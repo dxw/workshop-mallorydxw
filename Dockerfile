@@ -6,16 +6,52 @@ RUN apt-get update && apt-get dist-upgrade -y
 ##############################################################################
 ## Install tools
 
+RUN mkdir /src
+
 RUN apt-get install --no-install-recommends -y locales-all man-db manpages less
 RUN apt-get install --no-install-recommends -y openssh-client sudo
 RUN apt-get install --no-install-recommends -y tmux zsh
-RUN apt-get install --no-install-recommends -y git mercurial bzr
+RUN apt-get install --no-install-recommends -y git mercurial bzr tig
 RUN apt-get install --no-install-recommends -y ca-certificates
 RUN apt-get install --no-install-recommends -y python3 python3-pip python python-pip
 RUN apt-get install --no-install-recommends -y vim-nox
+RUN apt-get install --no-install-recommends -y ruby
+RUN apt-get install --no-install-recommends -y curl wget
+RUN apt-get install --no-install-recommends -y bind9-host
 
 # Requires python2
 RUN pip install fig
+
+# ag
+RUN git -C /src clone https://github.com/ggreer/the_silver_searcher.git
+RUN cd /src/the_silver_searcher && ./build.sh --prefix=/usr/local
+RUN make -C /src/the_silver_searcher install
+
+# git-flow
+RUN git -C /src clone https://github.com/nvie/gitflow.git
+RUN make -C /src prefix=/usr/local install
+
+# drone
+RUN wget http://downloads.drone.io/master/drone.deb -O /src/drone.deb
+RUN dpkg -i /src/drone.deb
+
+# # pluginscan
+# RUN gem install bundler
+# RUN git -C /src clone git@git.dxw.net:tools/pluginscan2 pluginscan
+# RUN mkdir -p /usr/local/share/pluginscan
+# RUN cp -r /src/pluginscan/* /usr/local/share/pluginscan
+# RUN cd /usr/local/share/pluginscan && bundle install --path=vendor/bundle
+# # Make the executable
+# RUN echo '#!/bin/sh' > /usr/local/bin/pluginscan
+# RUN echo 'BUNDLE_GEMFILE=/usr/local/share/pluginscan/Gemfile exec bundle exec /usr/local/share/pluginscan/bin/pluginscan' >> /usr/local/bin/pluginscan
+# RUN chmod 755 /usr/local/bin/pluginscan
+
+# pupdate
+ADD bin /src/bin
+RUN git -C /src clone git@git.dxw.net:plugin-updater
+RUN cp -r /src/plugin-updater /usr/local/share/pupdate
+RUN sed 's#___#/usr/local/share/pupdate#g' < pupdate > /usr/local/bin/pupdate
+RUN chmod 755 /usr/local/bin/pupdate
 
 ##############################################################################
 ## Add user

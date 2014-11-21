@@ -1,0 +1,11 @@
+# Debugging                                                                                    
+snippet p                                                                                      
+	echo(htmlspecialchars(json_encode(${1}))."<br>\n");
+snippet P                                                                                      
+	echo(json_encode(${1})."\n");
+snippet pp                                                                                     
+	<?php echo(htmlspecialchars(json_encode(${1}))."<br>\n"); ?>
+snippet e                                                                                      
+	trigger_error(json_encode(${1}), E_USER_ERROR);
+snippet hp                                                                                     
+	header("X-data: ".preg_replace("-\n|\r-", '', json_encode(${1})));
