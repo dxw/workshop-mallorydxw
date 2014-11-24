@@ -77,7 +77,11 @@ RUN dpkg -i /src/drone.deb
 ## Add dotfiles
 
 ADD dotfiles/ /home/core/
+
+# Copy in id_rsa
 ADD keys/id_rsa /home/core/.ssh/id_rsa
+# Symlink known_hosts
+RUN ln -s /workbench/home/.ssh/known_hosts /home/core/.ssh/known_hosts
 
 # Install vim plugins
 RUN git -C /home/core/.vim/bundle clone https://github.com/kien/rainbow_parentheses.vim.git && \
