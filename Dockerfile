@@ -4,14 +4,6 @@ ENV DEBIAN_FRONTEND noninteractive
 RUN apt-get update && apt-get dist-upgrade -y
 
 ##############################################################################
-## Startup
-
-VOLUME /workbench
-WORKDIR /workbench
-USER core
-CMD tmux -u2
-
-##############################################################################
 ## Global configuration
 
 RUN echo America/New_York > /etc/timezone
@@ -22,7 +14,6 @@ RUN dpkg-reconfigure -f noninteractive tzdata
 
 RUN adduser --gecos '' --shell /bin/zsh --disabled-password core
 RUN usermod -aG sudo core
-RUN echo '%sudo ALL=(ALL:ALL) NOPASSWD: ALL' >> /etc/sudoers
 
 ##############################################################################
 ## Install tools
@@ -74,6 +65,11 @@ RUN dpkg -i /src/drone.deb
 # RUN chmod 755 /usr/local/bin/pupdate
 
 ##############################################################################
+## More global configuration
+
+RUN echo '%sudo ALL=(ALL:ALL) NOPASSWD: ALL' >> /etc/sudoers
+
+##############################################################################
 ## Add dotfiles
 
 ADD dotfiles/ /home/core/
@@ -95,3 +91,11 @@ RUN git -C /home/core/.vim/bundle clone https://github.com/kien/rainbow_parenthe
     git -C /home/core/.vim/bundle clone https://github.com/dxw/vim-php-indent.git
 
 RUN chown -R core:core /home/core
+
+##############################################################################
+## Startup
+
+VOLUME /workbench
+WORKDIR /workbench
+USER core
+CMD tmux -u2
