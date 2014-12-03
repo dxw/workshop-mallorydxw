@@ -30,8 +30,10 @@ RUN apt-get install --no-install-recommends -y bind9-host
 RUN apt-get install --no-install-recommends -y build-essential pkg-config automake
 RUN apt-get install --no-install-recommends -y libpcre3-dev liblzma-dev
 RUN apt-get install --no-install-recommends -y git-flow
-RUN apt-get install --no-install-recommends -y golang php5-cli nodejs
+RUN apt-get install --no-install-recommends -y golang
 RUN apt-get install --no-install-recommends -y netcat
+RUN apt-get install --no-install-recommends -y php5-cli php5-mysql
+RUN apt-get install --no-install-recommends -y nodejs npm
 
 # fig
 RUN pip install --upgrade fig
@@ -50,6 +52,16 @@ RUN echo 'install: --no-rdoc --no-ri' > /etc/gemrc
 
 # Bundler
 RUN gem install bundler
+
+# Fix node
+RUN ln -s /usr/bin/nodejs /usr/local/bin/node
+
+# jshint
+RUN npm install -g jshint
+
+# wp-cli
+RUN wget https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar -O /usr/local/bin/wp
+RUN chmod 755 /usr/local/bin/wp
 
 ##############################################################################
 ## Add user and dotfiles
