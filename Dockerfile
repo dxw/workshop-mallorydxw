@@ -9,15 +9,8 @@ RUN apt-get update && apt-get dist-upgrade -y
 RUN echo America/New_York > /etc/timezone
 RUN dpkg-reconfigure -f noninteractive tzdata
 
-#TODO
-#RUN apt-get install --no-install-recommends -y sudo
-#RUN echo '%sudo ALL=(ALL:ALL) NOPASSWD: ALL' >> /etc/sudoers
-
-##############################################################################
-## Add user
-
-RUN adduser --gecos '' --shell /bin/zsh --disabled-password core
-RUN usermod -aG sudo core
+RUN apt-get install --no-install-recommends -y sudo
+RUN echo '%sudo ALL=(ALL:ALL) NOPASSWD: ALL' >> /etc/sudoers
 
 ##############################################################################
 ## Install tools
@@ -25,8 +18,7 @@ RUN usermod -aG sudo core
 RUN mkdir /src
 
 RUN apt-get install --no-install-recommends -y locales-all man-db manpages less
-RUN apt-get install --no-install-recommends -y openssh-client sudo
-#TODO: RUN apt-get install --no-install-recommends -y openssh-client
+RUN apt-get install --no-install-recommends -y openssh-client
 RUN apt-get install --no-install-recommends -y tmux zsh
 RUN apt-get install --no-install-recommends -y git mercurial bzr tig
 RUN apt-get install --no-install-recommends -y ca-certificates
@@ -60,13 +52,10 @@ RUN echo 'install: --no-rdoc --no-ri' > /etc/gemrc
 RUN gem install bundler
 
 ##############################################################################
-## More global configuration
+## Add user and dotfiles
 
-#TODO: remove this section
-RUN echo '%sudo ALL=(ALL:ALL) NOPASSWD: ALL' >> /etc/sudoers
-
-##############################################################################
-## Add dotfiles
+RUN adduser --gecos '' --shell /bin/zsh --disabled-password core
+RUN usermod -aG sudo core
 
 ADD dotfiles/ /home/core/
 
@@ -89,7 +78,7 @@ RUN git -C /home/core/.vim/bundle clone https://github.com/kien/rainbow_parenthe
 RUN chown -R core:core /home/core
 
 ##############################################################################
-## More tools
+## Install tools from private repos
 
 # Allow cloning private repos
 RUN ssh-keyscan -t rsa git.dxw.net > /src/known_hosts
