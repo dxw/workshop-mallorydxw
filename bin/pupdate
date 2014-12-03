@@ -1,8 +1,0 @@
-#!/bin/sh
-set -e
-
-PLUGIN_UPDATER_PATH='___'
-
-cd ${PLUGIN_UPDATER_PATH}/updating
-./update.sh $1 git@git.dxw.net:wordpress-plugins/$1
-cd -

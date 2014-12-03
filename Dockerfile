@@ -9,6 +9,10 @@ RUN apt-get update && apt-get dist-upgrade -y
 RUN echo America/New_York > /etc/timezone
 RUN dpkg-reconfigure -f noninteractive tzdata
 
+#TODO
+#RUN apt-get install --no-install-recommends -y sudo
+#RUN echo '%sudo ALL=(ALL:ALL) NOPASSWD: ALL' >> /etc/sudoers
+
 ##############################################################################
 ## Add user
 
@@ -22,6 +26,7 @@ RUN mkdir /src
 
 RUN apt-get install --no-install-recommends -y locales-all man-db manpages less
 RUN apt-get install --no-install-recommends -y openssh-client sudo
+#TODO: RUN apt-get install --no-install-recommends -y openssh-client
 RUN apt-get install --no-install-recommends -y tmux zsh
 RUN apt-get install --no-install-recommends -y git mercurial bzr tig
 RUN apt-get install --no-install-recommends -y ca-certificates
@@ -33,6 +38,8 @@ RUN apt-get install --no-install-recommends -y bind9-host
 RUN apt-get install --no-install-recommends -y build-essential pkg-config automake
 RUN apt-get install --no-install-recommends -y libpcre3-dev liblzma-dev
 RUN apt-get install --no-install-recommends -y git-flow
+RUN apt-get install --no-install-recommends -y golang php5-cli nodejs
+RUN apt-get install --no-install-recommends -y netcat
 
 # fig
 RUN pip install --upgrade fig
@@ -46,27 +53,16 @@ RUN make -C /src/the_silver_searcher install
 RUN wget --quiet http://downloads.drone.io/master/drone.deb -O /src/drone.deb
 RUN dpkg -i /src/drone.deb
 
-# # pluginscan
-# RUN gem install bundler
-# RUN git -C /src clone git@git.dxw.net:tools/pluginscan2 pluginscan
-# RUN mkdir -p /usr/local/share/pluginscan
-# RUN cp -r /src/pluginscan/* /usr/local/share/pluginscan
-# RUN cd /usr/local/share/pluginscan && bundle install --path=vendor/bundle
-# # Make the executable
-# RUN echo '#!/bin/sh' > /usr/local/bin/pluginscan
-# RUN echo 'BUNDLE_GEMFILE=/usr/local/share/pluginscan/Gemfile exec bundle exec /usr/local/share/pluginscan/bin/pluginscan' >> /usr/local/bin/pluginscan
-# RUN chmod 755 /usr/local/bin/pluginscan
+# Fix rubygems
+RUN echo 'install: --no-rdoc --no-ri' > /etc/gemrc
 
-# pupdate
-# ADD bin /src/bin
-# RUN git -C /src clone git@git.dxw.net:plugin-updater
-# RUN cp -r /src/plugin-updater /usr/local/share/pupdate
-# RUN sed 's#___#/usr/local/share/pupdate#g' < pupdate > /usr/local/bin/pupdate
-# RUN chmod 755 /usr/local/bin/pupdate
+# Bundler
+RUN gem install bundler
 
 ##############################################################################
 ## More global configuration
 
+#TODO: remove this section
 RUN echo '%sudo ALL=(ALL:ALL) NOPASSWD: ALL' >> /etc/sudoers
 
 ##############################################################################
@@ -91,6 +87,29 @@ RUN git -C /home/core/.vim/bundle clone https://github.com/kien/rainbow_parenthe
     git -C /home/core/.vim/bundle clone https://github.com/dxw/vim-php-indent.git
 
 RUN chown -R core:core /home/core
+
+##############################################################################
+## More tools
+
+# Allow cloning private repos
+RUN ssh-keyscan -t rsa git.dxw.net > /src/known_hosts
+RUN /bin/echo -e '#!/bin/sh\nssh -i /home/core/.ssh/id_rsa -o "UserKnownHostsFile /src/known_hosts" $@' > /src/core-ssh.sh && chmod 755 /src/core-ssh.sh
+
+# pluginscan
+RUN GIT_SSH=/src/core-ssh.sh git -C /src clone git@git.dxw.net:tools/pluginscan2 pluginscan
+RUN mkdir -p /usr/local/share/pluginscan
+RUN cp -r /src/pluginscan/* /usr/local/share/pluginscan
+RUN cd /usr/local/share/pluginscan && bundle install --path=vendor/bundle
+# Make the executable
+RUN echo '#!/bin/sh' > /usr/local/bin/pluginscan
+RUN echo 'BUNDLE_GEMFILE=/usr/local/share/pluginscan/Gemfile exec bundle exec /usr/local/share/pluginscan/bin/pluginscan' >> /usr/local/bin/pluginscan
+RUN chmod 755 /usr/local/bin/pluginscan
+
+# pupdate
+RUN GIT_SSH=/src/core-ssh.sh git -C /src clone git@git.dxw.net:plugin-updater
+RUN cp -r /src/plugin-updater /usr/local/share/pupdate
+RUN /bin/echo -e '#!/bin/sh\nset -e\ncd /usr/local/share/pupdate/updating\n./update.sh $1 git@git.dxw.net:wordpress-plugins/$1\ncd -' > /usr/local/bin/pupdate
+RUN chmod 755 /usr/local/bin/pupdate
 
 ##############################################################################
 ## Startup

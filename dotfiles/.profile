@@ -61,7 +61,7 @@ alias wget='wget --no-glob -erobots=off'
 alias curl='curl -gsS'
 
 # Golang
-export GOPATH=~/go
+export GOPATH=/workbench/go
 export PATH=$PATH:$GOPATH/bin
 
 # Ag
