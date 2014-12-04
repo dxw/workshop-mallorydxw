@@ -34,34 +34,34 @@ RUN apt-get install --no-install-recommends -y golang
 RUN apt-get install --no-install-recommends -y netcat
 RUN apt-get install --no-install-recommends -y php5-cli php5-mysql
 RUN apt-get install --no-install-recommends -y nodejs npm
+RUN apt-get install --no-install-recommends -y silversearcher-ag
+RUN apt-get install --no-install-recommends -y sloccount
 
-# fig
-RUN pip install --upgrade fig
-
-# ag
-RUN git -C /src clone https://github.com/ggreer/the_silver_searcher.git
-RUN cd /src/the_silver_searcher && ./build.sh --prefix=/usr/local
-RUN make -C /src/the_silver_searcher install
-
-# drone
+# dpkg
 RUN wget --quiet http://downloads.drone.io/master/drone.deb -O /src/drone.deb
 RUN dpkg -i /src/drone.deb
 
-# Fix rubygems
+# Ruby
 RUN echo 'install: --no-rdoc --no-ri' > /etc/gemrc
-
-# Bundler
 RUN gem install bundler
 
-# Fix node
-RUN ln -s /usr/bin/nodejs /usr/local/bin/node
+# Python
+RUN pip install --upgrade fig
 
-# jshint
+# Node
+RUN ln -s /usr/bin/nodejs /usr/local/bin/node
 RUN npm install -g jshint
 
-# wp-cli
+# PHP
 RUN wget https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar -O /usr/local/bin/wp
 RUN chmod 755 /usr/local/bin/wp
+RUN wget https://getcomposer.org/composer.phar -O /usr/local/bin/composer
+RUN chmod 755 /usr/local/bin/composer
+
+# Go
+RUN GOPATH=/src/go go get github.com/holizz/pw
+RUN GOPATH=/src/go go get github.com/holizz/diceware
+RUN mv /src/go/bin/* /usr/local/bin/
 
 ##############################################################################
 ## Add user and dotfiles
@@ -94,14 +94,14 @@ RUN chown -R core:core /home/core
 
 # Allow cloning private repos
 RUN ssh-keyscan -t rsa git.dxw.net > /src/known_hosts
-RUN /bin/echo -e '#!/bin/sh\nssh -i /home/core/.ssh/id_rsa -o "UserKnownHostsFile /src/known_hosts" $@' > /src/core-ssh.sh && chmod 755 /src/core-ssh.sh
+RUN /bin/echo -e '#!/bin/sh\nssh -i /home/core/.ssh/id_rsa -o "UserKnownHostsFile /src/known_hosts" $@' > /src/core-ssh.sh
+RUN chmod 755 /src/core-ssh.sh
 
 # pluginscan
 RUN GIT_SSH=/src/core-ssh.sh git -C /src clone git@git.dxw.net:tools/pluginscan2 pluginscan
 RUN mkdir -p /usr/local/share/pluginscan
 RUN cp -r /src/pluginscan/* /usr/local/share/pluginscan
 RUN cd /usr/local/share/pluginscan && bundle install --path=vendor/bundle
-# Make the executable
 RUN echo '#!/bin/sh' > /usr/local/bin/pluginscan
 RUN echo 'BUNDLE_GEMFILE=/usr/local/share/pluginscan/Gemfile exec bundle exec /usr/local/share/pluginscan/bin/pluginscan' >> /usr/local/bin/pluginscan
 RUN chmod 755 /usr/local/bin/pluginscan
