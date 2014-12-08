@@ -70,7 +70,7 @@ alias agj="ag -G'.js$'"
 alias agl="ag -G'.less$'"
 
 # Security scanning stuff
-alias scanify="agp upload_ && agp ajax.googleapis.com && agp '<script' && agp wp_ajax_ && find -name '*.js' && find -name '*.swf' && sloccount . 2>/dev/null | grep ^php: && pluginscan > scan && head -n1 scan && DISPLAY=:0 xclip -i -selection clipboard < scan"
+alias scanify="agp upload_ ; agp ajax.googleapis.com ; agp '<script' ; agp wp_ajax_ ; find -name '*.js' ; find -name '*.swf' ; sloccount . 2>/dev/null | grep ^php: && pluginscan > scan && head -n1 scan"
 
 # Treatment for neuropathy
 alias g=git
