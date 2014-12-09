@@ -36,6 +36,7 @@ RUN apt-get install --no-install-recommends -y php5-cli php5-mysql
 RUN apt-get install --no-install-recommends -y nodejs npm
 RUN apt-get install --no-install-recommends -y silversearcher-ag
 RUN apt-get install --no-install-recommends -y sloccount
+RUN apt-get install --no-install-recommends -y zip unzip
 
 # dpkg
 RUN wget --quiet http://downloads.drone.io/master/drone.deb -O /src/drone.deb
@@ -111,6 +112,11 @@ RUN GIT_SSH=/src/core-ssh.sh git -C /src clone git@git.dxw.net:plugin-updater
 RUN cp -r /src/plugin-updater /usr/local/share/pupdate
 RUN /bin/echo -e '#!/bin/sh\nset -e\ncd /usr/local/share/pupdate/updating\n./update.sh $1 git@git.dxw.net:wordpress-plugins/$1\ncd -' > /usr/local/bin/pupdate
 RUN chmod 755 /usr/local/bin/pupdate
+
+# whippet
+RUN GIT_SSH=/src/core-ssh.sh git -C /src clone --recursive git@git.dxw.net:whippet/whippet
+RUN cp -r /src/whippet /usr/local/share/whippet
+RUN ln -s /usr/local/share/whippet/bin/whippet /usr/local/bin/whippet
 
 ##############################################################################
 ## Startup
