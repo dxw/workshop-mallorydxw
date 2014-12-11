@@ -120,6 +120,11 @@ RUN GIT_SSH=/src/core-ssh.sh git -C /src clone --recursive git@git.dxw.net:whipp
 RUN cp -r /src/whippet /usr/local/share/whippet
 RUN ln -s /usr/local/share/whippet/bin/whippet /usr/local/bin/whippet
 
+# phar-install
+RUN GIT_SSH=/src/core-ssh.sh git -C /src clone git@git.dxw.net:install-phar phar-install
+RUN install /src/phar-install/bin/phar-install /usr/local/bin/phar-install
+RUN echo 'phar.readonly = Off' > /etc/php5/cli/conf.d/99-phar.ini
+
 ##############################################################################
 ## Startup
 
