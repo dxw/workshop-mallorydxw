@@ -61,6 +61,9 @@ RUN chmod 755 /usr/local/bin/wp
 RUN wget https://getcomposer.org/composer.phar -O /usr/local/bin/composer
 RUN chmod 755 /usr/local/bin/composer
 
+# git tools
+RUN git -C /src clone https://github.com/alberthier/git-webui.git
+
 # Go
 RUN GOPATH=/src/go go get github.com/holizz/pw
 RUN GOPATH=/src/go go get github.com/holizz/diceware

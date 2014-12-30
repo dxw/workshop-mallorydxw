@@ -13,6 +13,7 @@
   graph = log --graph --full-history --all --pretty=format:"%h%x09%x1b[32m%d%x1b[0m%x20%s"
   empty = commit --allow-empty -m Empty
   test = !tmux new-window -d -t 91 -c `pwd` -n deploy 'git push origin +HEAD:testing'
+  webui = !/src/git-webui/release/libexec/git-core/git-webui
 [core]
   whitespace = trailing-space
   excludesfile = ~/.gitexcludesfile
