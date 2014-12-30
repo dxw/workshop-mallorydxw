@@ -31,7 +31,7 @@ RUN apt-get install --no-install-recommends -y bind9-host
 RUN apt-get install --no-install-recommends -y libpcre3-dev liblzma-dev
 RUN apt-get install --no-install-recommends -y git-flow
 RUN apt-get install --no-install-recommends -y golang
-RUN apt-get install --no-install-recommends -y netcat
+RUN apt-get install --no-install-recommends -y netcat whois
 RUN apt-get install --no-install-recommends -y php5-cli php5-mysql
 RUN apt-get install --no-install-recommends -y nodejs npm
 RUN apt-get install --no-install-recommends -y silversearcher-ag
