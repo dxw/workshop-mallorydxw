@@ -39,6 +39,7 @@ RUN apt-get install --no-install-recommends -y sloccount
 RUN apt-get install --no-install-recommends -y zip unzip
 RUN apt-get install --no-install-recommends -y libxml2-dev libxslt1-dev libmysql++-dev
 RUN apt-get install --no-install-recommends -y libsqlite3-dev
+RUN apt-get install --no-install-recommends -y manpages-dev
 
 # dpkg
 RUN wget --quiet http://downloads.drone.io/master/drone.deb -O /src/drone.deb
