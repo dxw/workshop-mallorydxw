@@ -54,7 +54,7 @@ RUN pip install --upgrade fig
 
 # Node
 RUN ln -s /usr/bin/nodejs /usr/local/bin/node
-RUN npm install -g jshint
+RUN npm install -g jshint grunt-cli bower
 
 # PHP
 RUN wget https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar -O /usr/local/bin/wp
