@@ -18,28 +18,14 @@ RUN echo '%sudo ALL=(ALL:ALL) NOPASSWD: ALL' >> /etc/sudoers
 RUN mkdir /src
 
 RUN apt-get install --no-install-recommends -y build-essential pkg-config automake
-RUN apt-get install --no-install-recommends -y locales-all man-db manpages less
-RUN apt-get install --no-install-recommends -y openssh-client
-RUN apt-get install --no-install-recommends -y tmux zsh
-RUN apt-get install --no-install-recommends -y git mercurial bzr tig
-RUN apt-get install --no-install-recommends -y ca-certificates
-RUN apt-get install --no-install-recommends -y python3 python3-pip python python-pip
-RUN apt-get install --no-install-recommends -y vim-nox
-RUN apt-get install --no-install-recommends -y ruby ruby-dev
-RUN apt-get install --no-install-recommends -y curl wget
-RUN apt-get install --no-install-recommends -y bind9-host
-RUN apt-get install --no-install-recommends -y libpcre3-dev liblzma-dev
-RUN apt-get install --no-install-recommends -y git-flow
-RUN apt-get install --no-install-recommends -y golang
-RUN apt-get install --no-install-recommends -y netcat whois
-RUN apt-get install --no-install-recommends -y php5-cli php5-mysql
-RUN apt-get install --no-install-recommends -y nodejs npm
-RUN apt-get install --no-install-recommends -y silversearcher-ag
-RUN apt-get install --no-install-recommends -y sloccount
-RUN apt-get install --no-install-recommends -y zip unzip
-RUN apt-get install --no-install-recommends -y libxml2-dev libxslt1-dev libmysql++-dev
-RUN apt-get install --no-install-recommends -y libsqlite3-dev
-RUN apt-get install --no-install-recommends -y manpages-dev
+RUN apt-get install --no-install-recommends -y locales-all man-db manpages less manpages-dev
+RUN apt-get install --no-install-recommends -y openssh-client tmux zsh vim-nox
+RUN apt-get install --no-install-recommends -y git mercurial bzr tig git-flow
+RUN apt-get install --no-install-recommends -y python3 python3-pip python python-pip ruby ruby-dev golang php5-cli php5-mysql nodejs npm
+RUN apt-get install --no-install-recommends -y curl wget bind9-host netcat whois ca-certificates
+RUN apt-get install --no-install-recommends -y silversearcher-ag sloccount zip unzip
+RUN apt-get install --no-install-recommends -y libpcre3-dev liblzma-dev libxml2-dev libxslt1-dev libmysql++-dev libsqlite3-dev
+RUN apt-get install --no-install-recommends -y optipng libtool nasm libjpeg-turbo-progs
 
 # dpkg
 RUN wget --quiet http://downloads.drone.io/master/drone.deb -O /src/drone.deb
