@@ -65,6 +65,7 @@ export GOPATH=/workbench/go
 export PATH=$PATH:$GOPATH/bin
 
 # Ag
+alias ag="ag -a"
 alias agp="ag -G'.php$'"
 alias agj="ag -G'.js$'"
 alias agl="ag -G'.less$'"
