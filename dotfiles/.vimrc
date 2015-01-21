@@ -178,8 +178,9 @@ augroup rainbow_parentheses
         \ endif
 augroup END
 
-" vim-go - don't complain when editing files as root
+" vim-go
 let g:go_disable_autoinstall = 1
+let g:go_fmt_command = "goimports"
 
 " disable syntastic for Go - we use vim-go
 let g:syntastic_disabled_filetypes=['go']
