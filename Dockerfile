@@ -25,7 +25,7 @@ RUN apt-get install --no-install-recommends -y python3 python3-pip python python
 RUN apt-get install --no-install-recommends -y curl wget bind9-host netcat whois ca-certificates
 RUN apt-get install --no-install-recommends -y silversearcher-ag sloccount zip unzip
 RUN apt-get install --no-install-recommends -y libpcre3-dev liblzma-dev libxml2-dev libxslt1-dev libmysql++-dev libsqlite3-dev
-RUN apt-get install --no-install-recommends -y optipng libtool nasm libjpeg-turbo-progs mysql-client
+RUN apt-get install --no-install-recommends -y optipng libtool nasm libjpeg-turbo-progs mysql-client nmap
 
 # dpkg
 RUN wget --quiet http://downloads.drone.io/master/drone.deb -O /src/drone.deb
