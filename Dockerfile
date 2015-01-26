@@ -43,6 +43,7 @@ RUN ln -s /usr/bin/nodejs /usr/local/bin/node
 RUN npm install -g jshint grunt-cli bower
 
 # PHP
+RUN echo 'error_reporting=E_ALL' > /etc/php5/cli/conf.d/99-dxw-errors.ini
 RUN wget https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar -O /usr/local/bin/wp
 RUN chmod 755 /usr/local/bin/wp
 RUN wget https://getcomposer.org/composer.phar -O /usr/local/bin/composer
@@ -113,7 +114,7 @@ RUN ln -s /usr/local/share/whippet/bin/whippet /usr/local/bin/whippet
 # phar-install
 RUN GIT_SSH=/src/core-ssh.sh git -C /src clone git@git.dxw.net:install-phar phar-install
 RUN install /src/phar-install/bin/phar-install /usr/local/bin/phar-install
-RUN echo 'phar.readonly = Off' > /etc/php5/cli/conf.d/99-phar.ini
+RUN echo 'phar.readonly = Off' > /etc/php5/cli/conf.d/99-dxw-phar.ini
 
 ##############################################################################
 ## Startup
