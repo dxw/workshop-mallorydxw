@@ -17,45 +17,46 @@ RUN echo '%sudo ALL=(ALL:ALL) NOPASSWD: ALL' >> /etc/sudoers
 
 RUN mkdir /src
 
-RUN apt-get install --no-install-recommends -y build-essential pkg-config automake
-RUN apt-get install --no-install-recommends -y locales-all man-db manpages less manpages-dev
-RUN apt-get install --no-install-recommends -y openssh-client tmux zsh vim-nox
-RUN apt-get install --no-install-recommends -y git mercurial bzr tig git-flow
-RUN apt-get install --no-install-recommends -y python3 python3-pip python python-pip ruby ruby-dev golang php5-cli php5-mysql nodejs npm
-RUN apt-get install --no-install-recommends -y curl wget bind9-host netcat whois ca-certificates
-RUN apt-get install --no-install-recommends -y silversearcher-ag sloccount zip unzip
-RUN apt-get install --no-install-recommends -y libpcre3-dev liblzma-dev libxml2-dev libxslt1-dev libmysql++-dev libsqlite3-dev
-RUN apt-get install --no-install-recommends -y optipng libtool nasm libjpeg-turbo-progs mysql-client nmap
+RUN apt-get install --no-install-recommends -y build-essential pkg-config automake \
+                                               locales-all man-db manpages less manpages-dev \
+                                               openssh-client tmux zsh vim-nox \
+                                               git mercurial bzr tig git-flow \
+                                               python3 python3-pip python python-pip ruby ruby-dev golang php5-cli php5-mysql nodejs npm \
+                                               curl wget bind9-host netcat whois ca-certificates \
+                                               silversearcher-ag sloccount zip unzip \
+                                               libpcre3-dev liblzma-dev libxml2-dev libxslt1-dev libmysql++-dev libsqlite3-dev \
+                                               optipng libtool nasm libjpeg-turbo-progs mysql-client nmap
 
 # dpkg
 RUN wget --quiet http://downloads.drone.io/master/drone.deb -O /src/drone.deb
 RUN dpkg -i /src/drone.deb
 
-# Ruby
-RUN echo 'install: --no-rdoc --no-ri' > /etc/gemrc
-RUN gem install bundler
+# Fix bad defaults
+RUN echo 'install: --no-rdoc --no-ri' > /etc/gemrc && \
+    ln -s /usr/bin/nodejs /usr/local/bin/node &&\
+    echo 'error_reporting=E_ALL' > /etc/php5/cli/conf.d/99-dxw-errors.ini &&\
+    echo 'phar.readonly = Off' > /etc/php5/cli/conf.d/99-dxw-phar.ini
 
-# Python
-RUN pip install --upgrade fig
+# Install things with package managers
+RUN gem install bundler && \
+    pip install --upgrade fig && \
+    npm install -g jshint grunt-cli bower
 
-# Node
-RUN ln -s /usr/bin/nodejs /usr/local/bin/node
-RUN npm install -g jshint grunt-cli bower
+# wp-cli
+RUN wget https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar -O /usr/local/bin/wp && \
+    chmod 755 /usr/local/bin/wp
 
-# PHP
-RUN echo 'error_reporting=E_ALL' > /etc/php5/cli/conf.d/99-dxw-errors.ini
-RUN wget https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar -O /usr/local/bin/wp
-RUN chmod 755 /usr/local/bin/wp
-RUN wget https://getcomposer.org/composer.phar -O /usr/local/bin/composer
-RUN chmod 755 /usr/local/bin/composer
+# composer
+RUN wget https://getcomposer.org/composer.phar -O /usr/local/bin/composer && \
+    chmod 755 /usr/local/bin/composer
 
 # git tools
 RUN git -C /src clone https://github.com/alberthier/git-webui.git
 
-# Go
-RUN GOPATH=/src/go go get github.com/holizz/pw
-RUN GOPATH=/src/go go get github.com/holizz/diceware
-RUN mv /src/go/bin/* /usr/local/bin/
+# Go tools
+RUN GOPATH=/src/go go get github.com/holizz/pw && \
+    GOPATH=/src/go go get github.com/holizz/diceware && \
+    mv /src/go/bin/* /usr/local/bin/
 
 ##############################################################################
 ## Add user and dotfiles
@@ -87,34 +88,33 @@ RUN chown -R core:core /home/core
 ## Install tools from private repos
 
 # Allow cloning private repos
-RUN ssh-keyscan -t rsa git.dxw.net > /src/known_hosts
-RUN /bin/echo -e '#!/bin/sh\nssh -i /home/core/.ssh/id_rsa -o "UserKnownHostsFile /src/known_hosts" $@' > /src/core-ssh.sh
-RUN chmod 755 /src/core-ssh.sh
+RUN ssh-keyscan -t rsa git.dxw.net > /src/known_hosts && \
+    /bin/echo -e '#!/bin/sh\nssh -i /home/core/.ssh/id_rsa -o "UserKnownHostsFile /src/known_hosts" $@' > /src/core-ssh.sh && \
+    chmod 755 /src/core-ssh.sh
 
 # pluginscan
-RUN GIT_SSH=/src/core-ssh.sh git -C /src clone git@git.dxw.net:tools/pluginscan2 pluginscan
-RUN mkdir -p /usr/local/share/pluginscan
-RUN cp -r /src/pluginscan/* /usr/local/share/pluginscan
-RUN cd /usr/local/share/pluginscan && bundle install --path=vendor/bundle
-RUN echo '#!/bin/sh' > /usr/local/bin/pluginscan
-RUN echo 'BUNDLE_GEMFILE=/usr/local/share/pluginscan/Gemfile exec bundle exec /usr/local/share/pluginscan/bin/pluginscan' >> /usr/local/bin/pluginscan
-RUN chmod 755 /usr/local/bin/pluginscan
+RUN GIT_SSH=/src/core-ssh.sh git -C /src clone git@git.dxw.net:tools/pluginscan2 pluginscan && \
+    mkdir -p /usr/local/share/pluginscan && \
+    cp -r /src/pluginscan/* /usr/local/share/pluginscan && \
+    cd /usr/local/share/pluginscan && bundle install --path=vendor/bundle && \
+    echo '#!/bin/sh' > /usr/local/bin/pluginscan && \
+    echo 'BUNDLE_GEMFILE=/usr/local/share/pluginscan/Gemfile exec bundle exec /usr/local/share/pluginscan/bin/pluginscan' >> /usr/local/bin/pluginscan && \
+    chmod 755 /usr/local/bin/pluginscan
 
 # pupdate
-RUN GIT_SSH=/src/core-ssh.sh git -C /src clone git@git.dxw.net:plugin-updater
-RUN cp -r /src/plugin-updater /usr/local/share/pupdate
-RUN /bin/echo -e '#!/bin/sh\nset -e\ncd /usr/local/share/pupdate/updating\n./update.sh $1 git@git.dxw.net:wordpress-plugins/$1\ncd -' > /usr/local/bin/pupdate
-RUN chmod 755 /usr/local/bin/pupdate
+RUN GIT_SSH=/src/core-ssh.sh git -C /src clone git@git.dxw.net:plugin-updater && \
+    cp -r /src/plugin-updater /usr/local/share/pupdate && \
+    /bin/echo -e '#!/bin/sh\nset -e\ncd /usr/local/share/pupdate/updating\n./update.sh $1 git@git.dxw.net:wordpress-plugins/$1\ncd -' > /usr/local/bin/pupdate && \
+    chmod 755 /usr/local/bin/pupdate
 
 # whippet
-RUN GIT_SSH=/src/core-ssh.sh git -C /src clone --recursive git@git.dxw.net:whippet/whippet
-RUN cp -r /src/whippet /usr/local/share/whippet
-RUN ln -s /usr/local/share/whippet/bin/whippet /usr/local/bin/whippet
+RUN GIT_SSH=/src/core-ssh.sh git -C /src clone --recursive git@git.dxw.net:whippet/whippet && \
+    cp -r /src/whippet /usr/local/share/whippet && \
+    ln -s /usr/local/share/whippet/bin/whippet /usr/local/bin/whippet
 
 # phar-install
-RUN GIT_SSH=/src/core-ssh.sh git -C /src clone git@git.dxw.net:install-phar phar-install
-RUN install /src/phar-install/bin/phar-install /usr/local/bin/phar-install
-RUN echo 'phar.readonly = Off' > /etc/php5/cli/conf.d/99-dxw-phar.ini
+RUN GIT_SSH=/src/core-ssh.sh git -C /src clone git@git.dxw.net:install-phar phar-install && \
+    install /src/phar-install/bin/phar-install /usr/local/bin/phar-install
 
 ##############################################################################
 ## Startup
