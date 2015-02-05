@@ -101,6 +101,9 @@ nnoremap <silent> <Leader>B :echo system('git blame -L'.line('.').',+1 '.expand(
 " Yank from HEAD (aka per-line checkout from HEAD)
 nnoremap <silent> <Leader>Y :exe 'norm! 0C'.system('git blame -pL'.line('.').',+1 HEAD '.expand('%').'<Bar>tail -n1 <Bar>cut -c2-<Bar>tr -d "\n"')<CR>0
 
+" diary
+nmap <silent> <Leader>_ G<Leader>pO<Esc><Gjsisodate<Esc>ztVG:s/  /    /g<CR>
+
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """ Syntax, indenting, etc.
 
