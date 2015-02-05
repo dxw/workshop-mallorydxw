@@ -37,9 +37,13 @@ RUN echo 'install: --no-rdoc --no-ri' > /etc/gemrc && \
     echo 'error_reporting=E_ALL' > /etc/php5/cli/conf.d/99-dxw-errors.ini &&\
     echo 'phar.readonly = Off' > /etc/php5/cli/conf.d/99-dxw-phar.ini
 
+# Apparently pip2 from APT is broken
+RUN wget https://bootstrap.pypa.io/get-pip.py -O /src/get-pip.py && \
+    python /src/get-pip.py
+
 # Install things with package managers
 RUN gem install bundler && \
-    pip install --upgrade fig && \
+    pip install --upgrade docker-compose==1.1.0-rc2 'requests>=2.2.1,<2.5.0' && \
     npm install -g jshint grunt-cli bower
 
 # wp-cli
