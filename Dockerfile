@@ -57,6 +57,10 @@ RUN wget https://getcomposer.org/composer.phar -O /usr/local/bin/composer && \
 # git tools
 RUN git -C /src clone https://github.com/alberthier/git-webui.git
 
+# WP tools
+RUN git -C /src clone https://github.com/dxw/srdb.git --recursive && \
+    ln -s /src/srdb/srdb /usr/local/bin/srdb
+
 # Go tools
 RUN GOPATH=/src/go go get github.com/holizz/pw && \
     GOPATH=/src/go go get github.com/holizz/diceware && \
