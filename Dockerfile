@@ -38,7 +38,7 @@ RUN echo 'install: --no-rdoc --no-ri' > /etc/gemrc && \
     echo 'phar.readonly = Off' > /etc/php5/cli/conf.d/99-dxw-phar.ini
 
 # Apparently pip2 from APT is broken
-RUN wget https://bootstrap.pypa.io/get-pip.py -O /src/get-pip.py && \
+RUN wget --quiet https://bootstrap.pypa.io/get-pip.py -O /src/get-pip.py && \
     python /src/get-pip.py
 
 # Install things with package managers
@@ -47,11 +47,11 @@ RUN gem install bundler && \
     npm install -g jshint grunt-cli bower
 
 # wp-cli
-RUN wget https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar -O /usr/local/bin/wp && \
+RUN wget --quiet https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar -O /usr/local/bin/wp && \
     chmod 755 /usr/local/bin/wp
 
 # composer
-RUN wget https://getcomposer.org/composer.phar -O /usr/local/bin/composer && \
+RUN wget --quiet https://getcomposer.org/composer.phar -O /usr/local/bin/composer && \
     chmod 755 /usr/local/bin/composer
 
 # git tools
