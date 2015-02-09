@@ -92,6 +92,12 @@ RUN git -C /home/core/.vim/bundle clone https://github.com/kien/rainbow_parenthe
 
 RUN chown -R core:core /home/core
 
+# Install vim-go dependencies
+RUN mkdir -p /src/user/go && \
+    chown core:core /src/user/go && \
+    sudo -u core GOPATH=/src/user/go vim +GoInstallBinaries +q && \
+    mv /src/user/go/bin/* /usr/local/bin/
+
 ##############################################################################
 ## Install tools from private repos
 
