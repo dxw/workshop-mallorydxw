@@ -42,7 +42,7 @@ RUN wget --quiet https://bootstrap.pypa.io/get-pip.py -O /src/get-pip.py && \
     python /src/get-pip.py
 
 # Install things with package managers
-RUN gem install bundler && \
+RUN gem install bundler sass && \
     pip install --upgrade docker-compose==1.1.0-rc2 'requests>=2.2.1,<2.5.0' && \
     npm install -g jshint grunt-cli bower
 
