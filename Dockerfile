@@ -55,10 +55,10 @@ RUN wget --quiet https://getcomposer.org/composer.phar -O /usr/local/bin/compose
     chmod 755 /usr/local/bin/composer
 
 # git tools
-RUN git -C /src clone https://github.com/alberthier/git-webui.git
+RUN git -C /src clone --quiet https://github.com/alberthier/git-webui.git
 
 # WP tools
-RUN git -C /src clone https://github.com/dxw/srdb.git --recursive && \
+RUN git -C /src clone --quiet --recursive https://github.com/dxw/srdb.git && \
     ln -s /src/srdb/srdb /usr/local/bin/srdb
 
 # Go tools
@@ -80,15 +80,15 @@ ADD keys/id_rsa /home/core/.ssh/id_rsa
 RUN ln -s /workbench/home/.ssh/known_hosts /home/core/.ssh/known_hosts
 
 # Install vim plugins
-RUN git -C /home/core/.vim/bundle clone https://github.com/kien/rainbow_parentheses.vim.git && \
-    git -C /home/core/.vim/bundle clone https://github.com/sunaku/vim-unbundle.git && \
-    git -C /home/core/.vim/bundle clone https://github.com/tpope/vim-commentary.git && \
-    git -C /home/core/.vim/bundle clone https://github.com/tpope/vim-repeat.git && \
-    git -C /home/core/.vim/bundle clone https://github.com/msanders/snipmate.vim.git && \
-    git -C /home/core/.vim/bundle clone https://github.com/tpope/vim-surround.git && \
-    git -C /home/core/.vim/bundle clone https://github.com/scrooloose/syntastic.git && \
-    git -C /home/core/.vim/bundle clone https://github.com/fatih/vim-go.git && \
-    git -C /home/core/.vim/bundle clone https://github.com/dxw/vim-php-indent.git
+RUN git -C /home/core/.vim/bundle clone --quiet https://github.com/kien/rainbow_parentheses.vim.git && \
+    git -C /home/core/.vim/bundle clone --quiet https://github.com/sunaku/vim-unbundle.git && \
+    git -C /home/core/.vim/bundle clone --quiet https://github.com/tpope/vim-commentary.git && \
+    git -C /home/core/.vim/bundle clone --quiet https://github.com/tpope/vim-repeat.git && \
+    git -C /home/core/.vim/bundle clone --quiet https://github.com/msanders/snipmate.vim.git && \
+    git -C /home/core/.vim/bundle clone --quiet https://github.com/tpope/vim-surround.git && \
+    git -C /home/core/.vim/bundle clone --quiet https://github.com/scrooloose/syntastic.git && \
+    git -C /home/core/.vim/bundle clone --quiet https://github.com/fatih/vim-go.git && \
+    git -C /home/core/.vim/bundle clone --quiet https://github.com/dxw/vim-php-indent.git
 
 RUN chown -R core:core /home/core
 
@@ -107,7 +107,7 @@ RUN ssh-keyscan -t rsa git.dxw.net > /src/known_hosts && \
     chmod 755 /src/core-ssh.sh
 
 # pluginscan
-RUN GIT_SSH=/src/core-ssh.sh git -C /src clone git@git.dxw.net:tools/pluginscan2 pluginscan && \
+RUN GIT_SSH=/src/core-ssh.sh git -C /src clone --quiet git@git.dxw.net:tools/pluginscan2 pluginscan && \
     mkdir -p /usr/local/share/pluginscan && \
     cp -r /src/pluginscan/* /usr/local/share/pluginscan && \
     cd /usr/local/share/pluginscan && bundle install --path=vendor/bundle && \
@@ -116,18 +116,18 @@ RUN GIT_SSH=/src/core-ssh.sh git -C /src clone git@git.dxw.net:tools/pluginscan2
     chmod 755 /usr/local/bin/pluginscan
 
 # pupdate
-RUN GIT_SSH=/src/core-ssh.sh git -C /src clone git@git.dxw.net:plugin-updater && \
+RUN GIT_SSH=/src/core-ssh.sh git -C /src clone --quiet git@git.dxw.net:plugin-updater && \
     cp -r /src/plugin-updater /usr/local/share/pupdate && \
     /bin/echo -e '#!/bin/sh\nset -e\ncd /usr/local/share/pupdate/updating\n./update.sh $1 git@git.dxw.net:wordpress-plugins/$1\ncd -' > /usr/local/bin/pupdate && \
     chmod 755 /usr/local/bin/pupdate
 
 # whippet
-RUN GIT_SSH=/src/core-ssh.sh git -C /src clone --recursive git@git.dxw.net:whippet/whippet && \
+RUN GIT_SSH=/src/core-ssh.sh git -C /src clone --quiet --recursive git@git.dxw.net:whippet/whippet && \
     cp -r /src/whippet /usr/local/share/whippet && \
     ln -s /usr/local/share/whippet/bin/whippet /usr/local/bin/whippet
 
 # phar-install
-RUN GIT_SSH=/src/core-ssh.sh git -C /src clone git@git.dxw.net:install-phar phar-install && \
+RUN GIT_SSH=/src/core-ssh.sh git -C /src clone --quiet git@git.dxw.net:install-phar phar-install && \
     install /src/phar-install/bin/phar-install /usr/local/bin/phar-install
 
 ##############################################################################
