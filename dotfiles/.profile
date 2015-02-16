@@ -68,7 +68,6 @@ export PATH=$PATH:$GOPATH/bin
 alias ag="ag -a"
 alias agp="ag -G'.php$'"
 alias agj="ag -G'.js$'"
-alias agl="ag -G'.less$'"
 alias agp_="agp '\\\$_(GET|POST|REQUEST|SERVER|COOKIE)'"
 
 # Security scanning stuff
