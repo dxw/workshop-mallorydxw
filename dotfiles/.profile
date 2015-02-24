@@ -77,3 +77,4 @@ alias scanify="agp upload_ ; agp ajax.googleapis.com ; agp '<script' ; agp wp_aj
 # Treatment for neuropathy
 alias g=git
 alias v=$VISUAL
+alias dc=docker-compose
