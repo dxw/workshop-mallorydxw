@@ -79,8 +79,12 @@ ADD keys/id_rsa /home/core/.ssh/id_rsa
 # Symlink known_hosts
 RUN ln -s /workbench/home/.ssh/known_hosts /home/core/.ssh/known_hosts
 
+# Add vim's undodir so it doesn't leave undo files all over the place
+RUN mkdir -p /home/core/.vim/bak
+
 # Install vim plugins
-RUN git -C /home/core/.vim/bundle clone --quiet https://github.com/kien/rainbow_parentheses.vim.git && \
+RUN mkdir -p /home/core/.vim/bundle && \
+    git -C /home/core/.vim/bundle clone --quiet https://github.com/kien/rainbow_parentheses.vim.git && \
     git -C /home/core/.vim/bundle clone --quiet https://github.com/sunaku/vim-unbundle.git && \
     git -C /home/core/.vim/bundle clone --quiet https://github.com/tpope/vim-commentary.git && \
     git -C /home/core/.vim/bundle clone --quiet https://github.com/tpope/vim-repeat.git && \
