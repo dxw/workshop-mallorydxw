@@ -67,7 +67,7 @@ RUN GOPATH=/src/go go get github.com/holizz/pw && \
     mv /src/go/bin/* /usr/local/bin/
 
 # Install the correct version of Docker
-RUN wget https://get.docker.com/builds/Linux/x86_64/docker-1.4.1 -O /usr/local/bin/docker && \
+RUN wget https://get.docker.com/builds/Linux/x86_64/docker-1.5.0 -O /usr/local/bin/docker && \
     sudo chmod 755 /usr/local/bin/docker
 
 ##############################################################################
