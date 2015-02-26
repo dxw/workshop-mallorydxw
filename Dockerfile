@@ -43,7 +43,7 @@ RUN wget --quiet https://bootstrap.pypa.io/get-pip.py -O /src/get-pip.py && \
 
 # Install things with package managers
 RUN gem install bundler sass && \
-    pip install --upgrade docker-compose==1.1.0-rc2 'requests>=2.2.1,<2.5.0' && \
+    pip install --upgrade docker-compose && \
     npm install -g jshint grunt-cli bower
 
 # wp-cli
