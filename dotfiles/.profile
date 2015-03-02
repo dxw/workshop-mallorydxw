@@ -48,7 +48,7 @@ alias curl='curl -gsS'
 
 # Golang
 export GOPATH=/workbench/code
-export PATH=$PATH:$GOPATH/bin
+export PATH=$PATH:/usr/local/go/bin:$GOPATH/bin
 
 # Ag
 alias ag="ag -a"

@@ -21,7 +21,7 @@ RUN apt-get install --no-install-recommends -y build-essential pkg-config automa
                                                locales-all man-db manpages less manpages-dev \
                                                openssh-client tmux zsh vim-nox \
                                                git mercurial bzr tig git-flow \
-                                               python3 python3-pip python python-pip ruby ruby-dev golang php5-cli php5-mysql nodejs npm \
+                                               python3 python3-pip python python-pip ruby ruby-dev php5-cli php5-mysql nodejs npm \
                                                curl wget bind9-host netcat whois ca-certificates \
                                                silversearcher-ag sloccount zip unzip \
                                                libpcre3-dev liblzma-dev libxml2-dev libxslt1-dev libmysql++-dev libsqlite3-dev \
@@ -63,10 +63,17 @@ RUN git -C /src clone --quiet https://github.com/alberthier/git-webui.git
 RUN git -C /src clone --quiet --recursive https://github.com/dxw/srdb.git && \
     ln -s /src/srdb/srdb /usr/local/bin/srdb
 
+# Go
+RUN wget --quiet https://storage.googleapis.com/golang/go1.4.2.linux-amd64.tar.gz -O /src/go.tar.gz && \
+    tar -C /usr/local -xzf /src/go.tar.gz && \
+    rm /src/go.tar.gz
+ENV PATH=$PATH:/usr/local/go/bin
+
 # Go tools
 RUN GOPATH=/src/go go get github.com/holizz/pw && \
     GOPATH=/src/go go get github.com/holizz/diceware && \
-    mv /src/go/bin/* /usr/local/bin/
+    mv /src/go/bin/* /usr/local/bin/ && \
+    rm -rf /src/go
 
 ##############################################################################
 ## Add user and dotfiles
@@ -99,10 +106,11 @@ RUN mkdir -p /home/core/.vim/bundle && \
 RUN chown -R core:core /home/core
 
 # Install vim-go dependencies
-RUN mkdir -p /src/user/go && \
-    chown core:core /src/user/go && \
-    sudo -u core GOPATH=/src/user/go vim +GoInstallBinaries +q && \
-    mv /src/user/go/bin/* /usr/local/bin/
+RUN mkdir -p /src/go && \
+    chown core:core /src/go && \
+    sudo -u core sh -c 'PATH=$PATH:/usr/local/go/bin GOPATH=/src/go vim +GoInstallBinaries +q' && \
+    mv /src/go/bin/* /usr/local/bin/ && \
+    rm -rf /src/go
 
 ##############################################################################
 ## Install tools from private repos
