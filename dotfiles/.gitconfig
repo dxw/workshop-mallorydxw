@@ -27,3 +27,6 @@
   prompt = false
 [pull]
   ff = "only"
+[url "git@git.dxw.net:"]
+  # Allow using go get with our private repos
+  insteadOf = git://git.dxw.net/
