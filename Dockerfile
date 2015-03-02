@@ -28,8 +28,9 @@ RUN apt-get install --no-install-recommends -y build-essential pkg-config automa
                                                optipng libtool nasm libjpeg-turbo-progs mysql-client nmap
 
 # dpkg
-RUN wget --quiet http://downloads.drone.io/master/drone.deb -O /src/drone.deb
-RUN dpkg -i /src/drone.deb
+RUN wget --quiet http://downloads.drone.io/master/drone.deb -O /src/drone.deb && \
+    dpkg -i /src/drone.deb && \
+    rm /src/drone.deb
 
 # Fix bad defaults
 RUN echo 'install: --no-rdoc --no-ri' > /etc/gemrc && \
@@ -39,7 +40,8 @@ RUN echo 'install: --no-rdoc --no-ri' > /etc/gemrc && \
 
 # Apparently pip2 from APT is broken
 RUN wget --quiet https://bootstrap.pypa.io/get-pip.py -O /src/get-pip.py && \
-    python /src/get-pip.py
+    python /src/get-pip.py && \
+    rm /src/get-pip.py
 
 # Install things with package managers
 RUN gem install bundler sass && \
