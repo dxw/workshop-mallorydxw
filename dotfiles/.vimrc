@@ -19,6 +19,9 @@ end
 set nomodeline " security
 set t_Co=256 " use all 256 colours
 
+set cursorline
+highlight CursorLine cterm=NONE ctermbg=235
+
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """ Mappings
 
@@ -58,20 +61,6 @@ command! -bar SudoWrite :
       \ silent exe 'write !sudo tee % >/dev/null' |
       \ let &modified = v:shell_error
 cabbrev <silent> w!! SudoWrite
-
-" Crosshairs
-augroup crosshairs
-  autocmd!
-  autocmd BufReadPre *
-        \ if &t_Co ==# 256 |
-        \   highlight CursorLine   cterm=NONE ctermbg=237 |
-        \   highlight CursorColumn cterm=NONE ctermbg=237 |
-        \ else |
-        \   highlight CursorLine   cterm=NONE ctermbg=Gray |
-        \   highlight CursorColumn cterm=NONE ctermbg=Gray |
-        \ endif
-augroup END
-nnoremap <silent> <Leader>l :set cursorline! cursorcolumn!<CR>
 
 " ExtraneousWhitespace
 nnoremap <silent> <Leader>w :call ExtraneousWhitespace()<CR>
