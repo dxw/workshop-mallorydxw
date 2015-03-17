@@ -50,7 +50,7 @@ cmdstatus_set() {
     else
       cmdtime=`cmdstatus_hms ${cmdtime}`
     fi
-    cmdstatus="%(?,⊙,%{$fg[red]%}×%{$reset_color%}) ${cmdtime}
+    cmdstatus="%(?,%{$fg[green]%}✔%{$reset_color%},%{$fg[red]%}✖%{$reset_color%}) ${cmdtime}
 
 "
   fi
