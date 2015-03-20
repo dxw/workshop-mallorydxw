@@ -63,6 +63,11 @@ RUN git -C /src clone --quiet https://github.com/alberthier/git-webui.git
 RUN git -C /src clone --quiet --recursive https://github.com/dxw/srdb.git && \
     ln -s /src/srdb/srdb /usr/local/bin/srdb
 
+# whippet
+# RUN git -C /src clone --quiet --recursive https://github.com/dxw/whippet && \
+#     cp -r /src/whippet /usr/local/share/whippet && \
+#     ln -s /usr/local/share/whippet/bin/whippet /usr/local/bin/whippet
+
 # Go
 RUN wget --quiet https://storage.googleapis.com/golang/go1.4.2.linux-amd64.tar.gz -O /src/go.tar.gz && \
     tar -C /usr/local -xzf /src/go.tar.gz && \
@@ -134,11 +139,6 @@ RUN GIT_SSH=/src/core-ssh.sh git -C /src clone --quiet git@git.dxw.net:plugin-up
     cp -r /src/plugin-updater /usr/local/share/pupdate && \
     /bin/echo -e '#!/bin/sh\nset -e\ncd /usr/local/share/pupdate/updating\n./update.sh $1 git@git.dxw.net:wordpress-plugins/$1\ncd -' > /usr/local/bin/pupdate && \
     chmod 755 /usr/local/bin/pupdate
-
-# whippet
-RUN GIT_SSH=/src/core-ssh.sh git -C /src clone --quiet --recursive git@git.dxw.net:whippet/whippet && \
-    cp -r /src/whippet /usr/local/share/whippet && \
-    ln -s /usr/local/share/whippet/bin/whippet /usr/local/bin/whippet
 
 # phar-install
 RUN GIT_SSH=/src/core-ssh.sh git -C /src clone --quiet git@git.dxw.net:install-phar phar-install && \
