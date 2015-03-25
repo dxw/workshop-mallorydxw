@@ -25,7 +25,7 @@ RUN apt-get install --no-install-recommends -y build-essential pkg-config automa
                                                curl wget bind9-host netcat whois ca-certificates \
                                                silversearcher-ag sloccount zip unzip \
                                                libpcre3-dev liblzma-dev libxml2-dev libxslt1-dev libmysql++-dev libsqlite3-dev \
-                                               optipng libtool nasm libjpeg-turbo-progs mysql-client nmap cloc
+                                               optipng libtool nasm libjpeg-turbo-progs mysql-client nmap cloc ed
 
 # dpkg
 RUN wget --quiet http://downloads.drone.io/master/drone.deb -O /src/drone.deb && \
@@ -46,7 +46,7 @@ RUN wget --quiet https://bootstrap.pypa.io/get-pip.py -O /src/get-pip.py && \
 # Install things with package managers
 RUN gem install bundler sass && \
     pip install --upgrade docker-compose && \
-    npm install -g jshint grunt-cli bower
+    npm install -g jshint grunt-cli bower json
 
 # wp-cli
 RUN wget --quiet https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar -O /usr/local/bin/wp && \
