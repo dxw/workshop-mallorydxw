@@ -56,9 +56,6 @@ RUN wget --quiet https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/w
 RUN wget --quiet https://getcomposer.org/composer.phar -O /usr/local/bin/composer && \
     chmod 755 /usr/local/bin/composer
 
-# git tools
-RUN git -C /src clone --quiet https://github.com/alberthier/git-webui.git
-
 # WP tools
 RUN git -C /src clone --quiet --recursive https://github.com/dxw/srdb.git && \
     ln -s /src/srdb/srdb /usr/local/bin/srdb
