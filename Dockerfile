@@ -21,7 +21,7 @@ RUN apt-get install --no-install-recommends -y build-essential pkg-config automa
                                                locales-all man-db manpages less manpages-dev \
                                                openssh-client tmux zsh vim-nox \
                                                git mercurial bzr tig git-flow \
-                                               python3 python3-pip python python-pip ruby ruby-dev php5-cli php5-mysql php5-gd nodejs npm \
+                                               python3 python3-pip python python-pip ruby ruby-dev php5-cli php5-mysql php5-gd nodejs npm perl perl-doc \
                                                curl wget bind9-host netcat whois ca-certificates \
                                                silversearcher-ag sloccount zip unzip \
                                                libpcre3-dev liblzma-dev libxml2-dev libxslt1-dev libmysql++-dev libsqlite3-dev \
