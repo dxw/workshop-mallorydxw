@@ -145,6 +145,6 @@ RUN GIT_SSH=/src/core-ssh.sh git -C /src clone --quiet git@git.dxw.net:install-p
 ## Startup
 
 VOLUME /workbench
-WORKDIR /workbench/code/src
+WORKDIR /workbench/src
 USER core
 CMD tmux -u2
