@@ -39,8 +39,6 @@ alias j2y="ruby -r json -r yaml -e 'puts YAML.dump(JSON.load(STDIN.read))'"
 alias y2j="ruby -r json -r yaml -e 'j YAML.load(STDIN.read)'"
 alias p2j="php -r '\$f=fopen(\"php://stdin\",\"r\");\$s=\"\";while(!feof(\$f))\$s.=fread(\$f,1024);echo(json_encode(unserialize(\$s)).\"\\n\");'"
 alias j2p="php -r '\$f=fopen(\"php://stdin\",\"r\");\$s=\"\";while(!feof(\$f))\$s.=fread(\$f,1024);echo(serialize(json_decode(\$s)).\"\\n\");'"
-# JSON pretty print
-alias jpp="python -m json.tool"
 
 # WWW
 alias wget='wget --no-glob -erobots=off'
