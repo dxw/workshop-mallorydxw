@@ -114,6 +114,9 @@ RUN mkdir -p /src/go && \
     mv /src/go/bin/* /usr/local/bin/ && \
     rm -rf /src/go
 
+# Don't ask
+RUN echo '{"interactive":false}' > /home/core/.bowerrc
+
 ##############################################################################
 ## Install tools from private repos
 
