@@ -60,6 +60,10 @@ RUN wget --quiet https://getcomposer.org/composer.phar -O /usr/local/bin/compose
 RUN git -C /src clone --quiet --recursive https://github.com/dxw/srdb.git && \
     ln -s /src/srdb/srdb /usr/local/bin/srdb
 
+# phpunit
+RUN wget https://phar.phpunit.de/phpunit.phar -O /usr/local/bin/phpunit && \
+    chmod 755 /usr/local/bin/phpunit
+
 # whippet
 # RUN git -C /src clone --quiet --recursive https://github.com/dxw/whippet && \
 #     cp -r /src/whippet /usr/local/share/whippet && \
