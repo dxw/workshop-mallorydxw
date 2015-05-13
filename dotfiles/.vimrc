@@ -62,20 +62,15 @@ command! -bar SudoWrite :
       \ let &modified = v:shell_error
 cabbrev <silent> w!! SudoWrite
 
-" ExtraneousWhitespace
-nnoremap <silent> <Leader>w :call ExtraneousWhitespace()<CR>
-highlight ExtraneousWhitespace NONE
+" Show trailing characters, but not in insert mode
+highlight ExtraneousWhitespace ctermbg=DarkRed
+" match whitespace at the end of a line and spaces before a tab
 match ExtraneousWhitespace /\s\+$\| \+\ze\t/
-
-function! ExtraneousWhitespace()
-  if exists('g:extraneouswhitespace') && g:extraneouswhitespace
-    highlight ExtraneousWhitespace NONE
-    let g:extraneouswhitespace = 0
-  else
-    highlight ExtraneousWhitespace ctermbg=DarkRed
-    let g:extraneouswhitespace = 1
-  endif
-endfunction
+augroup trailing
+  autocmd!
+  autocmd InsertEnter * :highlight ExtraneousWhitespace NONE
+  autocmd InsertLeave * :highlight ExtraneousWhitespace ctermbg=DarkRed
+augroup END
 
 " Unlimited inteprocess paste buffer
 nnoremap <silent> <Leader>y :.!tee ~/.vimipc<CR>
