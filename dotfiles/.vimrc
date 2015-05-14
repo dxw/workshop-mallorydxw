@@ -102,30 +102,30 @@ filetype plugin indent on
 " Python
 augroup python
   autocmd!
-  autocmd FileType python setl shiftwidth=4 softtabstop=4
+  autocmd FileType python setlocal shiftwidth=4 softtabstop=4
   autocmd FileType python syntax match Error "\t"
 augroup END
 
 " JavaScript
 augroup javascript
   autocmd!
-  autocmd FileType javascript setl shiftwidth=4 softtabstop=4
+  autocmd FileType javascript setlocal shiftwidth=4 softtabstop=4
 augroup END
 
 " PHP
 augroup php
   " This doesn't work, see .vim/after/ftplugin/php.vim
   " autocmd!
-  " autocmd FileType php setl commentstring=//\ %s
+  " autocmd FileType php setlocal commentstring=//\ %s
 augroup END
 
 " Go
 augroup go
   autocmd!
-  autocmd BufRead,BufNewFile *.go setl filetype=go
-  autocmd FileType go setl shiftwidth=8 softtabstop=8 noexpandtab
+  autocmd BufRead,BufNewFile *.go setlocal filetype=go
+  autocmd FileType go setlocal shiftwidth=8 softtabstop=8 noexpandtab
   " This doesn't work, see .vim/after/ftplugin/go.vim
-  " autocmd FileType go setl commentstring=//\ %s
+  " autocmd FileType go setlocal commentstring=//\ %s
 augroup END
 
 
