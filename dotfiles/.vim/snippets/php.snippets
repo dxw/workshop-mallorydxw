@@ -6,6 +6,6 @@ snippet P
 snippet pp
 	<?php echo(htmlspecialchars(json_encode([${1}]))."<br>\n"); ?>
 snippet e
-	trigger_error(json_encode([${1}]), E_USER_ERROR);
+	trigger_error(json_encode([${1}]), E_USER_WARNING);
 snippet hp
 	header("X-data: ".preg_replace("-\n|\r-", '', json_encode([${1}])));
