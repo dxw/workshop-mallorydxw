@@ -87,10 +87,10 @@ RUN GOPATH=/src/go go get github.com/holizz/pw && \
 RUN adduser --gecos '' --shell /bin/zsh --disabled-password core
 RUN usermod -aG sudo core
 
-ADD dotfiles/ /home/core/
+COPY dotfiles/ /home/core/
 
 # Copy in id_rsa
-ADD keys/id_rsa /home/core/.ssh/id_rsa
+COPY keys/id_rsa /home/core/.ssh/id_rsa
 # Symlink known_hosts
 RUN ln -s /workbench/home/.ssh/known_hosts /home/core/.ssh/known_hosts
 
