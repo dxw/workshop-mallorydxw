@@ -128,6 +128,12 @@ augroup go
   " autocmd FileType go setlocal commentstring=//\ %s
 augroup END
 
+" git commit
+augroup gitcommit
+  autocmd!
+  autocmd FileType gitcommit setlocal spell
+augroup END
+
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """ Encryption
