@@ -20,9 +20,10 @@ export LESSCHARSET=utf-8
 
 # PATH
 export PATH=/sbin:/bin:\
-/usr/sbin:/usr/bin:\
-/usr/local/sbin:/usr/local/bin:\
-/usr/local/games:/usr/games:\
+/usr/sbin:/usr/bin:/usr/games:\
+/usr/local/go/bin:\
+/workbench/bin:\
+/usr/local/sbin:/usr/local/bin:/usr/local/games:\
 ~/bin
 
 # Aliases
@@ -46,7 +47,6 @@ alias curl='curl -gsS'
 
 # Golang
 export GOPATH=/workbench
-export PATH=$PATH:/usr/local/go/bin:$GOPATH/bin
 
 # Ag
 alias ag="ag -a"
