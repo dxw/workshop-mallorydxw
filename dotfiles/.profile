@@ -20,10 +20,10 @@ export LESSCHARSET=utf-8
 
 # PATH
 export PATH=/sbin:/bin:\
-/usr/sbin:/usr/bin:/usr/games:\
-/usr/local/go/bin:\
 /workbench/bin:\
 /usr/local/sbin:/usr/local/bin:/usr/local/games:\
+/usr/sbin:/usr/bin:/usr/games:\
+/usr/local/go/bin:\
 ~/bin
 
 # Aliases
