@@ -24,6 +24,7 @@ export PATH=/sbin:/bin:\
 /usr/local/sbin:/usr/local/bin:/usr/local/games:\
 /usr/sbin:/usr/bin:/usr/games:\
 /usr/local/go/bin:\
+/usr/local/lib/composer/vendor/bin:\
 ~/bin
 
 # Aliases
