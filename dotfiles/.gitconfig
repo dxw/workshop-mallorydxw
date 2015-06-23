@@ -14,7 +14,7 @@
   empty = commit --allow-empty -m Empty
 [core]
   whitespace = trailing-space
-  excludesfile = ~/.gitexcludesfile
+  excludesFile = ~/.gitexcludesfile
 [hooks]
   allownonascii = true
 [color]
@@ -30,8 +30,8 @@
   insteadOf = git://git.dxw.net/
 [rerere]
   enabled = true
-  autoupdate = true
+  autoUpdate = true
 [rebase]
-  autosquash = true
+  autoSquash = true
 [status]
   submoduleSummary = true
