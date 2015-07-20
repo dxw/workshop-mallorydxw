@@ -22,9 +22,17 @@ RUN mkdir -p /home/core/.vim/bundle && \
 RUN chown -R core:core /home/core
 
 # Install vim-go dependencies
-RUN mkdir -p /src/go && \
-    chown core:core /src/go && \
-    sudo -u core sh -c 'PATH=$PATH:/usr/local/go/bin GOPATH=/src/go vim +GoInstallBinaries +q' && \
+# https://github.com/fatih/vim-go/blob/master/plugin/go.vim
+RUN PATH=$PATH:/usr/local/go/bin GOPATH=/src/go sh -c '\
+    go get github.com/nsf/gocode && \
+    go get golang.org/x/tools/cmd/goimports && \
+    go get github.com/rogpeppe/godef && \
+    go get golang.org/x/tools/cmd/oracle && \
+    go get golang.org/x/tools/cmd/gorename && \
+    go get github.com/golang/lint/golint && \
+    go get github.com/kisielk/errcheck && \
+    go get github.com/jstemmer/gotags && \
+    true' && \
     mv /src/go/bin/* /usr/local/bin/ && \
     rm -rf /src/go
 
