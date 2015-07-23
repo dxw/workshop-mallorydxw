@@ -48,6 +48,7 @@ alias curl='curl -gsS'
 
 # Golang
 export GOPATH=/workbench
+export GO15VENDOREXPERIMENT=1
 
 # Ag
 alias ag="ag -a"
