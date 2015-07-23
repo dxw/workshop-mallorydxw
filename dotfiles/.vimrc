@@ -18,6 +18,7 @@ if has("cryptv")
 end
 set nomodeline " security
 set t_Co=256 " use all 256 colours
+set re=1 " fix a bug with the Ruby syntax highlighting
 
 set cursorline
 highlight CursorLine cterm=NONE ctermbg=235
