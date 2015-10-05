@@ -89,6 +89,9 @@ nnoremap <silent> <Leader>Y :exe 'norm! 0C'.system('git blame -pL'.line('.').',+
 " diary
 nmap <silent> <Leader>_ G<Leader>pO<Esc><Gjsisodate<Esc>ztVG:s/  /    /g<CR>
 
+" php-cs-fixer
+nmap <Leader>f :!php-cs-fixer fix %<CR>
+
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """ Syntax, indenting, etc.
 
@@ -115,8 +118,9 @@ augroup END
 
 " PHP
 augroup php
-  " This doesn't work, see .vim/after/ftplugin/php.vim
-  " autocmd!
+  autocmd!
+  autocmd FileType php setlocal shiftwidth=4 softtabstop=4
+  " The below doesn't work, see .vim/after/ftplugin/php.vim
   " autocmd FileType php setlocal commentstring=//\ %s
 augroup END
 
