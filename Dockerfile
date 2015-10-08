@@ -17,6 +17,7 @@ RUN mkdir -p /home/core/.vim/bundle && \
     git -C /home/core/.vim/bundle clone --quiet https://github.com/tpope/vim-surround.git && \
     git -C /home/core/.vim/bundle clone --quiet https://github.com/scrooloose/syntastic.git && \
     git -C /home/core/.vim/bundle clone --quiet https://github.com/fatih/vim-go.git && \
+    git -C /home/core/.vim/bundle clone --quiet https://github.com/vim-scripts/CursorLineCurrentWindow.git && \
     git -C /home/core/.vim/bundle clone --quiet https://github.com/dxw/vim-php-indent.git
 
 RUN chown -R core:core /home/core
