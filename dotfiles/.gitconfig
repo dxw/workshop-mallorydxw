@@ -27,7 +27,7 @@
   ff = "only"
 [url "git@git.dxw.net:"]
   # Allow using go get with our private repos
-  insteadOf = git://git.dxw.net/
+  insteadOf = https://git.dxw.net/
 [rebase]
   autoSquash = true
 [status]
