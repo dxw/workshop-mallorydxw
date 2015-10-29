@@ -51,7 +51,6 @@ export GOPATH=/workbench
 export GO15VENDOREXPERIMENT=1
 
 # Ag
-alias ag="ag -a"
 alias agp="ag -G'.php$'"
 alias agj="ag -G'.js$'"
 alias agp_="agp '\\\$_(GET|POST|REQUEST|SERVER|COOKIE)'"
