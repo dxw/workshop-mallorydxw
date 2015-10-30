@@ -116,6 +116,12 @@ augroup javascript
   autocmd FileType javascript setlocal shiftwidth=4 softtabstop=4
 augroup END
 
+" SCSS
+augroup scss
+  autocmd!
+  autocmd FileType scss setlocal shiftwidth=4 softtabstop=4
+augroup END
+
 " PHP
 augroup php
   autocmd!
