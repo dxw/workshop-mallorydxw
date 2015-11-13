@@ -1,11 +1,15 @@
 FROM thedxw/workshop-base
 
+# Switch WORKDIR/USER temporarily
+WORKDIR /
+USER root
+
 # Set timezone
 RUN echo America/New_York > /etc/timezone
 RUN dpkg-reconfigure -f noninteractive tzdata
 
-# Add vim's undodir so it doesn't leave undo files all over the place
-RUN mkdir -p /home/core/.vim/bak
+# Dotfiles
+COPY dotfiles/ /home/core/
 
 # Install vim plugins
 RUN mkdir -p /home/core/.vim/bundle && \
@@ -19,8 +23,6 @@ RUN mkdir -p /home/core/.vim/bundle && \
     git -C /home/core/.vim/bundle clone --quiet https://github.com/fatih/vim-go.git && \
     git -C /home/core/.vim/bundle clone --quiet https://github.com/vim-scripts/CursorLineCurrentWindow.git && \
     git -C /home/core/.vim/bundle clone --quiet https://github.com/dxw/vim-php-indent.git
-
-RUN chown -R core:core /home/core
 
 # Install vim-go dependencies
 # https://github.com/fatih/vim-go/blob/master/plugin/go.vim
@@ -37,5 +39,15 @@ RUN PATH=$PATH:/usr/local/go/bin GOPATH=/src/go sh -c '\
     mv /src/go/bin/* /usr/local/bin/ && \
     rm -rf /src/go
 
+# ssh keys
+RUN ln -s /workbench/home/.ssh/id_rsa /home/core/.ssh/id_rsa
+RUN ln -s /workbench/home/.ssh/id_rsa.pub /home/core/.ssh/id_rsa.pub
+
+# use a stateful known_hosts file
+RUN ln -s /workbench/home/.ssh/known_hosts /home/core/.ssh/known_hosts
+
+RUN chown -R core:core /home/core
+
+# Switch WORKDIR/USER back
 WORKDIR /workbench/src
 USER core
