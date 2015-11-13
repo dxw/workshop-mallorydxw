@@ -21,6 +21,7 @@ export LESSCHARSET=utf-8
 # PATH
 export PATH=/sbin:/bin:\
 /workbench/bin:\
+/workbench/local/bin:\
 /usr/local/sbin:/usr/local/bin:/usr/local/games:\
 /usr/sbin:/usr/bin:/usr/games:\
 /usr/local/go/bin:\
