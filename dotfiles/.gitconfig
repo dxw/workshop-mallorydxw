@@ -8,7 +8,7 @@
   cia = commit -a
   di = diff
   suir = !git submodule sync && git submodule update --init --recursive
-  graph = log --graph --full-history --all --pretty=format:"%h%x09%x1b[32m%d%x1b[0m%x20%s"
+  graph = log --graph --decorate --all --oneline --full-history
   empty = commit --allow-empty -m Empty
   f = fetch --all
 [push]
