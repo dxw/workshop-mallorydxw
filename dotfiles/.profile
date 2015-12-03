@@ -56,6 +56,9 @@ alias agp="ag -G'.php$'"
 alias agj="ag -G'.js$'"
 alias agp_="agp '\\\$_(GET|POST|REQUEST|SERVER|COOKIE)'"
 
+# Fix for vboxsf's lack of symlinks
+alias npm='npm --no-bin-links'
+
 # Treatment for neuropathy
 alias g=git
 alias v=$VISUAL
