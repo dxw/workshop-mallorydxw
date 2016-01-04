@@ -49,6 +49,13 @@ RUN ln -s /workbench/home/.ssh/known_hosts /home/core/.ssh/known_hosts
 # GPG
 RUN ln -s /workbench/home/.gnupg /home/core/.gnupg
 
+# PHP 7
+RUN locale-gen en_GB.UTF-8
+RUN LANG=en_GB.UTF-8 add-apt-repository -y ppa:ondrej/php-7.0
+RUN apt-get update
+RUN apt-get install -y php7.0-cli php7.0-gd php7.0-mysql
+
+# Etc
 RUN chown -R core:core /home/core
 
 # Switch WORKDIR/USER back
