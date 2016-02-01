@@ -59,6 +59,9 @@ alias agp_="agp '\\\$_(GET|POST|REQUEST|SERVER|COOKIE)'"
 # Fix for vboxsf's lack of symlinks
 alias npm='npm --no-bin-links'
 
+# Grunt
+alias gr='npm install --no-bin-links && bower install && grunt watch'
+
 # Treatment for neuropathy
 alias g=git
 alias v=$VISUAL
