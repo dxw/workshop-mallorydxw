@@ -8,6 +8,11 @@ snippet psf
 	{
 	    ${3}
 	}
+snippet wpm
+	\WP_Mock::wpFunction('${1}', [
+	    'args' => [${2}],
+	    'return' => ${3},
+	]);
 # Debugging
 snippet p
 	echo(htmlspecialchars(json_encode([${1}]))."<br>\n");
