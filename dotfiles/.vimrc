@@ -113,7 +113,7 @@ augroup END
 " JavaScript
 augroup javascript
   autocmd!
-  autocmd FileType javascript setlocal shiftwidth=4 softtabstop=4
+  autocmd FileType javascript setlocal shiftwidth=2 softtabstop=2
 augroup END
 
 " SCSS
@@ -188,6 +188,9 @@ let g:go_fmt_command = "goimports"
 
 " disable syntastic for Go - we use vim-go
 let g:syntastic_disabled_filetypes=['go']
+
+" JS
+let g:syntastic_javascript_checkers = ['standard']
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """ .vimrc.local
