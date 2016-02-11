@@ -1,8 +1,3 @@
-bind generic O !git checkout %(commit)
-bind generic c !git cherry-pick -n %(commit)
-bind main G !true # why would I want to run git gc?
-bind main R !git revert %(commit)
-
 set blame-view = date author:full,width=20 file-name id text
 set main-view = date author:full,width=20 id commit-title:graph=true,refs=true
 set refs-view = date author:full,width=20 id ref commit-title
