@@ -49,7 +49,6 @@ alias curl='curl -gsS'
 
 # Golang
 export GOPATH=/workbench
-export GO15VENDOREXPERIMENT=1
 
 # Ag
 alias agp="ag -G'.php$'"
@@ -61,6 +60,12 @@ alias npm='npm --no-bin-links'
 
 # Grunt
 alias gr='npm install --no-bin-links && bower install && grunt watch'
+
+# pluginscan
+alias pscan='pluginscan --no-sloccount --no-cloc --issues-format=error_list > scan-vim && pluginscan > scan'
+
+# Wercker
+alias wb='wercker build --build-dir=$HOME/_builds --cache-dir=$HOME/_cache --container-dir=$HOME/_containers --project-dir=$HOME/_projects --step-dir=$HOME/_steps'
 
 # Treatment for neuropathy
 alias g=git
