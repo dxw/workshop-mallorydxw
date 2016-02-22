@@ -55,6 +55,10 @@ RUN LANG=en_GB.UTF-8 add-apt-repository -y ppa:ondrej/php-7.0
 RUN apt-get update
 RUN apt-get install -y php7.0-cli php7.0-gd php7.0-mysql
 
+# php.ini
+COPY disable-mail.ini /etc/php/7.0/cli/conf.d/99-disable-mail.ini
+COPY errors.ini /etc/php/7.0/cli/conf.d/99-errors.ini
+
 # Etc
 RUN chown -R core:core /home/core
 
