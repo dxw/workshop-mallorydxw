@@ -67,6 +67,9 @@ alias pscan='pluginscan --no-sloccount --no-cloc --issues-format=error_list > sc
 # Wercker
 alias wb='wercker build --build-dir=$HOME/_builds --cache-dir=$HOME/_cache --container-dir=$HOME/_containers --project-dir=$HOME/_projects --step-dir=$HOME/_steps'
 
+# Docker compose
+alias dc='HOME=/ docker-compose'
+
 # Treatment for neuropathy
 alias g=git
 alias v=$VISUAL
