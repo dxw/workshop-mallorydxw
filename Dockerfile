@@ -8,6 +8,9 @@ USER root
 RUN echo America/New_York > /etc/timezone
 RUN dpkg-reconfigure -f noninteractive tzdata
 
+# Install more packages
+RUN apt-get install --no-install-recommends -y dsh
+
 # Dotfiles
 COPY dotfiles/ /home/core/
 
