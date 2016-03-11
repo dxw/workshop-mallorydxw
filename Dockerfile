@@ -65,6 +65,9 @@ RUN echo 'deb https://deb.nodesource.com/node_4.x wily main' > /etc/apt/sources.
 RUN apt-get update
 RUN apt-get install -y nodejs
 
+# Yeoman
+RUN npm install -g yo
+
 # php.ini
 COPY disable-mail.ini /etc/php/7.0/cli/conf.d/99-disable-mail.ini
 COPY errors.ini /etc/php/7.0/cli/conf.d/99-errors.ini
