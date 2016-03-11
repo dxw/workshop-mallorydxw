@@ -64,6 +64,7 @@ RUN curl -s https://deb.nodesource.com/gpgkey/nodesource.gpg.key | apt-key add -
 RUN echo 'deb https://deb.nodesource.com/node_4.x wily main' > /etc/apt/sources.list.d/nodesource.list
 RUN apt-get update
 RUN apt-get install -y nodejs
+RUN npm install -g npm
 
 # Yeoman
 RUN npm install -g yo
