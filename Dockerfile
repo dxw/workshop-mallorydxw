@@ -1,4 +1,4 @@
-FROM thedxw/workshop-base
+FROM thedxw/workshop
 
 # Switch WORKDIR/USER temporarily
 WORKDIR /
