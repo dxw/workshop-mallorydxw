@@ -59,7 +59,7 @@ alias agp_="agp '\\\$_(GET|POST|REQUEST|SERVER|COOKIE)'"
 alias npm='npm --no-bin-links'
 
 # Grunt
-alias gr='npm install --no-bin-links && bower install && grunt watch'
+alias gr='npm install --no-bin-links && bower install && grunt'
 
 # pluginscan
 alias pscan='pluginscan --no-sloccount --no-cloc --issues-format=error_list > scan-vim && pluginscan > scan'
