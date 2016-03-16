@@ -56,7 +56,7 @@ RUN ln -s /workbench/home/.gnupg /home/core/.gnupg
 RUN locale-gen en_GB.UTF-8 && \
     LANG=en_GB.UTF-8 add-apt-repository -y ppa:ondrej/php && \
     apt-get update && \
-    apt-get install -y php7.0-cli php7.0-gd php7.0-mysql php7.0-xml
+    apt-get install -y php7.0-cli php7.0-gd php7.0-mysql php7.0-xml php7.0-mbstring
 
 # Node
 RUN apt-get install -y apt-transport-https && \
