@@ -53,18 +53,18 @@ RUN ln -s /workbench/home/.ssh/known_hosts /home/core/.ssh/known_hosts
 RUN ln -s /workbench/home/.gnupg /home/core/.gnupg
 
 # PHP 7
-RUN locale-gen en_GB.UTF-8
-RUN LANG=en_GB.UTF-8 add-apt-repository -y ppa:ondrej/php
-RUN apt-get update
-RUN apt-get install -y php7.0-cli php7.0-gd php7.0-mysql php7.0-xml
+RUN locale-gen en_GB.UTF-8 && \
+    LANG=en_GB.UTF-8 add-apt-repository -y ppa:ondrej/php && \
+    apt-get update && \
+    apt-get install -y php7.0-cli php7.0-gd php7.0-mysql php7.0-xml
 
 # Node
-RUN apt-get install -y apt-transport-https
-RUN curl -s https://deb.nodesource.com/gpgkey/nodesource.gpg.key | apt-key add -
-RUN echo 'deb https://deb.nodesource.com/node_4.x wily main' > /etc/apt/sources.list.d/nodesource.list
-RUN apt-get update
-RUN apt-get install -y nodejs
-RUN npm install -g npm
+RUN apt-get install -y apt-transport-https && \
+    curl -s https://deb.nodesource.com/gpgkey/nodesource.gpg.key | apt-key add - && \
+    echo 'deb https://deb.nodesource.com/node_4.x wily main' > /etc/apt/sources.list.d/nodesource.list && \
+    apt-get update && \
+    apt-get install -y nodejs && \
+    npm install -g npm
 
 # Yeoman
 RUN npm install -g yo
