@@ -66,8 +66,8 @@ RUN apt-get install -y apt-transport-https && \
     apt-get install -y nodejs && \
     npm install -g npm
 
-# Yeoman
-RUN npm install -g yo
+# NPM
+RUN npm install -g yo gulp
 
 # php.ini
 COPY disable-mail.ini /etc/php/7.0/cli/conf.d/99-disable-mail.ini
