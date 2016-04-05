@@ -58,17 +58,6 @@ RUN locale-gen en_GB.UTF-8 && \
     apt-get update && \
     apt-get install -y php7.0-cli php7.0-gd php7.0-mysql php7.0-xml php7.0-mbstring
 
-# Node
-RUN apt-get install -y apt-transport-https && \
-    curl -s https://deb.nodesource.com/gpgkey/nodesource.gpg.key | apt-key add - && \
-    echo 'deb https://deb.nodesource.com/node_4.x wily main' > /etc/apt/sources.list.d/nodesource.list && \
-    apt-get update && \
-    apt-get install -y nodejs && \
-    npm install -g npm
-
-# NPM
-RUN npm install -g yo gulp
-
 # php.ini
 COPY disable-mail.ini /etc/php/7.0/cli/conf.d/99-disable-mail.ini
 COPY errors.ini /etc/php/7.0/cli/conf.d/99-errors.ini
