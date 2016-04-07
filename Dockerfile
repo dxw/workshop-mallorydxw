@@ -52,12 +52,6 @@ RUN ln -s /workbench/home/.ssh/known_hosts /home/core/.ssh/known_hosts
 # GPG
 RUN ln -s /workbench/home/.gnupg /home/core/.gnupg
 
-# PHP 7
-RUN locale-gen en_GB.UTF-8 && \
-    LANG=en_GB.UTF-8 add-apt-repository -y ppa:ondrej/php && \
-    apt-get update && \
-    apt-get install -y php7.0-cli php7.0-gd php7.0-mysql php7.0-xml php7.0-mbstring
-
 # php.ini
 COPY disable-mail.ini /etc/php/7.0/cli/conf.d/99-disable-mail.ini
 COPY errors.ini /etc/php/7.0/cli/conf.d/99-errors.ini
