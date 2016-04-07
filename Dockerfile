@@ -52,10 +52,6 @@ RUN ln -s /workbench/home/.ssh/known_hosts /home/core/.ssh/known_hosts
 # GPG
 RUN ln -s /workbench/home/.gnupg /home/core/.gnupg
 
-# php.ini
-COPY disable-mail.ini /etc/php/7.0/cli/conf.d/99-disable-mail.ini
-COPY errors.ini /etc/php/7.0/cli/conf.d/99-errors.ini
-
 # Etc
 RUN chown -R core:core /home/core
 
