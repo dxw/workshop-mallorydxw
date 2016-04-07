@@ -9,7 +9,9 @@ RUN echo America/New_York > /etc/timezone
 RUN dpkg-reconfigure -f noninteractive tzdata
 
 # Install more packages
-RUN apt-get install --no-install-recommends -y dsh
+RUN apt-get update && \
+    apt-get install --no-install-recommends -y dsh && \
+    rm -r /var/lib/apt/lists/*
 
 # Dotfiles
 COPY dotfiles/ /home/core/
