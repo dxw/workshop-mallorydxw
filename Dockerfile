@@ -7,6 +7,8 @@ USER root
 # Set timezone
 RUN echo America/New_York > /etc/timezone
 RUN dpkg-reconfigure -f noninteractive tzdata
+# workaround: https://bugs.launchpad.net/ubuntu/+source/tzdata/+bug/1554806
+RUN ln -fs /usr/share/zoneinfo/America/New_York /etc/localtime
 
 # Install more packages
 RUN apt-get update && \
