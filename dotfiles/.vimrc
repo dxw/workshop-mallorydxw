@@ -13,15 +13,10 @@ set history=1000
 set wildmenu wildmode=list:longest
 set shortmess=aoOtTI
 set undofile undodir=~/.vim/bak,.
-if has("cryptv")
-  set cryptmethod=blowfish
-end
 set nomodeline " security
-set t_Co=256 " use all 256 colours
 set re=1 " fix a bug with the Ruby syntax highlighting
 
-set cursorline
-highlight CursorLine cterm=NONE ctermbg=235
+colorscheme desert
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """ Mappings
@@ -191,6 +186,10 @@ let g:syntastic_disabled_filetypes=['go']
 
 " JS
 let g:syntastic_javascript_checkers = ['standard']
+
+" neoterm
+let g:neoterm_position = 'vertical'
+nmap <Leader>t :autocmd BufWritePost * :T vendor/bin/phpunit<CR>:T vendor/bin/phpunit<CR>
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """ .vimrc.local
