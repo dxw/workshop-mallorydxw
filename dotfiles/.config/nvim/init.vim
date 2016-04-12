@@ -12,7 +12,7 @@ set hidden
 set history=1000
 set wildmenu wildmode=list:longest
 set shortmess=aoOtTI
-set undofile undodir=~/.vim/bak,.
+set undofile undodir=~/.local/share/nvim/undodir,.
 set nomodeline " security
 set re=1 " fix a bug with the Ruby syntax highlighting
 
