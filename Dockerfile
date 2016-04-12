@@ -15,22 +15,28 @@ RUN apt-get update && \
     apt-get install --no-install-recommends -y dsh && \
     rm -r /var/lib/apt/lists/*
 
+# Install neovim
+RUN add-apt-repository -y ppa:neovim-ppa/unstable &&\
+    apt-get update && \
+    apt-get install --no-install-recommends -y neovim && \
+    rm -r /var/lib/apt/lists/*
+
 # Dotfiles
 COPY dotfiles/ /home/core/
 
 # Install vim plugins
-RUN mkdir -p /home/core/.vim/bundle && \
-    git -C /home/core/.vim/bundle clone --quiet https://github.com/kien/rainbow_parentheses.vim.git && \
-    git -C /home/core/.vim/bundle clone --quiet https://github.com/sunaku/vim-unbundle.git && \
-    git -C /home/core/.vim/bundle clone --quiet https://github.com/tpope/vim-commentary.git && \
-    git -C /home/core/.vim/bundle clone --quiet https://github.com/tpope/vim-repeat.git && \
-    git -C /home/core/.vim/bundle clone --quiet https://github.com/msanders/snipmate.vim.git && \
-    git -C /home/core/.vim/bundle clone --quiet https://github.com/tpope/vim-surround.git && \
-    git -C /home/core/.vim/bundle clone --quiet https://github.com/scrooloose/syntastic.git && \
-    git -C /home/core/.vim/bundle clone --quiet https://github.com/fatih/vim-go.git && \
-    git -C /home/core/.vim/bundle clone --quiet https://github.com/vim-scripts/CursorLineCurrentWindow.git && \
-    git -C /home/core/.vim/bundle clone --quiet https://github.com/dxw/vim-php-indent.git && \
-    git -C /home/core/.vim/bundle clone --quiet https://github.com/kassio/neoterm.git
+RUN mkdir -p /home/core/.config/nvim/bundle && \
+    git -C /home/core/.config/nvim/bundle clone --quiet https://github.com/kien/rainbow_parentheses.vim.git && \
+    git -C /home/core/.config/nvim/bundle clone --quiet https://github.com/sunaku/vim-unbundle.git && \
+    git -C /home/core/.config/nvim/bundle clone --quiet https://github.com/tpope/vim-commentary.git && \
+    git -C /home/core/.config/nvim/bundle clone --quiet https://github.com/tpope/vim-repeat.git && \
+    git -C /home/core/.config/nvim/bundle clone --quiet https://github.com/msanders/snipmate.vim.git && \
+    git -C /home/core/.config/nvim/bundle clone --quiet https://github.com/tpope/vim-surround.git && \
+    git -C /home/core/.config/nvim/bundle clone --quiet https://github.com/scrooloose/syntastic.git && \
+    git -C /home/core/.config/nvim/bundle clone --quiet https://github.com/fatih/vim-go.git && \
+    git -C /home/core/.config/nvim/bundle clone --quiet https://github.com/vim-scripts/CursorLineCurrentWindow.git && \
+    git -C /home/core/.config/nvim/bundle clone --quiet https://github.com/dxw/vim-php-indent.git && \
+    git -C /home/core/.config/nvim/bundle clone --quiet https://github.com/kassio/neoterm.git
 
 # Install vim-go dependencies
 # https://github.com/fatih/vim-go/blob/master/plugin/go.vim
@@ -46,15 +52,6 @@ RUN PATH=$PATH:/usr/local/go/bin GOPATH=/src/go sh -c '\
     true' && \
     mv /src/go/bin/* /usr/local/bin/ && \
     rm -rf /src/go
-
-# Install neovim
-RUN add-apt-repository -y ppa:neovim-ppa/unstable &&\
-    apt-get update && \
-    apt-get install --no-install-recommends -y neovim && \
-    rm -r /var/lib/apt/lists/*
-RUN mkdir -p ~/.config && \
-    ln -s ~/.vim ~/.config/nvim && \
-    ln -s ~/.vimrc ~/.config/nvim/init.vim
 
 # ssh keys
 RUN ln -s /workbench/home/.ssh/id_rsa /home/core/.ssh/id_rsa
