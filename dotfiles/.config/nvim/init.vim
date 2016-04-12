@@ -189,6 +189,7 @@ let g:syntastic_javascript_checkers = ['standard']
 
 " neoterm
 let g:neoterm_position = 'vertical'
+let g:neoterm_size = 80
 nmap <Leader>t :autocmd BufWritePost * :T vendor/bin/phpunit<CR>:T vendor/bin/phpunit<CR>
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
