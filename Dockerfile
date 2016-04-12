@@ -34,7 +34,6 @@ RUN mkdir -p /home/core/.config/nvim/bundle && \
     git -C /home/core/.config/nvim/bundle clone --quiet https://github.com/tpope/vim-surround.git && \
     git -C /home/core/.config/nvim/bundle clone --quiet https://github.com/scrooloose/syntastic.git && \
     git -C /home/core/.config/nvim/bundle clone --quiet https://github.com/fatih/vim-go.git && \
-    git -C /home/core/.config/nvim/bundle clone --quiet https://github.com/vim-scripts/CursorLineCurrentWindow.git && \
     git -C /home/core/.config/nvim/bundle clone --quiet https://github.com/dxw/vim-php-indent.git && \
     git -C /home/core/.config/nvim/bundle clone --quiet https://github.com/kassio/neoterm.git
 
