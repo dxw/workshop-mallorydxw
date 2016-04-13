@@ -190,7 +190,14 @@ let g:syntastic_javascript_checkers = ['standard']
 " neoterm
 let g:neoterm_position = 'vertical'
 let g:neoterm_size = 80
-nmap <Leader>t :autocmd BufWritePost * :T vendor/bin/phpunit<CR>:T vendor/bin/phpunit<CR>
+augroup neoterm_test_php
+  autocmd!
+  if filereadable('vendor/bin/phpunit')
+    autocmd BufRead,BufNewFile *.php execute 'T vendor/bin/phpunit'
+    autocmd BufWritePost *.php execute 'T vendor/bin/phpunit'
+    autocmd BufWinLeave *.php execute 'Tclose'
+  end
+augroup END
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """ .vimrc.local
