@@ -53,9 +53,9 @@ RUN PATH=$PATH:/usr/local/go/bin GOPATH=/src/go sh -c '\
     rm -rf /src/go
 
 # Install spell files
-RUN mkdir -p ~/.local/share/nvim/site/spell && \
-    wget --quiet http://ftp.vim.org/pub/vim/runtime/spell/en.utf-8.spl -O ~/.local/share/nvim/site/spell/en.utf-8.spl && \
-    wget --quiet http://ftp.vim.org/pub/vim/runtime/spell/en.utf-8.sug -O ~/.local/share/nvim/site/spell/en.utf-8.sug
+RUN mkdir -p /home/core/.local/share/nvim/site/spell && \
+    wget --quiet http://ftp.vim.org/pub/vim/runtime/spell/en.utf-8.spl -O /home/core/.local/share/nvim/site/spell/en.utf-8.spl && \
+    wget --quiet http://ftp.vim.org/pub/vim/runtime/spell/en.utf-8.sug -O /home/core/.local/share/nvim/site/spell/en.utf-8.sug
 
 # ssh keys
 RUN ln -s /workbench/home/.ssh/id_rsa /home/core/.ssh/id_rsa
