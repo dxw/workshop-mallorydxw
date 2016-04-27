@@ -27,6 +27,9 @@ export PATH=/sbin:/bin:\
 /usr/local/lib/composer/vendor/bin:\
 ~/bin
 
+# Stateful .histfile
+HISTFILE=/workbench/home/.histfile
+
 # Aliases
 [ X$TERM = Xscreen ] && alias screen='screen -e ^Oo'
 [ X$EMACS != Xt ] &&

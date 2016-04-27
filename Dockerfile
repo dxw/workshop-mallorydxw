@@ -64,9 +64,6 @@ RUN ln -s /workbench/home/.ssh/id_rsa.pub /home/core/.ssh/id_rsa.pub
 # use a stateful known_hosts file
 RUN ln -s /workbench/home/.ssh/known_hosts /home/core/.ssh/known_hosts
 
-# use a stateful history file
-RUN ln -s /workbench/home/.histfile /home/core/.histfile
-
 # GPG
 RUN ln -s /workbench/home/.gnupg /home/core/.gnupg
 
