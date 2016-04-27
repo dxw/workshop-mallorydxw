@@ -31,11 +31,6 @@ export PATH=/sbin:/bin:\
 HISTFILE=/workbench/home/.histfile
 
 # Aliases
-[ X$TERM = Xscreen ] && alias screen='screen -e ^Oo'
-[ X$EMACS != Xt ] &&
-  ls -F --color=auto >/dev/null 2>/dev/null && alias ls="ls -F --color=auto"
-alias ll="ls -l"
-alias llh="ls -lh"
 alias mv="mv -i"
 alias stash='git stash store `git stash create`'
 
