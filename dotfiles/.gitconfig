@@ -11,6 +11,7 @@
   graph = log --graph --decorate --oneline --full-history
   empty = commit --allow-empty -m Empty
   f = fetch --all
+  c = checkout
 [push]
   default = current
 [fetch]
