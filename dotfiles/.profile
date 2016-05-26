@@ -27,9 +27,6 @@ export PATH=/sbin:/bin:\
 /usr/local/lib/composer/vendor/bin:\
 ~/bin
 
-# Stateful .histfile
-HISTFILE=/workbench/home/.histfile
-
 # Aliases
 alias mv="mv -i"
 alias stash='git stash store `git stash create`'
