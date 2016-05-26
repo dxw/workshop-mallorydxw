@@ -3,7 +3,7 @@
 
 
 ## History
-HISTFILE=/workbench/home/.histfile
+HISTFILE=~/.histfile
 HISTSIZE=100000000
 SAVEHIST=100000000
 setopt hist_ignore_dups inc_append_history
