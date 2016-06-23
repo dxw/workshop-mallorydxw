@@ -29,6 +29,7 @@ export PATH=/sbin:/bin:\
 
 # Aliases
 alias mv="mv -i"
+alias ls="ls --color=auto"
 alias stash='git stash store `git stash create`'
 
 # Serialization formats
