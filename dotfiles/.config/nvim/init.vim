@@ -188,16 +188,16 @@ let g:syntastic_disabled_filetypes=['go']
 let g:syntastic_javascript_checkers = ['standard']
 
 " neoterm
-let g:neoterm_position = 'vertical'
-let g:neoterm_size = 80
-augroup neoterm_test_php
-  autocmd!
-  if filereadable('vendor/bin/phpunit')
-    autocmd BufRead,BufNewFile *.php execute 'T vendor/bin/phpunit'
-    autocmd BufWritePost *.php execute 'T vendor/bin/phpunit'
-    autocmd BufWinLeave *.php execute 'Tclose'
-  end
-augroup END
+" let g:neoterm_position = 'vertical'
+" let g:neoterm_size = 80
+" augroup neoterm_test_php
+"   autocmd!
+"   if filereadable('vendor/bin/phpunit')
+"     autocmd BufRead,BufNewFile *.php execute 'T vendor/bin/phpunit'
+"     autocmd BufWritePost *.php execute 'T vendor/bin/phpunit'
+"     autocmd BufWinLeave *.php execute 'Tclose'
+"   end
+" augroup END
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """ .vimrc.local
