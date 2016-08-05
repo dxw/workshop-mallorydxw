@@ -50,17 +50,8 @@ alias agp="ag -G'.php$'"
 alias agj="ag -G'.js$'"
 alias agp_="agp '\\\$_(GET|POST|REQUEST|SERVER|COOKIE)'"
 
-# Fix for vboxsf's lack of symlinks
-alias npm='npm --no-bin-links'
-
-# Grunt
-alias gr='npm install --no-bin-links && bower install && grunt'
-
 # pluginscan
 alias pscan='pluginscan --no-sloccount --no-cloc --issues-format=error_list > scan-vim && pluginscan > scan'
-
-# Wercker
-alias wb='wercker build --build-dir=$HOME/_builds --cache-dir=$HOME/_cache --container-dir=$HOME/_containers --project-dir=$HOME/_projects --step-dir=$HOME/_steps'
 
 # Docker compose
 alias dc='HOME=/ docker-compose'
