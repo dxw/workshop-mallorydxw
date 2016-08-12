@@ -27,6 +27,9 @@ export PATH=/sbin:/bin:\
 /usr/local/lib/composer/vendor/bin:\
 ~/bin
 
+#dxp
+export DXP_CONFIG=/workbench/src/twinkie.dxw.net/tools/dxp/config.json
+
 # Aliases
 alias mv="mv -i"
 alias ls="ls --color=auto"
