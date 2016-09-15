@@ -12,7 +12,7 @@ RUN ln -fs /usr/share/zoneinfo/America/New_York /etc/localtime
 
 # Install more packages
 RUN apt-get update && \
-    apt-get install --no-install-recommends -y dsh && \
+    apt-get install --no-install-recommends -y dsh libncurses5-dev && \
     rm -r /var/lib/apt/lists/*
 
 # Install neovim
@@ -60,6 +60,11 @@ RUN mkdir -p /home/core/.local/share/nvim/site/spell && \
 # Install tmuxinator
 RUN gem install tmuxinator && \
     ln -s /usr/local/bin/tmuxinator /usr/local/bin/mux
+
+# Install fzf
+RUN sudo gem install curses && \
+    git clone --depth 1 https://github.com/junegunn/fzf.git /home/core/.fzf && \
+    /home/core/.fzf/install --no-completion --no-key-bindings --no-update-rc
 
 # ssh keys
 RUN ln -s /workbench/home/.ssh/id_rsa /home/core/.ssh/id_rsa
