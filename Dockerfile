@@ -24,6 +24,9 @@ RUN add-apt-repository -y ppa:neovim-ppa/unstable &&\
 # Dotfiles
 COPY dotfiles/ /home/core/
 
+# bin
+COPY bin/ /usr/local/bin/
+
 # Install vim plugins
 RUN mkdir -p /home/core/.config/nvim/bundle && \
     git -C /home/core/.config/nvim/bundle clone --quiet https://github.com/kien/rainbow_parentheses.vim.git && \

@@ -12,6 +12,8 @@
   empty = commit --allow-empty -m Empty
   f = fetch --all
   c = checkout
+  # fzf aliases
+  cf = !git-branch-fzf git checkout
 [push]
   default = current
 [fetch]

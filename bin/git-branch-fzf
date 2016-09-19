@@ -1,0 +1,10 @@
+#!/bin/sh
+set -e
+
+# Source: https://coderwall.com/p/ba8afa/git-branch-fuzzy-search-checkout
+#
+# With some modifications.
+
+BRANCHES=$(git branch -a)
+BRANCH=$(echo "${BRANCHES}" | fzf +s +m -e)
+exec ${@} $(echo "${BRANCH}" | sed "s: -> .*::" | sed "s:.* ::")
