@@ -63,8 +63,9 @@ RUN gem install tmuxinator && \
 
 # Install fzf
 RUN sudo gem install curses && \
-    git clone --depth 1 https://github.com/junegunn/fzf.git /home/core/.fzf && \
-    /home/core/.fzf/install --no-completion --no-key-bindings --no-update-rc
+    git clone --depth 1 https://github.com/junegunn/fzf.git /usr/local/fzf && \
+    /usr/local/fzf/install --no-completion --no-key-bindings --no-update-rc && \
+    ln -s  ../fzf/fzf /usr/local/bin/fzf
 
 # ssh keys
 RUN ln -s /workbench/home/.ssh/id_rsa /home/core/.ssh/id_rsa
