@@ -180,9 +180,11 @@ augroup END
 " vim-go
 let g:go_disable_autoinstall = 1
 let g:go_fmt_command = "goimports"
+let g:go_list_type = "quickfix"
 
-" disable syntastic for Go - we use vim-go
-let g:syntastic_disabled_filetypes=['go']
+" syntastic
+let g:syntastic_go_checkers = ['golint', 'govet', 'errcheck']
+let g:syntastic_mode_map = { 'mode': 'active', 'passive_filetypes': ['go'] }
 
 " JS
 let g:syntastic_javascript_checkers = ['standard']
