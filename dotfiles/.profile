@@ -59,6 +59,9 @@ alias pscan='pluginscan --no-sloccount --no-cloc --issues-format=error_list > sc
 # Docker compose
 alias dc='HOME=/ docker-compose'
 
+# Tests
+alias peridot='watch vendor/bin/peridot spec -r dot'
+
 # Treatment for neuropathy
 alias g=git
 alias v=$VISUAL
