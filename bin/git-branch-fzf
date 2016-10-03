@@ -5,6 +5,6 @@ set -e
 #
 # With some modifications.
 
-BRANCHES=$(git branch -a)
+BRANCHES=$(git branch -a | sed 's:remotes/origin/::' | sort -u)
 BRANCH=$(echo "${BRANCHES}" | fzf +s +m -e)
 exec ${@} $(echo "${BRANCH}" | sed "s: -> .*::" | sed "s:.* ::")
