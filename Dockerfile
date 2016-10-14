@@ -21,6 +21,9 @@ RUN add-apt-repository -y ppa:neovim-ppa/unstable &&\
     apt-get install --no-install-recommends -y neovim && \
     rm -r /var/lib/apt/lists/*
 
+# So we don't need to run `apt update` every time we want to install something temporarily
+RUN apt-get update
+
 # Dotfiles
 COPY dotfiles/ /home/core/
 
