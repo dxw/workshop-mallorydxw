@@ -21,6 +21,7 @@
 [core]
   whitespace = trailing-space
   excludesFile = ~/.gitexcludesfile
+  hooksPath = ~/.githooks
 [hooks]
   allownonascii = true
 [color]
