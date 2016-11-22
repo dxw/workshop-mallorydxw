@@ -54,6 +54,10 @@ RUN PATH=$PATH:/usr/local/go/bin GOPATH=/src/go sh -c '\
     go get github.com/golang/lint/golint && \
     go get github.com/kisielk/errcheck && \
     go get github.com/jstemmer/gotags && \
+    go get github.com/alecthomas/gometalinter && \
+    go get github.com/klauspost/asmfmt/cmd/asmfmt && \
+    go get github.com/fatih/motion && \
+    go get github.com/josharian/impl && \
     true' && \
     mv /src/go/bin/* /usr/local/bin/ && \
     rm -rf /src/go
