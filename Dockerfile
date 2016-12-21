@@ -77,9 +77,6 @@ RUN sudo gem install curses && \
 RUN ln -s /workbench/home/.ssh/id_rsa /home/core/.ssh/id_rsa
 RUN ln -s /workbench/home/.ssh/id_rsa.pub /home/core/.ssh/id_rsa.pub
 
-# use a stateful known_hosts file
-RUN ln -s /workbench/home/.ssh/known_hosts /home/core/.ssh/known_hosts
-
 # GPG
 RUN ln -s /workbench/home/.gnupg /home/core/.gnupg
 
