@@ -97,6 +97,7 @@ set shiftwidth=2 softtabstop=2 expandtab
 " Syntax
 syntax on
 filetype plugin indent on
+autocmd VimEnter * colorscheme default
 
 " Python
 augroup python
