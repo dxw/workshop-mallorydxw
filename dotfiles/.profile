@@ -49,6 +49,7 @@ alias curl='curl -gsS'
 export GOPATH=/workbench
 
 # Ag
+alias ag='ag -a'
 alias agp="ag -G'.php$'"
 alias agj="ag -G'.js$'"
 alias agp_="agp '\\\$_(GET|POST|REQUEST|SERVER|COOKIE)'"
