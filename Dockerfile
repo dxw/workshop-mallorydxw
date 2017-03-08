@@ -21,6 +21,11 @@ RUN add-apt-repository -y ppa:neovim-ppa/unstable &&\
     apt-get install --no-install-recommends -y neovim && \
     rm -r /var/lib/apt/lists/*
 
+# Install latest version of tig
+RUN git clone https://github.com/jonas/tig.git /src/tig && \
+    git -C /src/tig checkout tig-2.2.1 && \
+    make -C /src/tig prefix=/usr/local install install-doc
+
 # So we don't need to run `apt update` every time we want to install something temporarily
 RUN apt-get update
 
