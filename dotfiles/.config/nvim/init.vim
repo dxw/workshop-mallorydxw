@@ -115,7 +115,7 @@ augroup END
 " SCSS
 augroup scss
   autocmd!
-  autocmd FileType scss setlocal shiftwidth=4 softtabstop=4
+  autocmd FileType scss setlocal shiftwidth=2 softtabstop=2
 augroup END
 
 " PHP
