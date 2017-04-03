@@ -21,6 +21,7 @@ export LESSCHARSET=utf-8
 export PATH=/sbin:/bin:\
 /workbench/bin:\
 /workbench/local/bin:\
+/workbench/local/ruby/bin:\
 /usr/local/sbin:/usr/local/bin:/usr/local/games:\
 /usr/sbin:/usr/bin:/usr/games:\
 /usr/local/go/bin:\
@@ -47,6 +48,9 @@ alias curl='curl -gsS'
 
 # Golang
 export GOPATH=/workbench
+
+# Ruby
+export GEM_PATH=/workbench/local/ruby
 
 # Ag
 alias ag='ag -a'
