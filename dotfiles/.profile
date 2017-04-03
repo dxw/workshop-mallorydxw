@@ -7,8 +7,8 @@ unset MAILCHECK
 # Exports
 export PAGER=less
 export GIT_PAGER='less -E'
-export EDITOR=nvim
-export VISUAL=nvim
+export EDITOR=vim
+export VISUAL=vim
 export NODE_DISABLE_COLORS=1
 
 # L10N and I18N

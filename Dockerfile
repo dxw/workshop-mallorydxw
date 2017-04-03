@@ -15,12 +15,6 @@ RUN apt-get update && \
     apt-get install --no-install-recommends -y dsh libncurses5-dev && \
     rm -r /var/lib/apt/lists/*
 
-# Install neovim
-RUN add-apt-repository -y ppa:neovim-ppa/unstable &&\
-    apt-get update && \
-    apt-get install --no-install-recommends -y neovim && \
-    rm -r /var/lib/apt/lists/*
-
 # Install latest version of tig
 RUN git clone https://github.com/jonas/tig.git /src/tig && \
     git -C /src/tig checkout tig-2.2.1 && \
@@ -55,17 +49,17 @@ COPY dotfiles/ /home/core/
 COPY bin/ /usr/local/bin/
 
 # Install vim plugins
-RUN mkdir -p /home/core/.config/nvim/bundle && \
-    git -C /home/core/.config/nvim/bundle clone --quiet https://github.com/kien/rainbow_parentheses.vim.git && \
-    git -C /home/core/.config/nvim/bundle clone --quiet https://github.com/sunaku/vim-unbundle.git && \
-    git -C /home/core/.config/nvim/bundle clone --quiet https://github.com/tpope/vim-commentary.git && \
-    git -C /home/core/.config/nvim/bundle clone --quiet https://github.com/tpope/vim-repeat.git && \
-    git -C /home/core/.config/nvim/bundle clone --quiet https://github.com/msanders/snipmate.vim.git && \
-    git -C /home/core/.config/nvim/bundle clone --quiet https://github.com/tpope/vim-surround.git && \
-    git -C /home/core/.config/nvim/bundle clone --quiet https://github.com/scrooloose/syntastic.git && \
-    git -C /home/core/.config/nvim/bundle clone --quiet https://github.com/fatih/vim-go.git && \
-    git -C /home/core/.config/nvim/bundle clone --quiet https://github.com/dxw/vim-php-indent.git && \
-    git -C /home/core/.config/nvim/bundle clone --quiet https://github.com/kassio/neoterm.git
+RUN mkdir -p /home/core/.vim/bundle && \
+    git -C /home/core/.vim/bundle clone --quiet https://github.com/kien/rainbow_parentheses.vim.git && \
+    git -C /home/core/.vim/bundle clone --quiet https://github.com/sunaku/vim-unbundle.git && \
+    git -C /home/core/.vim/bundle clone --quiet https://github.com/tpope/vim-commentary.git && \
+    git -C /home/core/.vim/bundle clone --quiet https://github.com/tpope/vim-repeat.git && \
+    git -C /home/core/.vim/bundle clone --quiet https://github.com/msanders/snipmate.vim.git && \
+    git -C /home/core/.vim/bundle clone --quiet https://github.com/tpope/vim-surround.git && \
+    git -C /home/core/.vim/bundle clone --quiet https://github.com/scrooloose/syntastic.git && \
+    git -C /home/core/.vim/bundle clone --quiet https://github.com/fatih/vim-go.git && \
+    git -C /home/core/.vim/bundle clone --quiet https://github.com/dxw/vim-php-indent.git && \
+    git -C /home/core/.vim/bundle clone --quiet https://github.com/kassio/neoterm.git
 
 # Install spell files
 RUN mkdir -p /home/core/.local/share/nvim/site/spell && \
