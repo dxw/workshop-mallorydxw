@@ -62,7 +62,7 @@ alias agp_="agp '\\\$_(GET|POST|REQUEST|SERVER|COOKIE)'"
 alias pscan='pluginscan --no-sloccount --no-cloc --issues-format=error_list > scan-vim && pluginscan > scan'
 
 # Docker compose
-alias dc='HOME=/ docker-compose'
+alias dc=docker-compose
 
 # Tests
 alias peridot='watch vendor/bin/peridot spec -r dot'
