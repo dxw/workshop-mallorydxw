@@ -12,7 +12,7 @@ RUN ln -fs /usr/share/zoneinfo/America/New_York /etc/localtime
 
 # Install more packages
 RUN apt-get update && \
-    apt-get install --no-install-recommends -y dsh libncurses5-dev && \
+    apt-get install --no-install-recommends -y dsh libncurses5-dev graphicsmagick && \
     rm -r /var/lib/apt/lists/*
 
 # Install latest version of tig
