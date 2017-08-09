@@ -16,8 +16,8 @@ RUN apt-get update && \
     rm -r /var/lib/apt/lists/*
 
 # Install latest version of tig
-RUN git clone https://github.com/jonas/tig.git /src/tig && \
-    git -C /src/tig checkout tig-2.2.1 && \
+RUN git clone --quiet https://github.com/jonas/tig.git /src/tig && \
+    git -C /src/tig checkout tig-2.2.2 && \
     make -C /src/tig prefix=/usr/local install install-doc
 
 # So we don't need to run `apt update` every time we want to install something temporarily
@@ -68,7 +68,7 @@ RUN mkdir -p /home/core/.local/share/nvim/site/spell && \
 
 # Install fzf
 RUN sudo gem install curses && \
-    git clone --depth 1 https://github.com/junegunn/fzf.git /usr/local/fzf && \
+    git clone --quiet --depth 1 https://github.com/junegunn/fzf.git /usr/local/fzf && \
     /usr/local/fzf/install --no-completion --no-key-bindings --no-update-rc && \
     ln -s  ../fzf/fzf /usr/local/bin/fzf
 
