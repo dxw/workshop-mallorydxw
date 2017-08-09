@@ -83,7 +83,7 @@ RUN ln -s /workbench/home/.gnupg /home/core/.gnupg
 RUN chown -R core:core /home/core
 
 # Fix terminfo to stop blinking
-RUN infocmp linux | perl -pi -e 's/cnorm=\\E\[\?25h\\E\[\?0c/cnorm=\\E\[\?25h/' | tic -
+RUN infocmp linux | perl -pe 's/cnorm=\\E\[\?25h\\E\[\?0c/cnorm=\\E\[\?25h/' | tic -
 
 # Switch WORKDIR/USER back
 WORKDIR /workbench/src
