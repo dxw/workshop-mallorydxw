@@ -71,3 +71,6 @@ alias peridot='watch vendor/bin/peridot spec -r dot'
 # Treatment for neuropathy
 alias g=git
 alias v=$VISUAL
+
+# Oh my...
+export OHMY_PASSWORD_FILE=/workbench/home/ohmy
