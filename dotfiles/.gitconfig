@@ -14,6 +14,7 @@
   c = checkout
   # fzf aliases
   cf = !git-branch-fzf git checkout
+  m = !git c master && git p && git merge --no-ff --no-edit origin/develop
 [push]
   default = current
 [fetch]
