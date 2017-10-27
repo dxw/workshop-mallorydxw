@@ -47,29 +47,33 @@ RUN apt-get update
 ##############################################################################
 ## Global configuration
 
+# Fix terminfo to prevent blinking
+RUN infocmp linux | perl -pe 's/cnorm=\\E\[\?25h\\E\[\?0c/cnorm=\\E\[\?25h/' | tic -
+
 # Fix "perl: warning: Setting locale failed."
 RUN locale-gen en_US.UTF-8 en_GB.UTF-8
 ENV LC_ALL=en_GB.UTF-8
 
-RUN echo Europe/London > /etc/timezone && \
-    dpkg-reconfigure -f noninteractive tzdata
+# Set timezone
+RUN echo America/New_York > /etc/timezone
+RUN dpkg-reconfigure -f noninteractive tzdata
 # workaround: https://bugs.launchpad.net/ubuntu/+source/tzdata/+bug/1554806
-RUN ln -fs /usr/share/zoneinfo/Europe/London /etc/localtime
+RUN ln -fs /usr/share/zoneinfo/America/New_York /etc/localtime
 
+# Setup sudoers
 RUN echo '%sudo ALL=(ALL:ALL) NOPASSWD: ALL' >> /etc/sudoers
-
-##############################################################################
-## Install tools
-
-RUN mkdir /src /home/core
 
 # Fix bad defaults
 RUN echo 'install: --no-rdoc --no-ri' > /etc/gemrc && \
     echo 'error_reporting=E_ALL' > /etc/php/7.1/cli/conf.d/99-dxw-errors.ini && \
     echo 'phar.readonly=Off' > /etc/php/7.1/cli/conf.d/99-dxw-phar.ini && \
     echo 'xdebug.var_display_max_depth=99999' > /etc/php/7.1/cli/conf.d/99-dxw-fix-xdebug-var-dump.ini && \
-    /bin/echo -e '[mail function]\nsendmail_path = /bin/false' > /etc/php/7.1/cli/conf.d/99-dxw-disable-mail.ini && \
-    echo '{"analytics":false}' > /home/core/.bowerrc
+    /bin/echo -e '[mail function]\nsendmail_path = /bin/false' > /etc/php/7.1/cli/conf.d/99-dxw-disable-mail.ini
+
+##############################################################################
+## Install tools
+
+RUN mkdir /src
 
 # Update package managers
 RUN gem update --system
@@ -80,14 +84,6 @@ RUN wget --quiet https://storage.googleapis.com/golang/`curl -s https://golang.o
     rm /src/go.tar.gz
 ENV PATH=$PATH:/usr/local/go/bin
 
-# Go tools
-RUN GOPATH=/src/go go get github.com/dxw/git-env && \
-    GOPATH=/src/go go get github.com/holizz/pw && \
-    GOPATH=/src/go go get github.com/holizz/diceware && \
-    GOPATH=/src/go go get github.com/src-d/beanstool && \
-    mv /src/go/bin/* /usr/local/bin/ && \
-    rm -rf /src/go
-
 # composer
 RUN wget --quiet https://getcomposer.org/download/1.5.2/composer.phar -O /usr/local/bin/composer && \
     chmod 755 /usr/local/bin/composer
@@ -96,7 +92,20 @@ ENV PATH=$PATH:/usr/local/lib/composer/vendor/bin:~/.composer/vendor/bin
 # Install things with package managers
 RUN gem install bundler sass && \
     pip3 install --upgrade docker-compose && \
-    yarn global add grunt-cli bower json standard standard-format yo gulp
+    yarn global add grunt-cli bower json standard standard-format yo gulp && \
+    GOPATH=/src/go go get github.com/dxw/git-env && \
+    GOPATH=/src/go go get github.com/holizz/pw && \
+    GOPATH=/src/go go get github.com/holizz/diceware && \
+    GOPATH=/src/go go get github.com/holizz/renamer && \
+    GOPATH=/src/go go get github.com/src-d/beanstool && \
+    mv /src/go/bin/* /usr/local/bin/ && \
+    rm -rf /src/go
+
+# Install fzf
+RUN gem install curses && \
+    git clone --quiet --depth 1 https://github.com/junegunn/fzf.git /usr/local/fzf && \
+    /usr/local/fzf/install --no-completion --no-key-bindings --no-update-rc && \
+    ln -s  ../fzf/fzf /usr/local/bin/fzf
 
 # Other tools
 RUN git -C /src clone --quiet --recursive https://github.com/dxw/srdb.git && \
@@ -108,33 +117,16 @@ RUN git -C /src clone --quiet https://github.com/dxw/wpc && \
     cp /src/wpc/bin/* /usr/local/bin
 
 ##############################################################################
-## Add user
+## User-specific
 
+RUN mkdir /home/core
+
+# Add user
 RUN adduser --gecos '' --shell /bin/zsh --disabled-password core
 RUN usermod -aG sudo core
 
-##############################################################################
-## Startup
-
-WORKDIR /workbench
-USER core
-VOLUME /workbench
-CMD ["tmux", "-u2"]
-
-# Switch WORKDIR/USER temporarily
-WORKDIR /
-USER root
-
-# Set timezone
-RUN echo America/New_York > /etc/timezone
-RUN dpkg-reconfigure -f noninteractive tzdata
-# workaround: https://bugs.launchpad.net/ubuntu/+source/tzdata/+bug/1554806
-RUN ln -fs /usr/share/zoneinfo/America/New_York /etc/localtime
-
-# Install latest version of tig
-RUN git clone --quiet https://github.com/jonas/tig.git /src/tig && \
-    git -C /src/tig checkout tig-2.2.2 && \
-    make -C /src/tig prefix=/usr/local install install-doc
+# Fix bad defaults
+RUN echo '{"analytics":false}' > /home/core/.bowerrc
 
 # Install vim-go dependencies
 # https://github.com/fatih/vim-go/blob/master/plugin/go.vim
@@ -179,12 +171,6 @@ RUN mkdir -p /home/core/.local/share/nvim/site/spell && \
     wget --quiet http://ftp.vim.org/pub/vim/runtime/spell/en.utf-8.spl -O /home/core/.local/share/nvim/site/spell/en.utf-8.spl && \
     wget --quiet http://ftp.vim.org/pub/vim/runtime/spell/en.utf-8.sug -O /home/core/.local/share/nvim/site/spell/en.utf-8.sug
 
-# Install fzf
-RUN sudo gem install curses && \
-    git clone --quiet --depth 1 https://github.com/junegunn/fzf.git /usr/local/fzf && \
-    /usr/local/fzf/install --no-completion --no-key-bindings --no-update-rc && \
-    ln -s  ../fzf/fzf /usr/local/bin/fzf
-
 # ssh keys
 RUN ln -s /workbench/home/.ssh/id_rsa /home/core/.ssh/id_rsa
 RUN ln -s /workbench/home/.ssh/id_rsa.pub /home/core/.ssh/id_rsa.pub
@@ -195,9 +181,8 @@ RUN ln -s /workbench/home/.gnupg /home/core/.gnupg
 # Etc
 RUN chown -R core:core /home/core
 
-# Fix terminfo to stop blinking
-RUN infocmp linux | perl -pe 's/cnorm=\\E\[\?25h\\E\[\?0c/cnorm=\\E\[\?25h/' | tic -
-
-# Switch WORKDIR/USER back
+# Set runtime details
 WORKDIR /workbench/src
 USER core
+VOLUME /workbench
+CMD ["tmux", "-u2"]
