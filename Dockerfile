@@ -85,7 +85,7 @@ RUN wget --quiet https://storage.googleapis.com/golang/`curl -s https://golang.o
 ENV PATH=$PATH:/usr/local/go/bin
 
 # composer
-RUN wget --quiet https://getcomposer.org/download/1.5.2/composer.phar -O /usr/local/bin/composer && \
+RUN wget --quiet https://getcomposer.org/download/1.5.3/composer.phar -O /usr/local/bin/composer && \
     chmod 755 /usr/local/bin/composer
 ENV PATH=$PATH:/usr/local/lib/composer/vendor/bin:~/.composer/vendor/bin
 
