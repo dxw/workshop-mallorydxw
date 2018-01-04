@@ -94,6 +94,7 @@ RUN gem install bundler sass && \
     pip3 install --upgrade docker-compose && \
     yarn global add grunt-cli bower json standard standard-format yo gulp && \
     GOPATH=/src/go go get github.com/dxw/git-env && \
+    GOPATH=/src/go go get github.com/dxw/wpc && \
     GOPATH=/src/go go get github.com/holizz/pw && \
     GOPATH=/src/go go get github.com/holizz/diceware && \
     GOPATH=/src/go go get github.com/holizz/renamer && \
@@ -113,8 +114,6 @@ RUN git -C /src clone --quiet --recursive https://github.com/dxw/srdb.git && \
 RUN git -C /src clone --quiet --recursive https://github.com/dxw/whippet && \
     cp -r /src/whippet /usr/local/share/whippet && \
     ln -s /usr/local/share/whippet/bin/whippet /usr/local/bin/whippet
-RUN git -C /src clone --quiet https://github.com/dxw/wpc && \
-    cp /src/wpc/bin/* /usr/local/bin
 
 ##############################################################################
 ## User-specific
