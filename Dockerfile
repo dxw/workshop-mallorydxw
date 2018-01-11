@@ -37,7 +37,7 @@ RUN apt-get update && \
         libpcre3-dev liblzma-dev libxml2-dev libxslt1-dev libmysql++-dev libsqlite3-dev \
         optipng libtool nasm libjpeg-turbo-progs mysql-client nmap cloc ed ripmime oathtool cloc \
         libcurl4-openssl-dev libexpat1-dev gettext asciidoc xsltproc xmlto iproute2 iputils-ping xmlstarlet gnupg2 tree jq libssl-dev \
-        dsh libncurses5-dev graphicsmagick \
+        dsh libncurses5-dev graphicsmagick awscli \
         nodejs heroku-toolbelt yarn && \
     rm -r /var/lib/apt/lists/*
 
