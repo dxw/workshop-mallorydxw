@@ -124,9 +124,6 @@ RUN mkdir /home/core
 RUN adduser --gecos '' --shell /bin/zsh --disabled-password core
 RUN usermod -aG sudo core
 
-# Fix bad defaults
-RUN echo '{"analytics":false}' > /home/core/.bowerrc
-
 # Install vim-go dependencies
 # https://github.com/fatih/vim-go/blob/master/plugin/go.vim
 RUN PATH=$PATH:/usr/local/go/bin GOPATH=/src/go sh -c '\
