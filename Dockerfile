@@ -92,7 +92,6 @@ ENV PATH=$PATH:/usr/local/lib/composer/vendor/bin:~/.composer/vendor/bin
 # Install things with package managers
 RUN gem install bundler sass && \
     pip3 install --upgrade docker-compose && \
-    yarn global add grunt-cli bower json standard standard-format yo gulp && \
     GOPATH=/src/go go get github.com/dxw/git-env && \
     GOPATH=/src/go go get github.com/dxw/wpc && \
     GOPATH=/src/go go get github.com/holizz/pw && \
