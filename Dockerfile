@@ -32,7 +32,7 @@ RUN apt-get update && \
         git mercurial bzr tig git-flow \
         python3 python3-pip python3-setuptools python ruby ruby-dev perl perl-doc \
         php-cli php-gd php-mbstring php-mysql php-xml php-curl php-xdebug php-gmp \
-        wget bind9-host netcat whois dnsutils net-tools \
+        wget bind9-host netcat whois dnsutils net-tools dialog \
         silversearcher-ag sloccount zip unzip \
         libpcre3-dev liblzma-dev libxml2-dev libxslt1-dev libmysql++-dev libsqlite3-dev \
         optipng libtool nasm libjpeg-turbo-progs mysql-client nmap cloc ed ripmime oathtool cloc \
