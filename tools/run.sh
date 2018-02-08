@@ -18,5 +18,5 @@ else
   # Remove stale
   docker rm workshop || true
   # Start fresh
-  exec docker run -ti --rm --name workshop --hostname workshop -v /usr/bin/docker:/usr/local/bin/docker:ro -v /var/run/docker.sock:/var/run/docker.sock -v /workbench:/workbench ${IMAGE}
+  exec docker run -ti --rm --name workshop --hostname workshop -v /usr/local/bin/docker:/usr/local/bin/docker:ro -v /var/run/docker.sock:/var/run/docker.sock -v /workbench:/workbench ${IMAGE}
 fi
