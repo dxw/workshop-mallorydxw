@@ -85,7 +85,7 @@ RUN wget --quiet https://storage.googleapis.com/golang/`curl -s https://golang.o
 ENV PATH=$PATH:/usr/local/go/bin
 
 # composer
-RUN wget --quiet `curl https://api.github.com/repos/composer/composer/releases/latest | jq -r '.assets[0].browser_download_url'` -O /usr/local/bin/composer && \
+RUN wget --quiet `curl -s https://api.github.com/repos/composer/composer/releases/latest | jq -r '.assets[0].browser_download_url'` -O /usr/local/bin/composer && \
     chmod 755 /usr/local/bin/composer
 ENV PATH=$PATH:/usr/local/lib/composer/vendor/bin:~/.composer/vendor/bin
 
