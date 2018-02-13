@@ -90,6 +90,8 @@ RUN wget --quiet `curl -s https://api.github.com/repos/composer/composer/release
 ENV PATH=$PATH:/usr/local/lib/composer/vendor/bin:~/.composer/vendor/bin
 
 # Install things with package managers
+# workaround: https://github.com/ffi/ffi/issues/608
+RUN apt-get install -y libffi-dev
 RUN gem install bundler sass && \
     pip3 install --upgrade docker-compose && \
     GOPATH=/src/go go get github.com/dxw/git-env && \
