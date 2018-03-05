@@ -1,12 +1,13 @@
 #!/bin/sh
 set -xe
 
-rm -rf /workbench/local
+BASE=/workbench/local
+SRC=${BASE}/src
+SHARE=${BASE}/share
+BIN=${BASE}/bin
+LIB=${BASE}/lib
 
-SRC=/workbench/local/src
-SHARE=/workbench/local/share
-BIN=/workbench/local/bin
-LIB=/workbench/local/lib
+rm -rf ${BASE}
 mkdir -p ${SRC} ${SHARE} ${BIN} ${LIB}
 
 # pluginscan
