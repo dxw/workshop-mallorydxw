@@ -10,8 +10,11 @@ LIB=/workbench/local/lib
 mkdir -p ${SRC} ${SHARE} ${BIN} ${LIB}
 
 # pluginscan
-gem sources -a https://gems.dxw.net/ && \
-  GEM_HOME=/workbench/local/ruby gem install rake pluginscan
+git -C ${SRC} clone --quiet git@git.govpress.com:dxw/pluginscan.git && \
+  cd ${SRC}/pluginscan && \
+  gem build pluginscan.gemspec && \
+  GEM_HOME=/workbench/local/ruby gem install pluginscan-*.gem && \
+  cd -
 
 # log-tail
 git -C ${SRC} clone --quiet git@git.govpress.com:dxw/log-tail && \
