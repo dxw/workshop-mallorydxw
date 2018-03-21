@@ -83,6 +83,15 @@ RUN wget --quiet https://storage.googleapis.com/golang/`curl -s https://golang.o
     tar -C /usr/local -xzf /src/go.tar.gz && \
     rm /src/go.tar.gz
 ENV PATH=$PATH:/usr/local/go/bin
+# Go dep
+RUN GOPATH=/src/go go get -d -u github.com/golang/dep && \
+    cd /src/go/src/github.com/golang/dep && \
+    DEP_LATEST=$(git describe --abbrev=0 --tags) && \
+    git checkout $DEP_LATEST && \
+    GOPATH=/src/go go install -ldflags="-X main.version=$DEP_LATEST" ./cmd/dep && \
+    git checkout master && \
+    mv /src/go/bin/* /usr/local/bin/ && \
+    rm -rf /src/go
 
 # composer
 RUN wget --quiet `curl -s https://api.github.com/repos/composer/composer/releases/latest | jq -r '.assets[0].browser_download_url'` -O /usr/local/bin/composer && \
