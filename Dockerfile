@@ -30,7 +30,7 @@ RUN apt-get update && \
         locales man-db manpages less manpages-dev \
         openssh-client tmux zsh vim-nox \
         git mercurial bzr tig git-flow \
-        python3 python3-pip python3-setuptools ruby ruby-dev perl perl-doc \
+        python3 python3-pip python3-setuptools ruby ruby-dev bundler perl perl-doc \
         php-cli php-gd php-mbstring php-mysql php-xml php-curl php-xdebug php-gmp \
         wget bind9-host netcat whois dnsutils net-tools dialog \
         silversearcher-ag sloccount zip unzip \
@@ -99,7 +99,7 @@ RUN wget --quiet `curl -s https://api.github.com/repos/composer/composer/release
 ENV PATH=$PATH:/usr/local/lib/composer/vendor/bin:~/.composer/vendor/bin
 
 # Install things with package managers
-RUN gem install bundler sass && \
+RUN gem install sass && \
     pip3 install --upgrade docker-compose && \
     GOPATH=/src/go go get github.com/dxw/git-env && \
     GOPATH=/src/go go get github.com/dxw/wpc && \
