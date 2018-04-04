@@ -123,15 +123,6 @@ RUN git -C /src clone --quiet --recursive https://github.com/dxw/whippet && \
     cp -r /src/whippet /usr/local/share/whippet && \
     ln -s /usr/local/share/whippet/bin/whippet /usr/local/bin/whippet
 
-##############################################################################
-## User-specific
-
-RUN mkdir /home/core
-
-# Add user
-RUN adduser --gecos '' --shell /bin/zsh --disabled-password core
-RUN usermod -aG sudo core
-
 # Install vim-go dependencies
 # https://github.com/fatih/vim-go/blob/master/plugin/go.vim
 RUN PATH=$PATH:/usr/local/go/bin GOPATH=/src/go sh -c '\
@@ -151,24 +142,32 @@ RUN PATH=$PATH:/usr/local/go/bin GOPATH=/src/go sh -c '\
     mv /src/go/bin/* /usr/local/bin/ && \
     rm -rf /src/go
 
+# Install vim plugins
+RUN mkdir -p /usr/share/vim/vimfiles/pack/bundle/start && \
+    git -C /usr/share/vim/vimfiles/pack/bundle/start clone --quiet https://github.com/kien/rainbow_parentheses.vim.git && \
+    git -C /usr/share/vim/vimfiles/pack/bundle/start clone --quiet https://github.com/tpope/vim-commentary.git && \
+    git -C /usr/share/vim/vimfiles/pack/bundle/start clone --quiet https://github.com/tpope/vim-repeat.git && \
+    git -C /usr/share/vim/vimfiles/pack/bundle/start clone --quiet https://github.com/msanders/snipmate.vim.git && \
+    git -C /usr/share/vim/vimfiles/pack/bundle/start clone --quiet https://github.com/tpope/vim-surround.git && \
+    git -C /usr/share/vim/vimfiles/pack/bundle/start clone --quiet https://github.com/scrooloose/syntastic.git && \
+    git -C /usr/share/vim/vimfiles/pack/bundle/start clone --quiet https://github.com/fatih/vim-go.git && \
+    git -C /usr/share/vim/vimfiles/pack/bundle/start clone --quiet https://github.com/dxw/vim-php-indent.git && \
+    git -C /usr/share/vim/vimfiles/pack/bundle/start clone --quiet https://github.com/kassio/neoterm.git
+
+##############################################################################
+## User-specific
+
+RUN mkdir /home/core
+
+# Add user
+RUN adduser --gecos '' --shell /bin/zsh --disabled-password core
+RUN usermod -aG sudo core
+
 # Dotfiles
 COPY dotfiles/ /home/core/
 
 # bin
 COPY bin/ /usr/local/bin/
-
-# Install vim plugins
-RUN mkdir -p /home/core/.vim/bundle && \
-    git -C /home/core/.vim/bundle clone --quiet https://github.com/kien/rainbow_parentheses.vim.git && \
-    git -C /home/core/.vim/bundle clone --quiet https://github.com/sunaku/vim-unbundle.git && \
-    git -C /home/core/.vim/bundle clone --quiet https://github.com/tpope/vim-commentary.git && \
-    git -C /home/core/.vim/bundle clone --quiet https://github.com/tpope/vim-repeat.git && \
-    git -C /home/core/.vim/bundle clone --quiet https://github.com/msanders/snipmate.vim.git && \
-    git -C /home/core/.vim/bundle clone --quiet https://github.com/tpope/vim-surround.git && \
-    git -C /home/core/.vim/bundle clone --quiet https://github.com/scrooloose/syntastic.git && \
-    git -C /home/core/.vim/bundle clone --quiet https://github.com/fatih/vim-go.git && \
-    git -C /home/core/.vim/bundle clone --quiet https://github.com/dxw/vim-php-indent.git && \
-    git -C /home/core/.vim/bundle clone --quiet https://github.com/kassio/neoterm.git
 
 # Install spell files
 RUN mkdir -p /home/core/.local/share/nvim/site/spell && \
