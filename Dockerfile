@@ -169,11 +169,6 @@ COPY dotfiles/ /home/core/
 # bin
 COPY bin/ /usr/local/bin/
 
-# Install spell files
-RUN mkdir -p /home/core/.local/share/nvim/site/spell && \
-    wget --quiet http://ftp.vim.org/pub/vim/runtime/spell/en.utf-8.spl -O /home/core/.local/share/nvim/site/spell/en.utf-8.spl && \
-    wget --quiet http://ftp.vim.org/pub/vim/runtime/spell/en.utf-8.sug -O /home/core/.local/share/nvim/site/spell/en.utf-8.sug
-
 # ssh keys
 RUN ln -s /workbench/home/.ssh/id_rsa /home/core/.ssh/id_rsa
 RUN ln -s /workbench/home/.ssh/id_rsa.pub /home/core/.ssh/id_rsa.pub
