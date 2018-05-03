@@ -15,7 +15,7 @@ RUN apt-get update && \
 
 # Install requirements for third-party sources
 RUN apt-get update && \
-    apt-get install --no-install-recommends -y apt-transport-https curl ca-certificates lsb-release && \
+    apt-get install --no-install-recommends -y apt-transport-https curl ca-certificates lsb-release gnupg && \
     rm -r /var/lib/apt/lists/*
 
 # Install third-party sources
@@ -39,7 +39,7 @@ RUN apt-get update && \
         silversearcher-ag sloccount zip unzip \
         libpcre3-dev liblzma-dev libxml2-dev libxslt1-dev libmysql++-dev libsqlite3-dev \
         optipng libtool nasm libjpeg-turbo-progs mysql-client nmap cloc ed ripmime oathtool cloc \
-        libcurl4-openssl-dev libexpat1-dev gettext xsltproc xmlto iproute2 iputils-ping xmlstarlet gnupg2 tree jq libssl-dev \
+        libcurl4-openssl-dev libexpat1-dev gettext xsltproc xmlto iproute2 iputils-ping xmlstarlet tree jq libssl-dev \
         dsh libncurses5-dev graphicsmagick awscli \
         nodejs heroku-toolbelt yarn && \
     rm -r /var/lib/apt/lists/*
