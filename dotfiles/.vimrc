@@ -106,12 +106,6 @@ augroup python
   autocmd FileType python syntax match Error "\t"
 augroup END
 
-" JavaScript
-augroup javascript
-  autocmd!
-  autocmd FileType javascript setlocal shiftwidth=2 softtabstop=2
-augroup END
-
 " SCSS
 augroup scss
   autocmd!
