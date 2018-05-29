@@ -149,6 +149,10 @@ RUN PATH=$PATH:/usr/local/go/bin GOPATH=/src/go sh -c '\
     mv /src/go/bin/* /usr/local/bin/ && \
     rm -rf /src/go
 
+# Chef
+RUN wget --quiet https://packages.chef.io/files/stable/chefdk/3.0.36/ubuntu/18.04/chefdk_3.0.36-1_amd64.deb -O /src/chefdk.deb && \
+    dpkg -i /src/chefdk.deb
+
 # Install vim plugins
 RUN mkdir -p /usr/share/vim/vimfiles/pack/bundle/start && \
     git -C /usr/share/vim/vimfiles/pack/bundle/start clone --quiet https://github.com/kien/rainbow_parentheses.vim.git && \
