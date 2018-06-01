@@ -87,6 +87,9 @@ nmap <silent> <Leader>_ G<Leader>pO<Esc><Gjsisodate<Esc>ztVG:s/  /    /g<CR>
 " php-cs-fixer
 nmap <Leader>f :!php-cs-fixer fix %<CR>
 
+" Rename
+nmap <Leader>r :%s/<C-R><C-W>//g<C-B><C-B>
+
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """ Syntax, indenting, etc.
 
