@@ -160,18 +160,6 @@ runtime macros/matchit.vim
 xmap <Leader>c <Plug>Commentary
 nmap <Leader>c <Plug>CommentaryLine
 
-" Rainbow Parentheses
-augroup rainbow_parentheses
-  autocmd!
-  " Highlights (), [], and {}
-  autocmd VimEnter *
-        \ if exists(':RainbowParenthesesToggle') |
-        \   execute 'RainbowParenthesesLoadSquare' |
-        \   execute 'RainbowParenthesesLoadBraces' |
-        \   execute 'nnoremap <silent> <Leader>r :RainbowParenthesesToggle<CR>' |
-        \ endif
-augroup END
-
 " vim-go
 let g:go_disable_autoinstall = 1
 let g:go_list_type = "quickfix"

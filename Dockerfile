@@ -155,7 +155,6 @@ RUN wget --quiet https://packages.chef.io/files/stable/chefdk/3.0.36/ubuntu/18.0
 
 # Install vim plugins
 RUN mkdir -p /usr/share/vim/vimfiles/pack/bundle/start && \
-    git -C /usr/share/vim/vimfiles/pack/bundle/start clone --quiet https://github.com/kien/rainbow_parentheses.vim.git && \
     git -C /usr/share/vim/vimfiles/pack/bundle/start clone --quiet https://github.com/tpope/vim-commentary.git && \
     git -C /usr/share/vim/vimfiles/pack/bundle/start clone --quiet https://github.com/tpope/vim-repeat.git && \
     git -C /usr/share/vim/vimfiles/pack/bundle/start clone --quiet https://github.com/msanders/snipmate.vim.git && \
