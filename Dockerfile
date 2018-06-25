@@ -19,7 +19,7 @@ RUN apt-get update && \
 
 # Install requirements for third-party sources
 RUN apt-get update && \
-    apt-get install --no-install-recommends -y apt-transport-https curl ca-certificates lsb-release gnupg && \
+    apt-get install --no-install-recommends -y apt-transport-https curl ca-certificates lsb-release gnupg software-properties-common && \
     rm -r /var/lib/apt/lists/*
 
 # Install third-party sources
@@ -28,7 +28,8 @@ RUN curl -sS https://deb.nodesource.com/gpgkey/nodesource.gpg.key | apt-key add 
     curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - && \
     echo 'deb https://deb.nodesource.com/node_8.x '`lsb_release -c -s`' main' > /etc/apt/sources.list.d/nodesource.list && \
     echo "deb http://toolbelt.heroku.com/ubuntu ./" > /etc/apt/sources.list.d/heroku.list && \
-    echo "deb https://dl.yarnpkg.com/debian/ stable main" > /etc/apt/sources.list.d/yarn.list
+    echo "deb https://dl.yarnpkg.com/debian/ stable main" > /etc/apt/sources.list.d/yarn.list && \
+    add-apt-repository ppa:git-core/ppa
 
 RUN apt-get update && \
     apt-get install --no-install-recommends -y \
