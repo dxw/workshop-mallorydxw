@@ -1,6 +1,6 @@
 [user]
-  name = Tom Adams
-  email = tom@dxw.com
+  name = Mallory Adams
+  email = mallory@dxw.com
 [alias]
   p = !git pull --ff-only && git submodule update --init --recursive
   st = status
