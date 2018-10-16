@@ -39,3 +39,7 @@
   autoSquash = true
 [status]
   submoduleSummary = true
+[mailmap]
+  file = /home/core/.mailmap
+[log]
+  mailmap = true
