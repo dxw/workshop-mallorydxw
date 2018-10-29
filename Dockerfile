@@ -23,9 +23,7 @@ RUN apt-get update && \
     rm -r /var/lib/apt/lists/*
 
 # Install third-party sources
-RUN curl -sS https://toolbelt.heroku.com/apt/release.key | apt-key add - && \
-    curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - && \
-    echo "deb http://toolbelt.heroku.com/ubuntu ./" > /etc/apt/sources.list.d/heroku.list && \
+RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - && \
     echo "deb https://dl.yarnpkg.com/debian/ stable main" > /etc/apt/sources.list.d/yarn.list && \
     add-apt-repository ppa:git-core/ppa
 
@@ -44,7 +42,7 @@ RUN apt-get update && \
         optipng libtool nasm libjpeg-turbo-progs mysql-client nmap cloc ed ripmime oathtool cloc \
         libcurl4-openssl-dev libexpat1-dev gettext xsltproc xmlto iproute2 iputils-ping xmlstarlet tree jq libssl-dev \
         dsh libncurses5-dev graphicsmagick awscli \
-        nodejs heroku-toolbelt yarn && \
+        nodejs yarn && \
     rm -r /var/lib/apt/lists/*
 
 # So we don't need to run `apt update` every time we want to install something temporarily
