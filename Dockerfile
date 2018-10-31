@@ -23,7 +23,9 @@ RUN apt-get update && \
     rm -r /var/lib/apt/lists/*
 
 # Install third-party sources
-RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - && \
+RUN curl -sS https://deb.nodesource.com/gpgkey/nodesource.gpg.key | apt-key add - && \
+    curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - && \
+    echo 'deb https://deb.nodesource.com/node_10.x '`lsb_release -c -s`' main' > /etc/apt/sources.list.d/nodesource.list && \
     echo "deb https://dl.yarnpkg.com/debian/ stable main" > /etc/apt/sources.list.d/yarn.list && \
     add-apt-repository ppa:git-core/ppa
 
