@@ -5,16 +5,14 @@ FROM ubuntu:18.10
 
 ENV DEBIAN_FRONTEND noninteractive
 
+# Unminimize Ubuntu
+# This means man pages will be available
+RUN yes | unminimize && \
+    rm -r /var/lib/apt/lists/*
+
 # Upgrade
 RUN apt-get update && \
     apt-get dist-upgrade -y && \
-    rm -r /var/lib/apt/lists/*
-
-# Do not exclude man pages & other documentation
-RUN rm /etc/dpkg/dpkg.cfg.d/excludes
-# Reinstall all currently installed packages in order to get the man pages back
-RUN apt-get update && \
-    dpkg -l | grep ^ii | cut -d' ' -f3 | xargs apt-get install -y --reinstall && \
     rm -r /var/lib/apt/lists/*
 
 # Install requirements for third-party sources
