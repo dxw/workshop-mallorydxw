@@ -97,6 +97,13 @@ RUN GOPATH=/src/go go get -d -u github.com/golang/dep && \
     mv /src/go/bin/* /usr/local/bin/ && \
     rm -rf /src/go
 
+# Rust
+ENV PATH=$PATH:/opt/rust/bin
+RUN wget --quiet https://static.rust-lang.org/rustup/dist/x86_64-unknown-linux-gnu/rustup-init -O /src/rustup-init && \
+    chmod 755 /src/rustup-init && \
+    RUSTUP_HOME=/opt/rust CARGO_HOME=/opt/rust /src/rustup-init --no-modify-path -y && \
+    rm /src/rustup-init
+
 # composer
 RUN wget --quiet `curl -s https://api.github.com/repos/composer/composer/releases/latest | jq -r '.assets[0].browser_download_url'` -O /usr/local/bin/composer && \
     chmod 755 /usr/local/bin/composer
@@ -182,6 +189,11 @@ RUN ln -s /workbench/home/.ssh/id_rsa.pub /home/core/.ssh/id_rsa.pub
 
 # GPG
 RUN ln -s /workbench/home/.gnupg /home/core/.gnupg
+
+# Rust
+RUN HOME=/home/core rustup toolchain install stable && \
+    HOME=/home/core rustup default stable && \
+    HOME=/home/core rustup component add rustfmt
 
 # Etc
 RUN chown -R core:core /home/core

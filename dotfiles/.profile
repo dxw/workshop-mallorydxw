@@ -26,6 +26,7 @@ export PATH=/sbin:/bin:\
 /usr/sbin:/usr/bin:/usr/games:\
 /usr/local/go/bin:\
 /usr/local/lib/composer/vendor/bin:\
+/opt/rust/bin:\
 ~/bin
 
 #dxp
