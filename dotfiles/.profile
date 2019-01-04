@@ -65,8 +65,9 @@ alias pscan='pluginscan --no-sloccount --no-cloc --issues-format=error_list > sc
 alias dc=docker-compose
 alias dcc='dc down --remove-orphans && dc up'
 
-# Tests
+# etc
 alias peridot='watch vendor/bin/peridot spec -r dot'
+alias grunt='yarn install -s && yarn run grunt'
 
 # Treatment for neuropathy
 alias g=git
