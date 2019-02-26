@@ -23,8 +23,10 @@ RUN apt-get update && \
 # Install third-party sources
 RUN curl -sS https://deb.nodesource.com/gpgkey/nodesource.gpg.key | apt-key add - && \
     curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - && \
+    curl -sS https://toolbelt.heroku.com/apt/release.key | apt-key add - && \
     echo 'deb https://deb.nodesource.com/node_10.x '`lsb_release -c -s`' main' > /etc/apt/sources.list.d/nodesource.list && \
     echo "deb https://dl.yarnpkg.com/debian/ stable main" > /etc/apt/sources.list.d/yarn.list && \
+    echo "deb http://toolbelt.heroku.com/ubuntu ./" > /etc/apt/sources.list.d/heroku.list && \
     add-apt-repository ppa:git-core/ppa
 
 RUN apt-get update && \
@@ -42,7 +44,7 @@ RUN apt-get update && \
         optipng libtool nasm libjpeg-turbo-progs mysql-client nmap cloc ed ripmime oathtool cloc \
         libcurl4-openssl-dev libexpat1-dev gettext xsltproc xmlto iproute2 iputils-ping xmlstarlet tree jq libssl-dev \
         dsh libncurses5-dev graphicsmagick awscli \
-        nodejs yarn && \
+        nodejs yarn heroku-toolbelt && \
     rm -r /var/lib/apt/lists/*
 
 # So we don't need to run `apt update` every time we want to install something temporarily
