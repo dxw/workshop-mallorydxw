@@ -1,4 +1,4 @@
-FROM ubuntu:18.10
+FROM ubuntu:19.04
 
 ##############################################################################
 ## APT
@@ -21,10 +21,8 @@ RUN apt-get update && \
     rm -r /var/lib/apt/lists/*
 
 # Install third-party sources
-RUN curl -sS https://deb.nodesource.com/gpgkey/nodesource.gpg.key | apt-key add - && \
-    curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - && \
+RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - && \
     curl -sS https://toolbelt.heroku.com/apt/release.key | apt-key add - && \
-    echo 'deb https://deb.nodesource.com/node_10.x '`lsb_release -c -s`' main' > /etc/apt/sources.list.d/nodesource.list && \
     echo "deb https://dl.yarnpkg.com/debian/ stable main" > /etc/apt/sources.list.d/yarn.list && \
     echo "deb http://toolbelt.heroku.com/ubuntu ./" > /etc/apt/sources.list.d/heroku.list && \
     add-apt-repository ppa:git-core/ppa
@@ -44,6 +42,7 @@ RUN apt-get update && \
         optipng libtool nasm libjpeg-turbo-progs mysql-client nmap cloc ed ripmime oathtool cloc \
         libcurl4-openssl-dev libexpat1-dev gettext xsltproc xmlto iproute2 iputils-ping xmlstarlet tree jq libssl-dev \
         dsh libncurses5-dev graphicsmagick awscli \
+        rustc cargo \
         nodejs yarn heroku-toolbelt && \
     rm -r /var/lib/apt/lists/*
 
@@ -99,13 +98,6 @@ RUN GOPATH=/src/go go get -d -u github.com/golang/dep && \
     mv /src/go/bin/* /usr/local/bin/ && \
     rm -rf /src/go
 
-# Rust
-ENV PATH=$PATH:/opt/rust/bin
-RUN wget --quiet https://static.rust-lang.org/rustup/dist/x86_64-unknown-linux-gnu/rustup-init -O /src/rustup-init && \
-    chmod 755 /src/rustup-init && \
-    RUSTUP_HOME=/opt/rust CARGO_HOME=/opt/rust /src/rustup-init --no-modify-path -y && \
-    rm /src/rustup-init
-
 # composer
 RUN wget --quiet `curl -s https://api.github.com/repos/composer/composer/releases/latest | jq -r '.assets[0].browser_download_url'` -O /usr/local/bin/composer && \
     chmod 755 /usr/local/bin/composer
@@ -131,9 +123,10 @@ RUN gem install curses && \
 
 # Other tools
 RUN git -C /src clone --quiet --recursive https://github.com/dxw/srdb.git && \
-    ln -s /src/srdb/srdb /usr/local/bin/srdb
+    mv /src/srdb /usr/local/share/ && \
+    ln -s /usr/local/share/srdb/srdb /usr/local/bin/srdb
 RUN git -C /src clone --quiet --recursive https://github.com/dxw/whippet && \
-    cp -r /src/whippet /usr/local/share/whippet && \
+    mv /src/whippet /usr/local/share/ && \
     ln -s /usr/local/share/whippet/bin/whippet /usr/local/bin/whippet
 
 # Install vim-go dependencies
@@ -157,7 +150,8 @@ RUN PATH=$PATH:/usr/local/go/bin GOPATH=/src/go sh -c '\
 
 # Chef
 RUN wget --quiet https://packages.chef.io/files/stable/chefdk/3.0.36/ubuntu/18.04/chefdk_3.0.36-1_amd64.deb -O /src/chefdk.deb && \
-    dpkg -i /src/chefdk.deb
+    dpkg -i /src/chefdk.deb && \
+    rm /src/chefdk.deb
 
 # Install vim plugins
 RUN mkdir -p /usr/share/vim/vimfiles/pack/bundle/start && \
@@ -191,11 +185,6 @@ RUN ln -s /workbench/home/.ssh/id_rsa.pub /home/core/.ssh/id_rsa.pub
 
 # GPG
 RUN ln -s /workbench/home/.gnupg /home/core/.gnupg
-
-# Rust
-RUN HOME=/home/core rustup toolchain install stable && \
-    HOME=/home/core rustup default stable && \
-    HOME=/home/core rustup component add rustfmt
 
 # Etc
 RUN chown -R core:core /home/core
