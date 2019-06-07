@@ -12,6 +12,7 @@
   empty = commit --allow-empty -m Empty
   f = fetch --all
   c = checkout
+  root = rev-parse --show-toplevel
   # fzf aliases
   cf = !git-branch-fzf git checkout
   m = !git c -B master origin/master && git p && git merge --no-ff --no-edit origin/develop
