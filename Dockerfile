@@ -22,8 +22,7 @@ RUN apt-get update && \
 
 # Install third-party sources
 RUN curl -sS https://toolbelt.heroku.com/apt/release.key | apt-key add - && \
-    echo "deb http://toolbelt.heroku.com/ubuntu ./" > /etc/apt/sources.list.d/heroku.list && \
-    add-apt-repository ppa:git-core/ppa
+    echo "deb http://toolbelt.heroku.com/ubuntu ./" > /etc/apt/sources.list.d/heroku.list
 
 RUN apt-get update && \
     apt-get install --no-install-recommends -y \
