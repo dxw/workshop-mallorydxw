@@ -80,6 +80,9 @@ RUN sudo ln -s /usr/bin/yarnpkg /usr/bin/yarn
 
 RUN mkdir /src
 
+# Add Rust/Cargo tools
+RUN cargo install cargo-edit
+
 # Update package managers
 RUN gem update --system
 
