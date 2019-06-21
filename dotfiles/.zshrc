@@ -11,7 +11,7 @@ setopt hist_ignore_dups inc_append_history
 
 ## Options
 bindkey -e
-setopt beep bsd_echo notify prompt_subst
+setopt beep bsd_echo notify prompt_subst auto_pushd
 unsetopt auto_cd extended_glob nomatch
 
 
