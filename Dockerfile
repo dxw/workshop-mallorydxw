@@ -34,7 +34,7 @@ RUN apt-get update && \
         python3 python3-pip python3-setuptools ruby ruby-dev bundler ruby-sass perl perl-doc \
         php-cli php-gd php-mbstring php-mysql php-xml php-curl php-xdebug php-gmp php-zip \
         wget bind9-host netcat whois dnsutils net-tools dialog \
-        silversearcher-ag sloccount zip unzip \
+        silversearcher-ag sloccount zip unzip parallel \
         libpcre3-dev liblzma-dev libxml2-dev libxslt1-dev libmysql++-dev libsqlite3-dev \
         optipng libtool nasm libjpeg-turbo-progs mysql-client nmap cloc ed ripmime oathtool cloc \
         libcurl4-openssl-dev libexpat1-dev gettext xsltproc xmlto iproute2 iputils-ping xmlstarlet tree jq libssl-dev \
