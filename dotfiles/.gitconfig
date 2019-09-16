@@ -12,6 +12,7 @@
   empty = commit --allow-empty -m Empty
   f = fetch --all
   s = switch
+  sd = switch --detach
   root = rev-parse --show-toplevel
   m = !git switch -C master origin/master && git p && git merge --no-ff --no-edit origin/develop
   # fzf aliases
