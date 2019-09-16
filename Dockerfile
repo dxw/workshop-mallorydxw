@@ -21,7 +21,9 @@ RUN apt-get update && \
     rm -r /var/lib/apt/lists/*
 
 # Install third-party sources
-RUN curl -sS https://toolbelt.heroku.com/apt/release.key | apt-key add - && \
+RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - && \
+    curl -sS https://toolbelt.heroku.com/apt/release.key | apt-key add - && \
+    echo "deb https://dl.yarnpkg.com/debian/ stable main" > /etc/apt/sources.list.d/yarn.list && \
     echo "deb http://toolbelt.heroku.com/ubuntu ./" > /etc/apt/sources.list.d/heroku.list && \
     add-apt-repository ppa:git-core/ppa
 
@@ -41,7 +43,7 @@ RUN apt-get update && \
         libcurl4-openssl-dev libexpat1-dev gettext xsltproc xmlto iproute2 iputils-ping xmlstarlet tree jq libssl-dev \
         dsh libncurses5-dev graphicsmagick awscli \
         rustc cargo \
-        nodejs yarnpkg heroku-toolbelt && \
+        nodejs yarn heroku-toolbelt && \
     rm -r /var/lib/apt/lists/*
 
 # So we don't need to run `apt update` every time we want to install something temporarily
@@ -72,9 +74,6 @@ RUN echo 'install: --no-rdoc --no-ri' > /etc/gemrc && \
     echo 'phar.readonly=Off' > /etc/php/7.2/cli/conf.d/99-dxw-phar.ini && \
     echo 'xdebug.var_display_max_depth=99999' > /etc/php/7.2/cli/conf.d/99-dxw-fix-xdebug-var-dump.ini && \
     /bin/echo -e '[mail function]\nsendmail_path = /bin/false' > /etc/php/7.2/cli/conf.d/99-dxw-disable-mail.ini
-
-# Fix for yarnpkg
-RUN sudo ln -s /usr/bin/yarnpkg /usr/bin/yarn
 
 ##############################################################################
 ## Install tools
