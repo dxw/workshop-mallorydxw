@@ -43,7 +43,7 @@ RUN apt-get update && \
         libcurl4-openssl-dev libexpat1-dev gettext xsltproc xmlto iproute2 iputils-ping xmlstarlet tree jq libssl-dev \
         dsh libncurses5-dev graphicsmagick awscli \
         rustc cargo \
-        nodejs yarn heroku-toolbelt && \
+        nodejs npm yarn heroku-toolbelt && \
     rm -r /var/lib/apt/lists/*
 
 # So we don't need to run `apt update` every time we want to install something temporarily
