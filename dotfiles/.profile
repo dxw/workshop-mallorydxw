@@ -66,11 +66,11 @@ alias dc=docker-compose
 alias dcc='dc down --remove-orphans && dc up'
 
 # etc
-alias peridot='watch run-php --noninteractive 7.3 vendor/bin/peridot spec -r dot -C'
-alias phpunit='watch run-php --noninteractive 7.3 vendor/bin/phpunit'
-alias php-cs-fixer='watch run-php --noninteractive 7.3 vendor/bin/php-cs-fixer fix --dry-run --diff'
-alias psalm='watch run-php --noninteractive 7.3 vendor/bin/psalm'
-alias composer='run-php 7.3 composer'
+alias peridot='watch run-php --noninteractive 7.4 vendor/bin/peridot spec -r dot -C'
+alias phpunit='watch run-php --noninteractive 7.4 vendor/bin/phpunit'
+alias php-cs-fixer='watch run-php --noninteractive 7.4 vendor/bin/php-cs-fixer fix --dry-run --diff'
+alias psalm='watch run-php --noninteractive 7.4 vendor/bin/psalm'
+alias composer='run-php 7.4 composer'
 alias grunt='yarn install -s && yarn run grunt'
 
 # Treatment for neuropathy
