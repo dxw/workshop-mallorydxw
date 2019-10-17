@@ -21,9 +21,7 @@ RUN apt-get update && \
     rm -r /var/lib/apt/lists/*
 
 # Install third-party sources
-RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - && \
-    curl -sS https://toolbelt.heroku.com/apt/release.key | apt-key add - && \
-    echo "deb https://dl.yarnpkg.com/debian/ stable main" > /etc/apt/sources.list.d/yarn.list && \
+RUN curl -sS https://toolbelt.heroku.com/apt/release.key | apt-key add - && \
     echo "deb http://toolbelt.heroku.com/ubuntu ./" > /etc/apt/sources.list.d/heroku.list && \
     add-apt-repository ppa:git-core/ppa
 
@@ -43,7 +41,7 @@ RUN apt-get update && \
         libcurl4-openssl-dev libexpat1-dev gettext xsltproc xmlto iproute2 iputils-ping xmlstarlet tree jq libssl-dev \
         dsh libncurses5-dev graphicsmagick awscli \
         rustc cargo \
-        yarn heroku-toolbelt && \
+        heroku-toolbelt && \
     rm -r /var/lib/apt/lists/*
 
 # So we don't need to run `apt update` every time we want to install something temporarily
@@ -100,13 +98,6 @@ RUN GOPATH=/src/go go get -d -u github.com/golang/dep && \
     git checkout master && \
     mv /src/go/bin/* /usr/local/bin/ && \
     rm -rf /src/go
-
-# node
-RUN mkdir /src/node && \
-    wget --quiet https://nodejs.org/dist/v12.12.0/node-v12.12.0-linux-x64.tar.xz -O /src/node/node.tar.xz && \
-    tar -C /src/node -xJf /src/node/node.tar.xz && \
-    cp -a /src/node/*/* /usr/local/ && \
-    rm -rf /src/node
 
 # composer
 RUN wget --quiet `curl -s https://api.github.com/repos/composer/composer/releases/latest | jq -r '.assets[0].browser_download_url'` -O /usr/local/bin/composer && \
