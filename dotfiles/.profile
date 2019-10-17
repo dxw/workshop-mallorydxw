@@ -65,12 +65,16 @@ alias pscan='pluginscan --no-sloccount --no-cloc --issues-format=error_list > sc
 alias dc=docker-compose
 alias dcc='dc down --remove-orphans && dc up'
 
-# etc
+# php
 alias peridot='watch run-php --noninteractive 7.4 vendor/bin/peridot spec -r dot -C'
 alias phpunit='watch run-php --noninteractive 7.4 vendor/bin/phpunit'
 alias php-cs-fixer='watch run-php --noninteractive 7.4 vendor/bin/php-cs-fixer fix --dry-run --diff'
 alias psalm='watch run-php --noninteractive 7.4 vendor/bin/psalm'
 alias composer='run-php 7.4 composer'
+
+# node
+alias node='docker run -ti --rm -v /workbench:/workbench --workdir=`pwd` thedxw/node-testing node'
+alias yarn='docker run -ti --rm -v /workbench:/workbench --workdir=`pwd` thedxw/node-testing yarn'
 alias grunt='yarn install -s && yarn run grunt'
 
 # Treatment for neuropathy
