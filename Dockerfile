@@ -103,7 +103,7 @@ RUN GOPATH=/src/go go get -d -u github.com/golang/dep && \
 
 # node
 RUN mkdir /src/node && \
-    wget --quiet https://nodejs.org/dist/v10.16.3/node-v10.16.3-linux-x64.tar.xz -O /src/node/node.tar.xz && \
+    wget --quiet https://nodejs.org/dist/v12.12.0/node-v12.12.0-linux-x64.tar.xz -O /src/node/node.tar.xz && \
     tar -C /src/node -xJf /src/node/node.tar.xz && \
     cp -a /src/node/*/* /usr/local/ && \
     rm -rf /src/node
