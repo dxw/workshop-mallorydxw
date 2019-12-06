@@ -61,9 +61,10 @@ alias agp_="agp '\\\$_(GET|POST|REQUEST|SERVER|COOKIE)'"
 # pluginscan
 alias pscan='pluginscan --no-sloccount --no-cloc --issues-format=error_list > scan-vim && pluginscan > scan'
 
-# Docker compose
+# Docker
 alias dc=docker-compose
 alias dcc='dc down --remove-orphans && dc up'
+alias update-images='docker image list --format "{{.Repository}}:{{.Tag}}" | grep -v ":<none>$" | xargs --max-args=1 --max-procs=5 docker pull --quiet'
 
 # php
 alias peridot='watch run-php --noninteractive 7.4 vendor/bin/peridot spec -r dot -C'
