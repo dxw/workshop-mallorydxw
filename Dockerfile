@@ -30,7 +30,7 @@ RUN apt-get update && \
         locales tzdata sudo \
         build-essential pkg-config automake software-properties-common \
         locales man-db manpages less manpages-dev \
-        openssh-client tmux zsh vim-nox \
+        openssh-client tmux zsh vim-nox emacs-nox \
         git mercurial bzr tig git-flow \
         python3 python3-pip python3-setuptools ruby ruby-dev bundler ruby-sass perl perl-doc \
         php-cli php-gd php-mbstring php-mysql php-xml php-curl php-xdebug php-gmp php-zip \
@@ -164,6 +164,10 @@ RUN mkdir -p /usr/share/vim/vimfiles/pack/bundle/start && \
     git -C /usr/share/vim/vimfiles/pack/bundle/start clone --quiet https://github.com/fatih/vim-go.git && \
     git -C /usr/share/vim/vimfiles/pack/bundle/start clone --quiet https://github.com/dxw/vim-php-indent.git && \
     git -C /usr/share/vim/vimfiles/pack/bundle/start clone --quiet https://github.com/kassio/neoterm.git
+
+# Install spacemacs
+RUN rmdir /usr/local/share/emacs/site-lisp && \
+    git clone https://github.com/syl20bnr/spacemacs.git /usr/local/share/emacs/site-lisp
 
 ##############################################################################
 ## User-specific
