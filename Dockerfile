@@ -165,10 +165,6 @@ RUN mkdir -p /usr/share/vim/vimfiles/pack/bundle/start && \
     git -C /usr/share/vim/vimfiles/pack/bundle/start clone --quiet https://github.com/dxw/vim-php-indent.git && \
     git -C /usr/share/vim/vimfiles/pack/bundle/start clone --quiet https://github.com/kassio/neoterm.git
 
-# Install spacemacs
-RUN rmdir /usr/local/share/emacs/site-lisp && \
-    git clone https://github.com/syl20bnr/spacemacs.git /usr/local/share/emacs/site-lisp
-
 ##############################################################################
 ## User-specific
 
@@ -177,6 +173,9 @@ RUN mkdir /home/core
 # Add user
 RUN adduser --gecos '' --shell /bin/zsh --disabled-password core
 RUN usermod -aG sudo core
+
+# Install spacemacs
+RUN git clone https://github.com/syl20bnr/spacemacs.git /home/core/.emacs.d
 
 # Dotfiles
 COPY dotfiles/ /home/core/
@@ -195,6 +194,9 @@ RUN ln -s /workbench/home/.gnupg /home/core/.gnupg
 
 # Etc
 RUN chown -R core:core /home/core
+
+# Install spacemacs dependencies
+RUN sudo --user=core emacs --batch --eval='(progn (load-file "~/.emacs.d/init.el") (lambda (&rest ignore) (spacemacs/switch-to-version)))'
 
 # Set runtime details
 WORKDIR /workbench/src
