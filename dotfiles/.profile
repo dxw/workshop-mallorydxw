@@ -69,7 +69,7 @@ alias update-images='docker image list --format "{{.Repository}}:{{.Tag}}" | gre
 # php
 alias peridot='watch run-php --noninteractive 7.4 vendor/bin/peridot spec -r dot -C'
 alias phpunit='watch run-php --noninteractive 7.4 vendor/bin/phpunit'
-alias php-cs-fixer='watch run-php --noninteractive 7.3 vendor/bin/php-cs-fixer fix --dry-run --diff'
+alias php-cs-fixer='watch run-php --noninteractive 7.4 vendor/bin/php-cs-fixer fix --dry-run --diff'
 alias psalm='watch run-php --noninteractive 7.3 vendor/bin/psalm'
 alias composer='run-php 7.4 composer'
 
