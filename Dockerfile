@@ -108,7 +108,6 @@ ENV PATH=$PATH:/usr/local/lib/composer/vendor/bin:~/.composer/vendor/bin
 RUN gem install sass && \
     pip3 install --upgrade docker-compose && \
     GOPATH=/src/go go get github.com/dxw/git-env && \
-    GOPATH=/src/go go get github.com/dxw/wpc && \
     GOPATH=/src/go go get github.com/holizz/pw && \
     GOPATH=/src/go go get github.com/holizz/diceware && \
     GOPATH=/src/go go get github.com/holizz/renamer && \

@@ -78,6 +78,9 @@ alias node='docker run -ti --rm -v /workbench:/workbench --workdir=`pwd` thedxw/
 alias yarn='docker run -ti --rm -v /workbench:/workbench --workdir=`pwd` thedxw/node-testing yarn'
 alias grunt='yarn install -s && yarn run grunt'
 
+# other tools
+alias wpc='docker run -ti --rm -v `pwd`:/app thedxw/wpc'
+
 # Treatment for neuropathy
 alias g=git
 alias v=$VISUAL
