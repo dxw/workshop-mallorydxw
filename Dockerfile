@@ -32,7 +32,7 @@ RUN apt-get update && \
         locales man-db manpages less manpages-dev \
         openssh-client tmux zsh vim-nox \
         git mercurial bzr tig git-flow \
-        python3 python3-pip python3-setuptools ruby ruby-dev bundler ruby-sass perl perl-doc \
+        python3 python3-pip python3-setuptools ruby ruby-dev bundler ruby-sass perl perl-doc golang \
         php-cli php-gd php-mbstring php-mysql php-xml php-curl php-xdebug php-gmp php-zip \
         wget bind9-host netcat whois dnsutils net-tools dialog \
         silversearcher-ag sloccount zip unzip parallel \
@@ -86,12 +86,6 @@ RUN gem update --system
 
 # Install tools with gem
 RUN gem install sass
-
-# Go
-RUN wget --quiet https://storage.googleapis.com/golang/`curl -s https://golang.org/VERSION?m=text`.linux-amd64.tar.gz -O /src/go.tar.gz && \
-    tar -C /usr/local -xzf /src/go.tar.gz && \
-    rm /src/go.tar.gz
-ENV PATH=$PATH:/usr/local/go/bin
 
 # Install tools with go get
 RUN GOPATH=/src/go go get github.com/dxw/git-env && \
