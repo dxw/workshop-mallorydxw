@@ -78,11 +78,14 @@ RUN echo 'install: --no-rdoc --no-ri' > /etc/gemrc && \
 
 RUN mkdir /src
 
-# Add Rust/Cargo tools
+# Rust/Cargo
 RUN cargo install cargo-edit
 
-# Update package managers
+# Ruby/Gem
 RUN gem update --system
+
+# Install tools with gem
+RUN gem install sass
 
 # Go
 RUN wget --quiet https://storage.googleapis.com/golang/`curl -s https://golang.org/VERSION?m=text`.linux-amd64.tar.gz -O /src/go.tar.gz && \
@@ -99,15 +102,8 @@ RUN GOPATH=/src/go go get -d -u github.com/golang/dep && \
     mv /src/go/bin/* /usr/local/bin/ && \
     rm -rf /src/go
 
-# composer
-RUN wget --quiet `curl -s https://api.github.com/repos/composer/composer/releases/latest | jq -r '.assets[0].browser_download_url'` -O /usr/local/bin/composer && \
-    chmod 755 /usr/local/bin/composer
-ENV PATH=$PATH:/usr/local/lib/composer/vendor/bin:~/.composer/vendor/bin
-
-# Install things with package managers
-RUN gem install sass && \
-    pip3 install --upgrade docker-compose && \
-    GOPATH=/src/go go get github.com/dxw/git-env && \
+# Install tools with go get
+RUN GOPATH=/src/go go get github.com/dxw/git-env && \
     GOPATH=/src/go go get github.com/holizz/pw && \
     GOPATH=/src/go go get github.com/holizz/diceware && \
     GOPATH=/src/go go get github.com/holizz/renamer && \
@@ -115,19 +111,19 @@ RUN gem install sass && \
     mv /src/go/bin/* /usr/local/bin/ && \
     rm -rf /src/go
 
-# Install fzf
-RUN gem install curses && \
-    git clone --quiet --depth 1 https://github.com/junegunn/fzf.git /usr/local/fzf && \
-    /usr/local/fzf/install --no-completion --no-key-bindings --no-update-rc && \
-    ln -s  ../fzf/bin/fzf /usr/local/bin/fzf
+# Install tools with pip3
+RUN pip3 install --upgrade docker-compose
 
-# Other tools
-RUN git -C /src clone --quiet --recursive https://github.com/dxw/srdb.git && \
-    mv /src/srdb /usr/local/share/ && \
-    ln -s /usr/local/share/srdb/srdb /usr/local/bin/srdb
-RUN git -C /src clone --quiet --recursive https://github.com/dxw/whippet && \
-    mv /src/whippet /usr/local/share/ && \
-    ln -s /usr/local/share/whippet/bin/whippet /usr/local/bin/whippet
+# Install vim plugins
+RUN mkdir -p /usr/share/vim/vimfiles/pack/bundle/start && \
+    git -C /usr/share/vim/vimfiles/pack/bundle/start clone --quiet https://github.com/tpope/vim-commentary.git && \
+    git -C /usr/share/vim/vimfiles/pack/bundle/start clone --quiet https://github.com/tpope/vim-repeat.git && \
+    git -C /usr/share/vim/vimfiles/pack/bundle/start clone --quiet https://github.com/msanders/snipmate.vim.git && \
+    git -C /usr/share/vim/vimfiles/pack/bundle/start clone --quiet https://github.com/tpope/vim-surround.git && \
+    git -C /usr/share/vim/vimfiles/pack/bundle/start clone --quiet https://github.com/scrooloose/syntastic.git && \
+    git -C /usr/share/vim/vimfiles/pack/bundle/start clone --quiet https://github.com/fatih/vim-go.git && \
+    git -C /usr/share/vim/vimfiles/pack/bundle/start clone --quiet https://github.com/dxw/vim-php-indent.git && \
+    git -C /usr/share/vim/vimfiles/pack/bundle/start clone --quiet https://github.com/kassio/neoterm.git
 
 # Install vim-go dependencies
 # https://github.com/fatih/vim-go/blob/master/plugin/go.vim
@@ -148,21 +144,29 @@ RUN PATH=$PATH:/usr/local/go/bin GOPATH=/src/go sh -c '\
     mv /src/go/bin/* /usr/local/bin/ && \
     rm -rf /src/go
 
+# composer
+RUN wget --quiet `curl -s https://api.github.com/repos/composer/composer/releases/latest | jq -r '.assets[0].browser_download_url'` -O /usr/local/bin/composer && \
+    chmod 755 /usr/local/bin/composer
+ENV PATH=$PATH:/usr/local/lib/composer/vendor/bin:~/.composer/vendor/bin
+
+# Install fzf
+RUN gem install curses && \
+    git clone --quiet --depth 1 https://github.com/junegunn/fzf.git /usr/local/fzf && \
+    /usr/local/fzf/install --no-completion --no-key-bindings --no-update-rc && \
+    ln -s  ../fzf/bin/fzf /usr/local/bin/fzf
+
+# Other tools
+RUN git -C /src clone --quiet --recursive https://github.com/dxw/srdb.git && \
+    mv /src/srdb /usr/local/share/ && \
+    ln -s /usr/local/share/srdb/srdb /usr/local/bin/srdb
+RUN git -C /src clone --quiet --recursive https://github.com/dxw/whippet && \
+    mv /src/whippet /usr/local/share/ && \
+    ln -s /usr/local/share/whippet/bin/whippet /usr/local/bin/whippet
+
 # Chef
 RUN wget --quiet https://packages.chef.io/files/stable/chefdk/3.0.36/ubuntu/18.04/chefdk_3.0.36-1_amd64.deb -O /src/chefdk.deb && \
     dpkg -i /src/chefdk.deb && \
     rm /src/chefdk.deb
-
-# Install vim plugins
-RUN mkdir -p /usr/share/vim/vimfiles/pack/bundle/start && \
-    git -C /usr/share/vim/vimfiles/pack/bundle/start clone --quiet https://github.com/tpope/vim-commentary.git && \
-    git -C /usr/share/vim/vimfiles/pack/bundle/start clone --quiet https://github.com/tpope/vim-repeat.git && \
-    git -C /usr/share/vim/vimfiles/pack/bundle/start clone --quiet https://github.com/msanders/snipmate.vim.git && \
-    git -C /usr/share/vim/vimfiles/pack/bundle/start clone --quiet https://github.com/tpope/vim-surround.git && \
-    git -C /usr/share/vim/vimfiles/pack/bundle/start clone --quiet https://github.com/scrooloose/syntastic.git && \
-    git -C /usr/share/vim/vimfiles/pack/bundle/start clone --quiet https://github.com/fatih/vim-go.git && \
-    git -C /usr/share/vim/vimfiles/pack/bundle/start clone --quiet https://github.com/dxw/vim-php-indent.git && \
-    git -C /usr/share/vim/vimfiles/pack/bundle/start clone --quiet https://github.com/kassio/neoterm.git
 
 ##############################################################################
 ## User-specific
