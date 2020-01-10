@@ -149,7 +149,8 @@ RUN git -C /src clone --quiet --recursive https://github.com/dxw/whippet && \
     ln -s /usr/local/share/whippet/bin/whippet /usr/local/bin/whippet
 
 # Chef
-RUN wget --quiet https://packages.chef.io/files/stable/chefdk/3.0.36/ubuntu/18.04/chefdk_3.0.36-1_amd64.deb -O /src/chefdk.deb && \
+# https://downloads.chef.io/chefdk
+RUN wget --quiet https://packages.chef.io/files/stable/chefdk/4.6.35/ubuntu/18.04/chefdk_4.6.35-1_amd64.deb -O /src/chefdk.deb && \
     dpkg -i /src/chefdk.deb && \
     rm /src/chefdk.deb
 
