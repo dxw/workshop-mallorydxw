@@ -78,6 +78,13 @@ alias node='docker run -ti --rm -v /workbench:/workbench --workdir=`pwd` thedxw/
 alias yarn='docker run -ti --rm -v /workbench:/workbench --workdir=`pwd` thedxw/node-testing yarn'
 alias grunt='yarn install -s && yarn run grunt'
 
+# https://github.com/github/scripts-to-rule-them-all
+alias bootstrap=script/bootstrap
+alias console=script/console
+alias server=script/server
+alias setup=script/setup
+alias update=script/update
+
 # other tools
 alias wpc='docker run -ti --rm -v `pwd`:/app thedxw/wpc'
 
