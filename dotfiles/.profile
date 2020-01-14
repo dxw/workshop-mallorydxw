@@ -63,7 +63,6 @@ alias pscan='pluginscan --no-sloccount --no-cloc --issues-format=error_list > sc
 
 # Docker
 alias dc=docker-compose
-alias dcc='dc down --remove-orphans && dc up'
 alias update-images='docker image list --format "{{.Repository}}:{{.Tag}}" | grep -v ":<none>$" | xargs --max-args=1 --max-procs=5 docker pull --quiet'
 
 # php
