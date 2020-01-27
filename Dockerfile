@@ -65,6 +65,8 @@ RUN ln -fs /usr/share/zoneinfo/America/New_York /etc/localtime
 
 # Setup sudoers
 RUN echo '%sudo ALL=(ALL:ALL) NOPASSWD: ALL' >> /etc/sudoers
+# Workaround: https://bugs.launchpad.net/ubuntu/+source/sudo/+bug/1857036/comments/4
+RUN echo 'Set disable_coredump false' >> /etc/sudo.conf
 
 # Fix bad defaults
 RUN echo 'install: --no-rdoc --no-ri' > /etc/gemrc && \
