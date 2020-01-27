@@ -1,4 +1,4 @@
-FROM ubuntu:19.10
+FROM ubuntu:20.04
 
 ##############################################################################
 ## APT
@@ -31,7 +31,7 @@ RUN apt-get update && \
         build-essential pkg-config automake software-properties-common \
         locales man-db manpages less manpages-dev \
         openssh-client tmux zsh vim-nox \
-        git mercurial bzr tig git-flow \
+        git mercurial tig git-flow \
         python3 python3-pip python3-setuptools ruby ruby-dev bundler perl perl-doc golang \
         php-cli php-gd php-mbstring php-mysql php-xml php-curl php-xdebug php-gmp php-zip \
         wget bind9-host netcat whois dnsutils net-tools dialog \
