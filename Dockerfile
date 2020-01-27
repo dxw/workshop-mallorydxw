@@ -161,10 +161,10 @@ RUN adduser --gecos '' --shell /bin/zsh --disabled-password core
 RUN usermod -aG sudo core
 
 # Dotfiles
-COPY dotfiles/ /home/core/
+COPY --chown=core:core dotfiles/ /home/core/
 
 # bin
-COPY bin/ /usr/local/bin/
+COPY --chown=core:core bin/ /usr/local/bin/
 
 # ssh keys
 RUN ln -s /workbench/home/.ssh/id_rsa /home/core/.ssh/id_rsa
