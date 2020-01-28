@@ -40,7 +40,6 @@ RUN apt-get update && \
         optipng libtool nasm libjpeg-turbo-progs mysql-client nmap cloc ed ripmime oathtool cloc \
         libcurl4-openssl-dev libexpat1-dev gettext xsltproc xmlto iproute2 iputils-ping xmlstarlet tree jq libssl-dev \
         dsh libncurses5-dev graphicsmagick awscli \
-        rustc cargo \
         heroku-toolbelt && \
     rm -r /var/lib/apt/lists/*
 
@@ -79,9 +78,6 @@ RUN echo 'install: --no-rdoc --no-ri' > /etc/gemrc && \
 ## Install tools
 
 RUN mkdir /src
-
-# Rust/Cargo
-RUN cargo install cargo-edit
 
 # Ruby/Gem
 RUN gem update --system
@@ -179,6 +175,14 @@ RUN ln -s /workbench/home/.gnupg /home/core/.gnupg
 
 # Etc
 RUN chown -R core:core /home/core
+
+# Install Rust
+RUN curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs > /src/rustup && \
+    chmod 755 /src/rustup && \
+    sudo -u core /src/rustup --no-modify-path -y && \
+    rm /src/rustup
+# Install extra tools with cargo
+RUN sudo -u core ~core/.cargo/bin/cargo install cargo-edit
 
 # Set runtime details
 WORKDIR /workbench/src
