@@ -92,7 +92,7 @@ RUN GOPATH=/src/go go get github.com/dxw/git-env && \
     rm -rf /src/go
 
 # Install tools with pip3
-RUN pip3 install --upgrade docker-compose
+RUN pip3 install --upgrade docker-compose pipenv
 
 # Install vim plugins
 RUN mkdir -p /usr/share/vim/vimfiles/pack/bundle/start && \
