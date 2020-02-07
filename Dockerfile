@@ -32,7 +32,7 @@ RUN apt-get update && \
         locales man-db manpages less manpages-dev \
         openssh-client tmux zsh vim-nox \
         git mercurial tig git-flow \
-        python3 python3-pip python3-setuptools ruby ruby-dev bundler perl perl-doc golang \
+        python3 python3-pip python3-setuptools python3-wheel ruby ruby-dev bundler perl perl-doc golang \
         php-cli php-gd php-mbstring php-mysql php-xml php-curl php-xdebug php-gmp php-zip \
         wget bind9-host netcat whois dnsutils net-tools dialog \
         silversearcher-ag sloccount zip unzip parallel \
