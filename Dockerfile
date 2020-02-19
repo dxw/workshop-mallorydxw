@@ -183,6 +183,7 @@ RUN curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs > /src/rustup && \
     rm /src/rustup
 # Install extra tools with cargo
 RUN sudo -u core ~core/.cargo/bin/cargo install cargo-edit
+RUN sudo -u core ~core/.cargo/bin/cargo install git-absorb
 
 # Set runtime details
 WORKDIR /workbench/src
