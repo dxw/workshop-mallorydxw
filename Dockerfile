@@ -139,9 +139,6 @@ RUN gem install curses && \
 RUN git -C /src clone --quiet --recursive https://github.com/dxw/srdb.git && \
     mv /src/srdb /usr/local/share/ && \
     ln -s /usr/local/share/srdb/srdb /usr/local/bin/srdb
-RUN git -C /src clone --quiet --recursive https://github.com/dxw/whippet && \
-    mv /src/whippet /usr/local/share/ && \
-    ln -s /usr/local/share/whippet/bin/whippet /usr/local/bin/whippet
 
 # Chef
 # https://downloads.chef.io/chefdk

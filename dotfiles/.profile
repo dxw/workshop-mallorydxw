@@ -87,6 +87,7 @@ alias update=script/update
 
 # other tools
 alias wpc='docker run -ti --rm -v `pwd`:/app thedxw/wpc'
+alias whippet='vendor/bin/whippet'
 
 # Treatment for neuropathy
 alias g=git
