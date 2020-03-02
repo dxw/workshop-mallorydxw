@@ -5,6 +5,10 @@ set -e
 # Echo commands
 set -x
 
+has_stable_version() {
+  curl -sS https://packagist.org/packages/${1}.json | jq '.package.versions|keys|.[]' --raw-output | grep -E '^v?[0-9]' >/dev/null 2>/dev/null
+}
+
 REQUIRE_DEV=`jq '.["require-dev"]|keys|.[]' --raw-output < composer.json`
 REQUIRE=`jq '.["require"]|keys|.[]' --raw-output < composer.json`
 
@@ -16,8 +20,28 @@ composer remove --no-scripts ${REQUIRE}
 # Removing these is required for composer to use the latest versions
 rm -rf composer.lock vendor/
 
-composer require --no-scripts --dev ${REQUIRE_DEV}
-composer require --no-scripts ${REQUIRE}
+# Add =dev-master for all dependencies that don't have stable versions
+
+REQUIRE_DEV2=''
+for I in ${REQUIRE_DEV}; do
+  if has_stable_version ${I}; then
+    REQUIRE_DEV2="${REQUIRE_DEV2} ${I}"
+  else
+    REQUIRE_DEV2="${REQUIRE_DEV2} ${I}=dev-master"
+  fi
+done
+
+REQUIRE2=''
+for I in ${REQUIRE}; do
+  if has_stable_version ${I}; then
+    REQUIRE2="${REQUIRE2} ${I}"
+  else
+    REQUIRE2="${REQUIRE2} ${I}=dev-master"
+  fi
+done
+
+composer require --no-scripts --dev ${REQUIRE_DEV2}
+composer require --no-scripts ${REQUIRE2}
 
 # Run a final update without --no-scripts to allow phar-install to run
 composer update
