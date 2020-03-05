@@ -4,7 +4,7 @@ set -xe
 mkdir -p app
 mkdir -p spec
 
-echo '{"config":{"platform":{"php": "7.0.22"}},"autoload": {"psr-4": {"MyNamespace\\\\": "app/"}},"scripts":{"post-update-cmd": "vendor/bin/phar-install"}}' | jq . > composer.json
+echo '{"config":{"platform":{"php": "7.2"}},"autoload": {"psr-4": {"MyNamespace\\\\": "app/"}},"scripts":{"post-update-cmd": "vendor/bin/phar-install"}}' | jq . > composer.json
 
 cat <<EOF > psalm.xml
 <?xml version="1.0"?>
