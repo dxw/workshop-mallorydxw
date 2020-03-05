@@ -1,0 +1,90 @@
+#!/bin/sh
+set -xe
+
+mkdir -p app
+mkdir -p spec
+
+echo '{"config":{"platform":{"php": "7.0.22"}},"autoload": {"psr-4": {"MyNamespace\\\\": "app/"}},"scripts":{"post-update-cmd": "vendor/bin/phar-install"}}' | jq . > composer.json
+
+cat <<EOF > psalm.xml
+<?xml version="1.0"?>
+<psalm>
+  <projectFiles>
+    <directory name="app"/>
+    <ignoreFiles>
+      <file name="vendor.phar"/>
+      <file name="app/di.php"/>
+    </ignoreFiles>
+  </projectFiles>
+  <issueHandlers>
+    <!-- WordPress functions are going to be tripping this one constantly -->
+    <UndefinedFunction errorLevel="suppress"/>
+  </issueHandlers>
+</psalm>
+EOF
+
+cat <<EOF > peridot.php
+<?php
+return function (\\Evenement\\EventEmitterInterface \$emitter) {
+    \$dot = new \\Peridot\\Reporter\\Dot\\DotReporterPlugin(\$emitter);
+};
+EOF
+
+cat <<EOF > .php_cs
+<?php
+
+\$finder = \\PhpCsFixer\\Finder::create()
+  ->exclude('vendor')
+  ->exclude('node_modules')
+  ->in(__DIR__);
+
+return \\PhpCsFixer\\Config::create()
+  ->setRules([
+    '@PSR2' => true,
+    'array_syntax' => ['syntax' => 'short'],
+  ])
+  ->setFinder(\$finder);
+EOF
+
+cat <<EOF > .gitattributes
+/composer.lock -diff
+/vendor.phar -diff
+EOF
+
+cat <<EOF > .gitignore
+/vendor
+/.php_cs.cache
+EOF
+
+cat <<EOF > app/di.php
+<?php
+EOF
+
+cat <<EOF > app/load.php
+<?php
+
+require __DIR__.'/../vendor.phar';
+
+return \\Dxw\\Iguana\\Init::init(__DIR__, 'MyNamespace');
+EOF
+
+cat <<EOF > index.php
+<?php
+
+/*
+Plugin Name: MyNamespace
+Description: ...
+Author: dxw
+Author URI: https://www.dxw.com
+*/
+
+\$registrar = require __DIR__.'/app/load.php';
+\$registrar->register();
+EOF
+
+composer require --dev friendsofphp/php-cs-fixer peridot-php/peridot peridot-php/peridot-dot-reporter peridot-php/leo mockery/mockery dxw/phar-install php-mock/php-mock-mockery vimeo/psalm
+composer require dxw/iguana
+
+set +x
+echo '------------------------------------------------------------------------------'
+echo '-- Now add this plugin/theme to .gitlab-ci.yml'
