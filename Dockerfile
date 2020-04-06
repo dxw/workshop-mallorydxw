@@ -69,10 +69,10 @@ RUN echo 'Set disable_coredump false' >> /etc/sudo.conf
 
 # Fix bad defaults
 RUN echo 'install: --no-rdoc --no-ri' > /etc/gemrc && \
-    echo 'error_reporting=E_ALL' > /etc/php/7.3/cli/conf.d/99-dxw-errors.ini && \
-    echo 'phar.readonly=Off' > /etc/php/7.3/cli/conf.d/99-dxw-phar.ini && \
-    echo 'xdebug.var_display_max_depth=99999' > /etc/php/7.3/cli/conf.d/99-dxw-fix-xdebug-var-dump.ini && \
-    /bin/echo -e '[mail function]\nsendmail_path = /bin/false' > /etc/php/7.3/cli/conf.d/99-dxw-disable-mail.ini
+    echo 'error_reporting=E_ALL' > /etc/php/7.4/cli/conf.d/99-dxw-errors.ini && \
+    echo 'phar.readonly=Off' > /etc/php/7.4/cli/conf.d/99-dxw-phar.ini && \
+    echo 'xdebug.var_display_max_depth=99999' > /etc/php/7.4/cli/conf.d/99-dxw-fix-xdebug-var-dump.ini && \
+    /bin/echo -e '[mail function]\nsendmail_path = /bin/false' > /etc/php/7.4/cli/conf.d/99-dxw-disable-mail.ini
 
 ##############################################################################
 ## Install tools
