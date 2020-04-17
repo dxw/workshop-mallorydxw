@@ -83,10 +83,7 @@ RUN mkdir /src
 RUN gem update --system
 
 # Install tools with go get
-RUN GOPATH=/src/go go get github.com/dxw/git-env && \
-    GOPATH=/src/go go get github.com/holizz/pw && \
-    GOPATH=/src/go go get github.com/holizz/diceware && \
-    GOPATH=/src/go go get github.com/holizz/renamer && \
+RUN GOPATH=/src/go go get github.com/holizz/renamer && \
     GOPATH=/src/go go get github.com/src-d/beanstool && \
     mv /src/go/bin/* /usr/local/bin/ && \
     rm -rf /src/go
@@ -134,11 +131,6 @@ RUN gem install curses && \
     git clone --quiet --depth 1 https://github.com/junegunn/fzf.git /usr/local/fzf && \
     /usr/local/fzf/install --no-completion --no-key-bindings --no-update-rc && \
     ln -s  ../fzf/bin/fzf /usr/local/bin/fzf
-
-# Other tools
-RUN git -C /src clone --quiet --recursive https://github.com/dxw/srdb.git && \
-    mv /src/srdb /usr/local/share/ && \
-    ln -s /usr/local/share/srdb/srdb /usr/local/bin/srdb
 
 # Chef
 # https://downloads.chef.io/chefdk
