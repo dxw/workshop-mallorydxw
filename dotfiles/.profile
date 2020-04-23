@@ -75,8 +75,6 @@ alias composer='run-php 7.4 composer'
 
 # node
 alias node='docker run -ti --rm -v /workbench:/workbench --workdir=`pwd` thedxw/node-testing node'
-alias yarn='docker run -ti --rm -v /workbench:/workbench --workdir=`pwd` thedxw/node-testing yarn'
-alias grunt='yarn install -s && yarn run grunt'
 
 # https://github.com/github/scripts-to-rule-them-all
 alias bootstrap=script/bootstrap
