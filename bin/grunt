@@ -2,4 +2,4 @@
 set -e
 
 yarn install -s
-exec yarn run grunt
+exec yarn run grunt ${@}
