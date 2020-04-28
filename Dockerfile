@@ -154,8 +154,6 @@ COPY --chown=core:core dotfiles/ /home/core/
 COPY --chown=core:core bin/ /usr/local/bin/
 
 # ssh keys
-RUN ln -s /workbench/home/.ssh/id_rsa /home/core/.ssh/id_rsa
-RUN ln -s /workbench/home/.ssh/id_rsa.pub /home/core/.ssh/id_rsa.pub
 RUN ln -s /workbench/home/.ssh/id_ed25519 /home/core/.ssh/id_ed25519
 RUN ln -s /workbench/home/.ssh/id_ed25519.pub /home/core/.ssh/id_ed25519.pub
 
