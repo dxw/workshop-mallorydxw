@@ -1,0 +1,15 @@
+#!/bin/sh
+set -e
+
+BASE=${1}
+
+if test ${BASE}X = X; then
+  echo "Usage: `basename ${0}` base-branch"
+  exit 1
+fi
+
+for COMMIT in `git log ${BASE}..@^ --oneline --pretty=tformat:%H --reverse`; do
+  INTERMEDIATE_NAME=test_intermediate_${COMMIT}
+  git branch -f ${INTERMEDIATE_NAME} ${COMMIT}
+  git push -f origin ${INTERMEDIATE_NAME}
+done
