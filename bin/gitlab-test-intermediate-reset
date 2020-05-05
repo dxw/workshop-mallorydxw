@@ -1,0 +1,7 @@
+#!/bin/sh
+set -e
+
+# Delete local branches
+git branch | grep test_intermediate_ | xargs git branch -D
+# Delete remote branches
+git branch -r | grep test_intermediate_ | cut -d/ -f2 | xargs git push origin -d
