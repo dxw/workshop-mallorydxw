@@ -73,9 +73,6 @@ alias php-cs-fixer='watch run-php --noninteractive 7.4 vendor/bin/php-cs-fixer f
 alias psalm='watch run-php --noninteractive 7.4 vendor/bin/psalm'
 alias composer='run-php 7.4 composer'
 
-# node
-alias node='docker run -ti --rm -v /workbench:/workbench --workdir=`pwd` thedxw/node-testing node'
-
 # https://github.com/github/scripts-to-rule-them-all
 alias bootstrap=script/bootstrap
 alias console=script/console

@@ -88,6 +88,15 @@ RUN GOPATH=/src/go go get github.com/holizz/renamer && \
     mv /src/go/bin/* /usr/local/bin/ && \
     rm -rf /src/go
 
+# node
+RUN mkdir /src/node && \
+    wget --quiet https://nodejs.org/dist/v12.12.0/node-v12.12.0-linux-x64.tar.xz -O /src/node/node.tar.xz && \
+    tar -C /src/node -xJf /src/node/node.tar.xz && \
+    cp -a /src/node/*/* /usr/local/ && \
+    rm -rf /src/node
+# yarn
+RUN npm install --global yarn
+
 # Install tools with pip3
 RUN pip3 install --upgrade docker-compose pipenv
 

@@ -1,3 +1,0 @@
-#!/bin/sh
-
-exec docker run -ti --rm -v /workbench:/workbench --workdir=`pwd` thedxw/node-testing yarn ${@}
