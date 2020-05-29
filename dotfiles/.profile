@@ -67,11 +67,10 @@ alias dc=docker-compose
 alias update-images='docker image list --format "{{.Repository}}:{{.Tag}}" | grep -v ":<none>$" | xargs --max-args=1 --max-procs=5 docker pull --quiet'
 
 # php
-alias peridot='watch run-php --noninteractive 7.4 vendor/bin/peridot spec -r dot -C'
-alias phpunit='watch run-php --noninteractive 7.4 vendor/bin/phpunit'
-alias php-cs-fixer='watch run-php --noninteractive 7.4 vendor/bin/php-cs-fixer fix --dry-run --diff'
-alias psalm='watch run-php --noninteractive 7.4 vendor/bin/psalm'
-alias composer='run-php 7.4 composer'
+alias peridot='watch vendor/bin/peridot spec -r dot -C'
+alias phpunit='watch vendor/bin/phpunit'
+alias php-cs-fixer='watch vendor/bin/php-cs-fixer fix --dry-run --diff'
+alias psalm='watch vendor/bin/psalm'
 
 # https://github.com/github/scripts-to-rule-them-all
 alias bootstrap=script/bootstrap
