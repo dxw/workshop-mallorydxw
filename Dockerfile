@@ -81,6 +81,7 @@ RUN mkdir /src
 
 # Ruby/Gem
 RUN gem update --system
+RUN gem install sass
 
 # Install tools with go get
 RUN GOPATH=/src/go go get github.com/holizz/renamer && \
