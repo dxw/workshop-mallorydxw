@@ -14,8 +14,12 @@ REQUIRE=`jq '.["require"]|keys|.[]' --raw-output < composer.json | grep -q -v '^
 
 # Use --no-scripts throughout to prevent phar-install from running
 
-composer remove --no-scripts --dev ${REQUIRE_DEV}
-composer remove --no-scripts ${REQUIRE}
+if ${REQUIRE_DEV}X != X; then
+  composer remove --no-scripts --dev ${REQUIRE_DEV}
+fi
+if ${REQUIRE}X != X; then
+  composer remove --no-scripts ${REQUIRE}
+fi
 
 # Removing these is required for composer to use the latest versions
 rm -rf composer.lock vendor/
@@ -40,8 +44,12 @@ for I in ${REQUIRE}; do
   fi
 done
 
-composer require --no-scripts --dev ${REQUIRE_DEV2}
-composer require --no-scripts ${REQUIRE2}
+if ${REQUIRE_DEV2}X != X; then
+  composer require --no-scripts --dev ${REQUIRE_DEV2}
+fi
+if ${REQUIRE2}X != X; then
+  composer require --no-scripts ${REQUIRE2}
+fi
 
 # Run a final update without --no-scripts to allow phar-install to run
 composer update
