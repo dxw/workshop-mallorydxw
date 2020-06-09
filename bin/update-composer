@@ -10,7 +10,7 @@ has_stable_version() {
 }
 
 REQUIRE_DEV=`jq '.["require-dev"]|keys|.[]' --raw-output < composer.json`
-REQUIRE=`jq '.["require"]|keys|.[]' --raw-output < composer.json`
+REQUIRE=`jq '.["require"]|keys|.[]' --raw-output < composer.json | grep -q -v '^php$' || true`
 
 # Use --no-scripts throughout to prevent phar-install from running
 
