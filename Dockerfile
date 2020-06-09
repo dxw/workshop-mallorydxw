@@ -132,8 +132,9 @@ RUN PATH=$PATH:/usr/local/go/bin GOPATH=/src/go sh -c '\
     rm -rf /src/go
 
 # composer
-RUN wget --quiet `curl -s https://api.github.com/repos/composer/composer/releases/latest | jq -r '.assets[0].browser_download_url'` -O /usr/local/bin/composer && \
-    chmod 755 /usr/local/bin/composer
+RUN wget --quiet https://getcomposer.org/installer -O /src/composer-setup.php && \
+    php /src/composer-setup.php --install-dir=/usr/local/bin --filename=composer && \
+    rm /src/composer-setup.php
 ENV PATH=$PATH:/usr/local/lib/composer/vendor/bin:~/.composer/vendor/bin
 
 # Install fzf
