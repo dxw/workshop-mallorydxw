@@ -47,5 +47,3 @@
   file = /home/core/.mailmap
 [log]
   mailmap = true
-[init]
-  templateDir = /home/core/.config/git/template
