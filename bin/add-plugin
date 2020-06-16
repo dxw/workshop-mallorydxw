@@ -1,0 +1,46 @@
+#!/bin/bash
+set -xe
+
+TICKET=${1}
+PLUGINS=${@:2}
+
+pretty() {
+  node --eval 'console.log(require("/usr/local/lib/node_modules/json-stringify-pretty-compact")(JSON.parse(require("fs").readFileSync(require("process").stdin.fd, "utf-8")), {indent: 4}))'
+}
+
+if test `git status --porcelain=v2 | grep -v '^?' | wc -l` != 0; then
+  echo 'Your work tree has changes. Please stash or commit them before proceeding.'
+  exit 1
+fi
+
+sudo npm install --global json-stringify-pretty-compact
+composer install
+
+if test ! -f vendor/bin/whippet; then
+  echo 'Run wpc on this repo first'
+  exit 2
+fi
+
+git checkout develop
+git pull --ff-only
+
+git switch --create feature/${TICKET}-add-plugin
+
+cat whippet.json | pretty > whippet.json.tmp
+mv whippet.json.tmp whippet.json
+git add whippet.json
+git commit --message 'Pretty-print whippet.json'
+
+vendor/bin/whippet deps update
+git add whippet.lock
+git commit --message 'whippet deps update'
+
+for PLUGIN in ${PLUGINS}; do
+  cat whippet.json | jq '.plugins += [{"name":"'${PLUGIN}'"}]' | pretty > whippet.json.tmp
+  mv whippet.json.tmp whippet.json
+  vendor/bin/whippet deps update
+  git add whippet.json whippet.lock .gitignore
+  git commit --message "Add plugin: ${PLUGIN}" --message "Resolves: https://dxw.zendesk.com/agent/tickets/${TICKET}"
+done
+
+echo 'Finished successfully'
