@@ -14,10 +14,10 @@ REQUIRE=`jq '.["require"]|keys|.[]' --raw-output < composer.json | grep -q -v '^
 
 # Use --no-scripts throughout to prevent phar-install from running
 
-if ${REQUIRE_DEV}X != X; then
+if test ${REQUIRE_DEV}X != X; then
   composer remove --no-scripts --dev ${REQUIRE_DEV}
 fi
-if ${REQUIRE}X != X; then
+if test ${REQUIRE}X != X; then
   composer remove --no-scripts ${REQUIRE}
 fi
 
@@ -44,10 +44,10 @@ for I in ${REQUIRE}; do
   fi
 done
 
-if ${REQUIRE_DEV2}X != X; then
+if test ${REQUIRE_DEV2}X != X; then
   composer require --no-scripts --dev ${REQUIRE_DEV2}
 fi
-if ${REQUIRE2}X != X; then
+if test ${REQUIRE2}X != X; then
   composer require --no-scripts ${REQUIRE2}
 fi
 
