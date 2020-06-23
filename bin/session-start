@@ -1,0 +1,5 @@
+#!/bin/sh
+set -e
+
+tmux new-session -d 'vim -O todo diary'
+tmux -u2 attach

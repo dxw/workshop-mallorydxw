@@ -188,4 +188,4 @@ RUN chown -R core:core /home/core
 WORKDIR /workbench/src
 USER core
 VOLUME /workbench
-CMD ["tmux", "-u2"]
+CMD ["session-start"]
