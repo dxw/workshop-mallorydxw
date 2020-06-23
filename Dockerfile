@@ -157,6 +157,16 @@ RUN mkdir /home/core
 # Add user
 RUN adduser --gecos '' --shell /bin/zsh --disabled-password core
 RUN usermod -aG sudo core
+RUN chown -R core:core /home/core
+
+# Install Rust
+RUN curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs > /src/rustup && \
+    chmod 755 /src/rustup && \
+    sudo -u core /src/rustup --no-modify-path -y && \
+    rm /src/rustup
+# Install extra tools with cargo
+RUN sudo -u core ~core/.cargo/bin/cargo install cargo-edit
+RUN sudo -u core ~core/.cargo/bin/cargo install git-absorb
 
 # Dotfiles
 COPY --chown=core:core dotfiles/ /home/core/
@@ -173,15 +183,6 @@ RUN ln -s /workbench/home/.gnupg /home/core/.gnupg
 
 # Etc
 RUN chown -R core:core /home/core
-
-# Install Rust
-RUN curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs > /src/rustup && \
-    chmod 755 /src/rustup && \
-    sudo -u core /src/rustup --no-modify-path -y && \
-    rm /src/rustup
-# Install extra tools with cargo
-RUN sudo -u core ~core/.cargo/bin/cargo install cargo-edit
-RUN sudo -u core ~core/.cargo/bin/cargo install git-absorb
 
 # Set runtime details
 WORKDIR /workbench/src
