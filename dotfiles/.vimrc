@@ -82,7 +82,7 @@ nnoremap <silent> <Leader>B :echo system('git blame -L'.line('.').',+1 '.expand(
 nnoremap <silent> <Leader>Y :exe 'norm! 0C'.system('git blame -pL'.line('.').',+1 HEAD '.expand('%').'<Bar>tail -n1 <Bar>cut -c2-<Bar>tr -d "\n"')<CR>0
 
 " diary
-nmap <silent> <Leader>_ ?^---$jV/^---$k<Leader>yG<Leader>pO<GjsisodateztVG:s/  /    /gGzb
+nmap <silent> <Leader>_ ?^---$jV/^---$k<Leader>yG<Leader>pO<GjsisodateztVG:s/  /    /gGzz
 
 " php-cs-fixer
 nmap <Leader>f :!php-cs-fixer fix %<CR>
