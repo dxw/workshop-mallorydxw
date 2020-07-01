@@ -18,12 +18,13 @@ export LC_COLLATE=C
 export LESSCHARSET=utf-8
 
 # PATH
-export PATH=/sbin:/bin:\
+export PATH=\
+/usr/local/sbin:/usr/local/bin:/usr/local/games:\
+/usr/sbin:/usr/bin:/usr/games:\
+/sbin:/bin:\
 /workbench/bin:\
 /workbench/local/bin:\
 /workbench/local/ruby/bin:\
-/usr/local/sbin:/usr/local/bin:/usr/local/games:\
-/usr/sbin:/usr/bin:/usr/games:\
 /usr/local/go/bin:\
 /usr/local/lib/composer/vendor/bin:\
 ~/.cargo/bin:\
