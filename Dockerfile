@@ -40,6 +40,7 @@ RUN apt-get update && \
         optipng libtool nasm libjpeg-turbo-progs mysql-client nmap cloc ed ripmime oathtool cloc \
         libcurl4-openssl-dev libexpat1-dev gettext xsltproc xmlto iproute2 iputils-ping xmlstarlet tree jq libssl-dev \
         dsh libncurses5-dev graphicsmagick awscli \
+        asciidoc docbook2x \
         heroku-toolbelt && \
     rm -r /var/lib/apt/lists/*
 
@@ -78,6 +79,13 @@ RUN echo 'install: --no-rdoc --no-ri' > /etc/gemrc && \
 ## Install tools
 
 RUN mkdir /src
+
+# git next
+RUN git clone https://github.com/git/git.git /src/git && \
+    git -C /src/git switch next && \
+    make -C /src/git prefix=/usr/local all doc info && \
+    make -C /src/git prefix=/usr/local install install-doc install-html install-info && \
+    rm -rf /src/git
 
 # Ruby/Gem
 RUN gem update --system
