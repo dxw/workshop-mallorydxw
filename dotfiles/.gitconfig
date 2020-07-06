@@ -49,3 +49,5 @@
   mailmap = true
 [init]
   defaultBranch = main
+[gitget]
+  root = /workbench/src

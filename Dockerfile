@@ -97,6 +97,14 @@ RUN GOPATH=/src/go go get github.com/holizz/renamer && \
     mv /src/go/bin/* /usr/local/bin/ && \
     rm -rf /src/go
 
+RUN mkdir /src/go && \
+    git clone https://github.com/grdl/git-get.git /src/go/git-get && \
+    cd /src/go/git-get && \
+    GOPATH=/src/go go build -o /usr/local/bin/git-get ./cmd/get && \
+    GOPATH=/src/go go build -o /usr/local/bin/git-list ./cmd/list && \
+    cd - && \
+    rm -rf /src/go
+
 # node
 RUN mkdir /src/node && \
     wget --quiet https://nodejs.org/dist/v12.12.0/node-v12.12.0-linux-x64.tar.xz -O /src/node/node.tar.xz && \
