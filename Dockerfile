@@ -41,6 +41,7 @@ RUN apt-get update && \
         libcurl4-openssl-dev libexpat1-dev gettext xsltproc xmlto iproute2 iputils-ping xmlstarlet tree jq libssl-dev \
         dsh libncurses5-dev graphicsmagick awscli \
         asciidoc docbook2x \
+        shellcheck \
         heroku-toolbelt && \
     rm -r /var/lib/apt/lists/*
 
