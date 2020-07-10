@@ -51,3 +51,5 @@
   defaultBranch = main
 [gitget]
   root = /workbench/src
+[merge]
+  conflictStyle = diff3
