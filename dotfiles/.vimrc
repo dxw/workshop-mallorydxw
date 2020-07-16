@@ -76,6 +76,9 @@ vnoremap <silent> <Leader>d :!> ~/.vimipc<CR>
 nnoremap <silent> <Leader>p :r ~/.vimipc<CR>
 nnoremap <silent> <Leader>P :-1r ~/.vimipc<CR>
 
+" Open file under cursor
+nnoremap <silent> <Leader>n :new <C-R><C-P><CR>
+
 " Blame
 nnoremap <silent> <Leader>B :echo system('git blame -L'.line('.').',+1 '.expand('%'))<CR>
 " Yank from HEAD (aka per-line checkout from HEAD)
