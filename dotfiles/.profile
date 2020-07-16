@@ -33,6 +33,10 @@ export PATH=\
 #dxp
 export DXP_CONFIG=/workbench/src/twinkie.dxw.net/tools/dxp/config.json
 
+# Rude software
+# https://github.com/typicode/husky#disable-auto-install
+export HUSKY_SKIP_INSTALL=1
+
 # Aliases
 alias mv="mv -i"
 alias ls="ls --color=auto"
