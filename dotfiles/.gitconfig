@@ -22,7 +22,6 @@
   default = current
 [fetch]
   prune = true
-  writeCommitGraph = true
 [core]
   whitespace = trailing-space
   excludesFile = ~/.gitexcludesfile
