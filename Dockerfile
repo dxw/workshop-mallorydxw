@@ -144,6 +144,12 @@ RUN PATH=$PATH:/usr/local/go/bin GOPATH=/src/go sh -c '\
     go get github.com/klauspost/asmfmt/cmd/asmfmt && \
     go get github.com/fatih/motion && \
     go get github.com/josharian/impl && \
+    go get golang.org/x/tools/gopls && \
+    go get github.com/davidrjenni/reftools/cmd/fillstruct && \
+    go get github.com/go-delve/delve/cmd/dlv && \
+    go get github.com/koron/iferr && \
+    go get github.com/golangci/golangci-lint/cmd/golangci-lint && \
+    go get github.com/fatih/gomodifytags && \
     true' && \
     mv /src/go/bin/* /usr/local/bin/ && \
     rm -rf /src/go
