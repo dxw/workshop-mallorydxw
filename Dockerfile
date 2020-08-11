@@ -112,6 +112,9 @@ RUN mkdir /src/node && \
     tar -C /src/node -xJf /src/node/node.tar.xz && \
     cp -a /src/node/*/* /usr/local/ && \
     rm -rf /src/node
+# npx downloads packages from npm and runs them
+# With typosquatting, that's a lot of risk
+RUN rm /usr/local/bin/npx
 # yarn
 RUN npm install --global yarn
 
