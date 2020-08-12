@@ -175,6 +175,11 @@ RUN wget --quiet https://packages.chef.io/files/stable/chefdk/4.6.35/ubuntu/18.0
     dpkg -i /src/chefdk.deb && \
     rm /src/chefdk.deb
 
+# adr-tools
+RUN git clone --quiet --depth 1 https://github.com/npryce/adr-tools.git /src/adr-tools && \
+    mv /src/adr-tools/src/* /usr/local/bin/ && \
+    rm -rf /src/adr-tools
+
 ##############################################################################
 ## User-specific
 
