@@ -180,6 +180,11 @@ RUN git clone --quiet --depth 1 https://github.com/npryce/adr-tools.git /src/adr
     mv /src/adr-tools/src/* /usr/local/bin/ && \
     rm -rf /src/adr-tools
 
+# AWS
+RUN curl https://s3.amazonaws.com/session-manager-downloads/plugin/latest/ubuntu_64bit/session-manager-plugin.deb -o /src/session-manager-plugin.deb && \
+    dpkg -i /src/session-manager-plugin.deb && \
+    rm /src/session-manager-plugin.deb
+
 ##############################################################################
 ## User-specific
 
@@ -208,6 +213,9 @@ COPY --chown=core:core bin/ /usr/local/bin/
 # ssh keys
 RUN ln -s /workbench/home/.ssh/id_ed25519 /home/core/.ssh/id_ed25519
 RUN ln -s /workbench/home/.ssh/id_ed25519.pub /home/core/.ssh/id_ed25519.pub
+
+# AWS
+RUN ln -s /workbench/home/.aws /home/core/.aws
 
 # GPG
 RUN ln -s /workbench/home/.gnupg /home/core/.gnupg
