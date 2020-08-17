@@ -186,6 +186,15 @@ RUN curl https://s3.amazonaws.com/session-manager-downloads/plugin/latest/ubuntu
     dpkg -i /src/session-manager-plugin.deb && \
     rm /src/session-manager-plugin.deb
 
+# rbenv & ruby-build
+# - for dalmatian
+RUN git clone https://github.com/rbenv/rbenv.git /usr/local/rbenv && \
+    sh -c 'cd /usr/local/rbenv && src/configure && make -C src' && \
+    ln -s ../rbenv/libexec/rbenv /usr/local/bin/ && \
+    mkdir -p "$(rbenv root)"/plugins && \
+    git clone https://github.com/rbenv/ruby-build.git "$(rbenv root)"/plugins/ruby-build && \
+    rbenv install 2.7.1
+
 ##############################################################################
 ## User-specific
 
