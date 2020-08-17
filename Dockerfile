@@ -23,7 +23,8 @@ RUN apt-get update && \
 # Install third-party sources
 RUN curl -sS https://toolbelt.heroku.com/apt/release.key | apt-key add - && \
     echo "deb http://toolbelt.heroku.com/ubuntu ./" > /etc/apt/sources.list.d/heroku.list && \
-    add-apt-repository ppa:git-core/ppa
+    add-apt-repository ppa:git-core/ppa && \
+    add-apt-repository ppa:rmescandon/yq
 
 RUN apt-get update && \
     apt-get install --no-install-recommends -y \
@@ -39,7 +40,7 @@ RUN apt-get update && \
         libpcre3-dev liblzma-dev libxml2-dev libxslt1-dev libmysql++-dev libsqlite3-dev \
         optipng libtool nasm libjpeg-turbo-progs mysql-client nmap cloc ed ripmime oathtool cloc \
         libcurl4-openssl-dev libexpat1-dev gettext xsltproc xmlto iproute2 iputils-ping xmlstarlet tree jq libssl-dev \
-        dsh libncurses5-dev graphicsmagick awscli \
+        dsh libncurses5-dev graphicsmagick awscli yq \
         asciidoc docbook2x \
         shellcheck \
         heroku-toolbelt && \
