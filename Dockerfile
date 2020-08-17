@@ -168,7 +168,7 @@ ENV PATH=$PATH:/usr/local/lib/composer/vendor/bin:~/.composer/vendor/bin
 RUN gem install curses && \
     git clone --quiet --depth 1 https://github.com/junegunn/fzf.git /usr/local/fzf && \
     /usr/local/fzf/install --no-completion --no-key-bindings --no-update-rc && \
-    ln -s  ../fzf/bin/fzf /usr/local/bin/fzf
+    ln -s ../fzf/bin/fzf /usr/local/bin/fzf
 
 # Chef
 # https://downloads.chef.io/chefdk
