@@ -16,6 +16,7 @@
   root = rev-parse --show-toplevel
   m = !git switch -C master origin/master && git p && git merge --no-ff --no-edit origin/develop
   delete-merged = !git branch --merged main | cut -c 3- | grep -v '^main$' | grep -v '^master$' | grep -v '^develop$' | xargs git branch --delete
+  exclude = !echo >> $(git rev-parse --git-dir)/info/exclude
   # fzf aliases
   cf = !git-branch-fzf git switch
 [push]
