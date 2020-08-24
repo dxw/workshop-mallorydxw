@@ -133,31 +133,6 @@ RUN mkdir -p /usr/share/vim/vimfiles/pack/bundle/start && \
     git -C /usr/share/vim/vimfiles/pack/bundle/start clone --quiet https://github.com/dxw/vim-php-indent.git && \
     git -C /usr/share/vim/vimfiles/pack/bundle/start clone --quiet https://github.com/kassio/neoterm.git
 
-# Install vim-go dependencies
-# https://github.com/fatih/vim-go/blob/master/plugin/go.vim
-RUN PATH=$PATH:/usr/local/go/bin GOPATH=/src/go sh -c '\
-    go get github.com/nsf/gocode && \
-    go get golang.org/x/tools/cmd/goimports && \
-    go get github.com/rogpeppe/godef && \
-    go get golang.org/x/tools/cmd/guru && \
-    go get golang.org/x/tools/cmd/gorename && \
-    go get golang.org/x/lint/golint && \
-    go get github.com/kisielk/errcheck && \
-    go get github.com/jstemmer/gotags && \
-    go get github.com/alecthomas/gometalinter && \
-    go get github.com/klauspost/asmfmt/cmd/asmfmt && \
-    go get github.com/fatih/motion && \
-    go get github.com/josharian/impl && \
-    go get golang.org/x/tools/gopls && \
-    go get github.com/davidrjenni/reftools/cmd/fillstruct && \
-    go get github.com/go-delve/delve/cmd/dlv && \
-    go get github.com/koron/iferr && \
-    go get github.com/golangci/golangci-lint/cmd/golangci-lint && \
-    go get github.com/fatih/gomodifytags && \
-    true' && \
-    mv /src/go/bin/* /usr/local/bin/ && \
-    rm -rf /src/go
-
 # composer
 RUN wget --quiet https://getcomposer.org/installer -O /src/composer-setup.php && \
     php /src/composer-setup.php --install-dir=/usr/local/bin --filename=composer && \
