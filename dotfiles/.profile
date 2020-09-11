@@ -75,7 +75,7 @@ alias update-images='docker image list --format "{{.Repository}}:{{.Tag}}" | gre
 alias peridot='watch vendor/bin/peridot spec -r dot -C'
 alias phpunit='watch vendor/bin/phpunit'
 alias php-cs-fixer='watch vendor/bin/php-cs-fixer fix --dry-run --diff'
-alias psalm='watch vendor/bin/psalm'
+alias psalm='watch vendor/bin/psalm --monochrome'
 alias kahlan='watch vendor/bin/kahlan --no-colors'
 
 # https://github.com/github/scripts-to-rule-them-all
