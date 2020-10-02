@@ -15,6 +15,7 @@ set shortmess=aoOtTI
 set undofile undodir=~/.local/share/nvim/undodir,.
 set nomodeline " security
 set termguicolors
+set term=xterm
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """ Mappings
