@@ -23,7 +23,6 @@ RUN apt-get update && \
 # Install third-party sources
 RUN curl -sS https://toolbelt.heroku.com/apt/release.key | apt-key add - && \
     echo "deb http://toolbelt.heroku.com/ubuntu ./" > /etc/apt/sources.list.d/heroku.list && \
-    add-apt-repository ppa:git-core/ppa && \
     add-apt-repository ppa:rmescandon/yq
 
 RUN apt-get update && \
