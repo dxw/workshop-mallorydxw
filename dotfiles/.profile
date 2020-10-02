@@ -95,3 +95,6 @@ gg() {
 # Treatment for neuropathy
 alias g=git
 alias v=$VISUAL
+
+# Let's have colours in vim!
+export TERM=xterm
