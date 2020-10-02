@@ -183,8 +183,3 @@ let g:syntastic_javascript_checkers = ['standard']
 if filereadable(expand($MYVIMRC.'.local'))
   source $MYVIMRC.local
 endif
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-""" Unbundle
-
-runtime bundle/vim-unbundle/plugin/unbundle.vim
