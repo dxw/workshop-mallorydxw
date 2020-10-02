@@ -1,4 +1,4 @@
-FROM ubuntu:20.04
+FROM ubuntu:20.10
 
 ##############################################################################
 ## APT
@@ -22,8 +22,7 @@ RUN apt-get update && \
 
 # Install third-party sources
 RUN curl -sS https://toolbelt.heroku.com/apt/release.key | apt-key add - && \
-    echo "deb http://toolbelt.heroku.com/ubuntu ./" > /etc/apt/sources.list.d/heroku.list && \
-    add-apt-repository ppa:rmescandon/yq
+    echo "deb http://toolbelt.heroku.com/ubuntu ./" > /etc/apt/sources.list.d/heroku.list
 
 RUN apt-get update && \
     apt-get install --no-install-recommends -y \
@@ -39,7 +38,7 @@ RUN apt-get update && \
         libpcre3-dev liblzma-dev libxml2-dev libxslt1-dev libmysql++-dev libsqlite3-dev \
         optipng libtool nasm libjpeg-turbo-progs mysql-client nmap cloc ed ripmime oathtool cloc \
         libcurl4-openssl-dev libexpat1-dev gettext xsltproc xmlto iproute2 iputils-ping xmlstarlet tree jq libssl-dev \
-        dsh libncurses5-dev graphicsmagick awscli yq \
+        dsh libncurses5-dev graphicsmagick awscli \
         asciidoc docbook2x \
         shellcheck \
         heroku-toolbelt && \
@@ -95,6 +94,7 @@ RUN gem install sass
 # Install tools with go get
 RUN GOPATH=/src/go go get github.com/holizz/renamer && \
     GOPATH=/src/go go get github.com/src-d/beanstool && \
+    GOPATH=/src/go GO111MODULE=on go get github.com/mikefarah/yq/v3 && \
     mv /src/go/bin/* /usr/local/bin/ && \
     rm -rf /src/go
 
