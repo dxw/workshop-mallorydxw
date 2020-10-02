@@ -92,7 +92,7 @@ RUN gem update --system
 RUN gem install sass
 
 # Install tools with go get
-RUN GOPATH=/src/go go get github.com/holizz/renamer && \
+RUN GOPATH=/src/go go get github.com/itchyny/mmv/cmd/mmv && \
     GOPATH=/src/go go get github.com/src-d/beanstool && \
     GOPATH=/src/go GO111MODULE=on go get github.com/mikefarah/yq/v3 && \
     mv /src/go/bin/* /usr/local/bin/ && \
