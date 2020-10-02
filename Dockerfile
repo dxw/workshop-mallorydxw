@@ -157,7 +157,7 @@ RUN git clone --quiet --depth 1 https://github.com/npryce/adr-tools.git /src/adr
     rm -rf /src/adr-tools
 
 # AWS
-RUN curl https://s3.amazonaws.com/session-manager-downloads/plugin/latest/ubuntu_64bit/session-manager-plugin.deb -o /src/session-manager-plugin.deb && \
+RUN curl -sS https://s3.amazonaws.com/session-manager-downloads/plugin/latest/ubuntu_64bit/session-manager-plugin.deb -o /src/session-manager-plugin.deb && \
     dpkg -i /src/session-manager-plugin.deb && \
     rm /src/session-manager-plugin.deb
 
