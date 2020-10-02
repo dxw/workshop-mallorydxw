@@ -169,6 +169,11 @@ RUN git clone https://github.com/rbenv/rbenv.git /usr/local/rbenv && \
     git clone https://github.com/rbenv/ruby-build.git "$(rbenv root)"/plugins/ruby-build && \
     rbenv install 2.7.1
 
+RUN git -C /src clone https://github.com/h3xx/tig-colors-neonwolf.git && \
+    mkdir -p /usr/local/share/tig-colors-neonwolf && \
+    cp /src/tig-colors-neonwolf/tig-colors-neonwolf-256.tigrc /usr/local/share/tig-colors-neonwolf && \
+    rm -rf /src/tig-colors-neonwolf
+
 ##############################################################################
 ## User-specific
 
