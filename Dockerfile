@@ -130,7 +130,8 @@ RUN mkdir -p /usr/share/vim/vimfiles/pack/bundle/start && \
     git -C /usr/share/vim/vimfiles/pack/bundle/start clone --quiet https://github.com/tpope/vim-surround.git && \
     git -C /usr/share/vim/vimfiles/pack/bundle/start clone --quiet https://github.com/scrooloose/syntastic.git && \
     git -C /usr/share/vim/vimfiles/pack/bundle/start clone --quiet https://github.com/fatih/vim-go.git && \
-    git -C /usr/share/vim/vimfiles/pack/bundle/start clone --quiet https://github.com/dxw/vim-php-indent.git
+    git -C /usr/share/vim/vimfiles/pack/bundle/start clone --quiet https://github.com/dxw/vim-php-indent.git && \
+    git -C /usr/share/vim/vimfiles/pack/bundle/start clone --quiet https://github.com/morhetz/gruvbox.git
 
 # composer
 RUN wget --quiet https://getcomposer.org/installer -O /src/composer-setup.php && \

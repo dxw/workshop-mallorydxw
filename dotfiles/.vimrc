@@ -14,8 +14,7 @@ set wildmenu wildmode=list:longest
 set shortmess=aoOtTI
 set undofile undodir=~/.local/share/nvim/undodir,.
 set nomodeline " security
-
-colorscheme desert
+set termguicolors
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """ Mappings
@@ -102,7 +101,9 @@ set shiftwidth=2 softtabstop=2 expandtab
 " Syntax
 syntax on
 filetype plugin indent on
-autocmd VimEnter * colorscheme default
+
+" Set colorscheme after plugins are loaded, per gruvbox instructions
+autocmd VimEnter * colorscheme gruvbox
 
 " Python
 augroup python
