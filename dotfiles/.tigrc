@@ -4,3 +4,4 @@ set refs-view = date author:full,width=20 id ref commit-title
 set stash-view = date author:full,width=20 id commit-title
 set tree-view = mode author:full,width=20 file-size date id file-name
 set mailmap = true
+set wrap-lines = true
