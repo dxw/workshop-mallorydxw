@@ -160,14 +160,11 @@ RUN curl -sS https://s3.amazonaws.com/session-manager-downloads/plugin/latest/ub
     dpkg -i /src/session-manager-plugin.deb && \
     rm /src/session-manager-plugin.deb
 
-# rbenv & ruby-build
+# rbenv
 # - for dalmatian
 RUN git clone https://github.com/rbenv/rbenv.git /usr/local/rbenv && \
     sh -c 'cd /usr/local/rbenv && src/configure && make -C src' && \
-    ln -s ../rbenv/libexec/rbenv /usr/local/bin/ && \
-    mkdir -p "$(rbenv root)"/plugins && \
-    git clone https://github.com/rbenv/ruby-build.git "$(rbenv root)"/plugins/ruby-build && \
-    rbenv install 2.7.1
+    ln -s ../rbenv/libexec/rbenv /usr/local/bin/
 
 RUN git -C /src clone https://github.com/h3xx/tig-colors-neonwolf.git && \
     mkdir -p /usr/local/share/tig-colors-neonwolf && \
@@ -192,6 +189,11 @@ RUN curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs > /src/rustup && \
 # Install extra tools with cargo
 RUN sudo -u core ~core/.cargo/bin/cargo install cargo-edit
 RUN sudo -u core ~core/.cargo/bin/cargo install git-absorb
+
+# Install rbenv install command
+RUN mkdir -p "$(rbenv root)"/plugins && \
+    git clone https://github.com/rbenv/ruby-build.git "$(rbenv root)"/plugins/ruby-build && \
+    rbenv install 2.7.1
 
 # Dotfiles
 COPY --chown=core:core dotfiles/ /home/core/

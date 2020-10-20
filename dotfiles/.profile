@@ -55,8 +55,8 @@ alias curl='curl -gsS'
 # Golang
 export GOPATH=/workbench
 
-# Ruby
-export GEM_PATH=/workbench/local/ruby
+# Ruby/rbenv
+eval "$(rbenv init -)"
 
 # Ag
 alias ag='ag -a'
