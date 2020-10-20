@@ -41,6 +41,7 @@ RUN apt-get update && \
         dsh libncurses5-dev graphicsmagick awscli \
         asciidoc docbook2x \
         shellcheck \
+        libreadline-dev libpq-dev \
         heroku-toolbelt && \
     rm -r /var/lib/apt/lists/*
 
