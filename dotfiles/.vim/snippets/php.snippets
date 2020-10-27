@@ -3,8 +3,10 @@ snippet pf
 	{
 	    ${4}
 	}
-snippet wpm
-	PHPMockery::mock(__NAMESPACE__, '${1}')->${2};
+snippet af
+	allow('${1}')->toBeCalled()${2};
+snippet ef
+	expect('${1}')->toBeCalled()${2};
 snippet esc_html
 	PHPMockery::mock(__NAMESPACE__, 'esc_html')->andReturnUsing(function ($a) {return '_'.$a.'_';});
 snippet describe
