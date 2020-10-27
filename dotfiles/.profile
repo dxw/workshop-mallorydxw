@@ -41,6 +41,7 @@ export HUSKY_SKIP_INSTALL=1
 alias mv="mv -i"
 alias ls="ls --color=auto"
 alias stash='git stash store `git stash create`'
+alias watch='watch --color'
 
 # Serialization formats
 alias j2y="ruby -r json -r yaml -e 'puts YAML.dump(JSON.load(STDIN.read))'"
@@ -72,11 +73,11 @@ alias dc=docker-compose
 alias update-images='docker image list --format "{{.Repository}}:{{.Tag}}" | grep -v ":<none>$" | xargs --max-args=1 --max-procs=5 docker pull --quiet'
 
 # php
-alias peridot='watch vendor/bin/peridot spec -r dot -C'
+alias peridot='watch vendor/bin/peridot spec -r dot'
 alias phpunit='watch vendor/bin/phpunit'
 alias php-cs-fixer='watch vendor/bin/php-cs-fixer fix --dry-run --diff'
-alias psalm='watch vendor/bin/psalm --monochrome'
-alias kahlan='watch vendor/bin/kahlan --no-colors'
+alias psalm='watch vendor/bin/psalm'
+alias kahlan='watch vendor/bin/kahlan'
 
 # https://github.com/github/scripts-to-rule-them-all
 alias bootstrap=script/bootstrap
